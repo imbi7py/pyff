@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-
+from __future__ import absolute_import
 import time
 
-from lib.feedbackcontroller import FeedbackController
-import lib.bcixml
+from .lib.feedbackcontroller import FeedbackController
+import .lib import bcixml
 
 
-play_signal = lib.bcixml.BciSignal(None, [lib.bcixml.CMD_PLAY], lib.bcixml.INTERACTION_SIGNAL)
+play_signal = bcixml.BciSignal(None, [bcixml.CMD_PLAY], bcixml.INTERACTION_SIGNAL)
     
     
 
