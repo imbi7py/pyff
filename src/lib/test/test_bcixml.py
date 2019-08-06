@@ -171,7 +171,7 @@ class BcixmlTestCase(unittest.TestCase):
 
     def test_Command(self):
         """Should support Commands with arguments."""
-        signal = bcixml.BciSignal(None, [['foo', dict()]], bcixml.INTERACTION_SIGNAL)
+        signal = bcixml.BciSignal(None, [('foo', dict())], bcixml.INTERACTION_SIGNAL)
         xml = self.encoder.encode_packet(signal)
         signal2 = self.decoder.decode_packet(xml)
         self.assertEqual(signal.commands, signal2.commands)
