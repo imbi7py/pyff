@@ -54,8 +54,7 @@ class Control(VisionEggFeedback, Config):
         self._palette.set(self.symbol_colors, self.color_groups)
         self.alphabet = ''.join(self.color_groups)
         self._sorted_alphabet = sorted(self.alphabet, key=lambda s: s.lower())
-        self.eeg_alphabet = ''.join(filter(lambda c: c.isalpha(),
-                                           self._sorted_alphabet)
+        self.eeg_alphabet = ''.join([c for c in self._sorted_alphabet if c.isalpha()]
                                     + [e[0] for e in self.nonalpha_trigger])
         self._trial_name = self._trial_types[self.trial_type - 1]
         self._setup_input_handler()

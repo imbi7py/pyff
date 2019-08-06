@@ -143,11 +143,11 @@ class VisionEggView(object):
         they change, and so the Viewport needs to have a reference to
         the containing TextList, otherwise they get lost.
         """
-        text_lists = filter(lambda s: isinstance(s, TextList), stimuli)
+        text_lists = [s for s in stimuli if isinstance(s, TextList)]
         if text_lists:
             for text in text_lists:
                 self.add_viewport(Viewport(screen=self.screen, stimuli=text))
-            stimuli = filter(lambda s: not isinstance(s, TextList), stimuli)
+            stimuli = [s for s in stimuli if not isinstance(s, TextList)]
         stimuli = self._standard_viewport.parameters.stimuli + list(stimuli)
         if stimuli:
             self.set_stimuli(*stimuli)
