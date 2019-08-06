@@ -29,8 +29,7 @@ def apply_fixer(fixer_name, *, no_six=False):
         raise RuntimeError("Git repository is not clean")
     print(("======== {} ========".format(fixer_name)))
     cmd = _RUN_FIXER + [fixer_name, "."]
-    if subprocess.call(cmd):
-        print("Issues reported when attempting to apply fixer")
+    subprocess.check_call(cmd)
     if have_git_changes():
         print("Changes made by fixer, committing to git")
         add_updated_files()
