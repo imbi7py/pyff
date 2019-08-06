@@ -50,6 +50,7 @@ from sys import platform, maxint
 from lib import marker
 from lib import serialport
 from six.moves import range
+from six.moves import zip
 
 
 class VisualSpellerVE(MainloopFeedback):
@@ -802,7 +803,7 @@ class VisualSpellerVE(MainloopFeedback):
         sample_rate=44100
         pygame.mixer.init(sample_rate, -16, 2) # 44.1kHz, 16-bit signed, stereo
         f = sine_array(8000, 1, sample_rate)
-        f = NP.array(zip (f, f))
+        f = NP.array(list(zip(f, f)))
         sound = pygame.sndarray.make_sound(f)
         channel = sound.play(-1)
         channel.set_volume(0.2, 0.2)

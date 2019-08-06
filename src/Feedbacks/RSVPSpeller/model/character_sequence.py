@@ -2,6 +2,7 @@ from __future__ import division
 from __future__ import absolute_import
 from six.moves import map
 from six.moves import range
+from six.moves import zip
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -57,7 +58,7 @@ class CharacterSequence(list):
         """
         nsym = len(self.burst_sequence)
         self._colors = list(map(self._positional_color, range(nsym)))
-        zipped = zip(self.burst_sequence, self._colors)
+        zipped = list(zip(self.burst_sequence, self._colors))
         self[:] = zipped
         self.bursts = slices(zipped, self._burst_len)
 
