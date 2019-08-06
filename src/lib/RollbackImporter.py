@@ -17,7 +17,7 @@
 
 
 from __future__ import absolute_import
-import __builtin__
+import six.moves.builtins
 import sys
 
 
@@ -43,15 +43,15 @@ class RollbackImporter(object):
     def __init__(self):
         """Init the RollbackImporter and setup the import proxy."""
         self.oldmodules = sys.modules.copy()
-        self.realimport = __builtin__.__import__
-        __builtin__.__import__ = self._import
+        self.realimport = six.moves.builtins.__import__
+        six.moves.builtins.__import__ = self._import
 
     def uninstall(self):
         """Unload all modules since __init__ and restore the original import."""
         for module in sys.modules.keys():
             if module not in self.oldmodules:
                 del sys.modules[module]
-        __builtin__.__import__ = self.realimport
+        six.moves.builtins.__import__ = self.realimport
 
     def _import(self, name, globals={}, locals={}, fromlist=[], level=-1):
         """Our import method."""

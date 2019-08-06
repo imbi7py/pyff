@@ -27,7 +27,7 @@ from __future__ import absolute_import
 import asyncore
 import asynchat
 import socket
-import cPickle as pickle
+import six.moves.cPickle as pickle
 import logging
 
 from . import bcixml
@@ -39,7 +39,7 @@ TERMINATOR = "\r\n\r\n"
 IPC_PORT = 12347
 LOCALHOST = "127.0.0.1"
 
-import thread
+import six.moves._thread
 
 def ipcloop():
     """Start the IPC loop."""

@@ -18,7 +18,7 @@
 from __future__ import division
 from __future__ import absolute_import
 import os
-import cPickle as pickle
+import six.moves.cPickle as pickle
 from numpy import ones, outer, sum, isscalar, squeeze, array
 import pylab as p
 from . import Utils
