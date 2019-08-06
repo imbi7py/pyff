@@ -56,7 +56,7 @@ if __name__ == "__main__":
             last_attempted_fixer = fixer_name
             if apply_fixer(fixer_name, no_six=True):
                 applied.add(fixer_name)
-            last_completed_fixer = None
+            last_completed_fixer = fixer_name
         # On the second pass, allow fixers that need six
         for fixer_name in fixer_names:
             if fixer_name in applied:
