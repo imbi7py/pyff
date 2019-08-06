@@ -49,7 +49,7 @@ class TobiQLAdapter(MainloopFeedback):
         try:
             server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             server.connect(self.get_server_address())
-        except socket.error, msg:
+        except socket.error as msg:
             self.logger.critical("Error connecting to server (%s)" % str(msg))
             return
         

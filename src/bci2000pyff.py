@@ -79,7 +79,7 @@ class Bci2000PyffAdapter(object):
         logger.debug('_Preflight')
         try:
             pass
-        except Exception, e:
+        except Exception as e:
             self._handle_error(str(e))
         return copy.deepcopy(in_signal_props)
 
@@ -97,7 +97,7 @@ class Bci2000PyffAdapter(object):
         try:
             pass
             # OnControlEvent
-        except Exception, e:
+        except Exception as e:
             self._handle_error(str(e))
         return copy.deepcopy(in_signal)
 
@@ -119,7 +119,7 @@ class Bci2000PyffAdapter(object):
         logger.debug('_call_hook(%s, %s, %s)' % (method, pargs, kwargs))
         try:
             retval = method(*pargs, **kwargs)
-        except Exception, e:
+        except Exception as e:
             retval = None
             self._handle_error(str(e))
         return retval

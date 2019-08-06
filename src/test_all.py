@@ -41,7 +41,7 @@ for root, dirs, files in os.walk("."):
                 try:
                     suite = unittest.TestLoader().loadTestsFromName(module)
                     allTests.addTest(suite)
-                except Exception, e:
+                except Exception as e:
                     logging.warning("Unable to add %s" % module)
                     logging.warning(e)
 

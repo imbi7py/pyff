@@ -182,7 +182,7 @@ class VisionEggFeedback(MainloopFeedback):
         try:
             self._view.acquire()
             self._update_parameters()
-        except pygame.error, e:
+        except pygame.error as e:
             self.logger.error(e)
 
     def on_interaction_event(self, data):

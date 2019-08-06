@@ -323,7 +323,7 @@ class XmlEncoder(object):
         for d in signal.data:
             try:
                 self.__write_element(d, signal.data[d], dom, root2)
-            except EncodingError, e:
+            except EncodingError as e:
                 # Ignore elements which are unkknown, just print a warning
                 self.logger.warning("Unable to write element (%s)" % str(e))
         return dom.toxml('utf-8')
