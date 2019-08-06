@@ -136,7 +136,7 @@ class BoringClock(MainloopFeedback):
         if self.auditoryFeedback:
             dir = os.path.dirname(sys.modules[__name__].__file__) # Get current dir
             self.sound = pygame.mixer.Sound(dir + "/sound18.wav")
-        print(self.sequence)
+        print((self.sequence))
                
     def tick(self):
         # If last state is finished, proceed to next state
