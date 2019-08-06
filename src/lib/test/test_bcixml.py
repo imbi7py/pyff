@@ -77,7 +77,7 @@ class BcixmlTestCase(unittest.TestCase):
 
     def testSet(self):
         """Should correctly en/decode Set."""
-        self.__convert_and_compare("somename", set([1,2,3]))
+        self.__convert_and_compare("somename", {1,2,3})
 
     def testFrozenset(self):
         """Should correctly en/decode Frozenset."""

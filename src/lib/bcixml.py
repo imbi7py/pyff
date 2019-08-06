@@ -563,7 +563,7 @@ def main():
          "llist" : [[1], [[1],2], [[[1],[2]],[3]]],
          "tuple" : (1, 2, 3, 4, 5, 6),
          "ttuple" : ((1), ((1),2), (((1),(2)),(3))),
-         "set" : set([1,2,3]),
+         "set" : {1,2,3},
          "frozenset" : frozenset([1,2,3,4,5]),
          "dict" : {"foo" : 1, "bar" : 2, "baz" : 3},
          "ddict" : {"key" : "value", "d-in-" : {"foo" : 1, "bar" : 2, "baz" : 3}}
