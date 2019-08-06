@@ -46,6 +46,7 @@ from VisionEgg.MoreStimuli import FilledCircle
 from FeedbackBase.VisionEggFeedback import VisionEggFeedback
     
 from lib import marker
+from io import open
     
 # TODO: 
 # - EVTL: hit-miss-counter

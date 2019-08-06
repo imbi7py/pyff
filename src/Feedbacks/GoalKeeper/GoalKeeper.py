@@ -35,6 +35,7 @@ from PIL import Image
 import pygame
 
 from FeedbackBase.PygameFeedback import PygameFeedback
+from io import open
 
 
 class GoalKeeper(PygameFeedback):

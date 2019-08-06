@@ -51,6 +51,7 @@ from lib.P300VisualElement.Circle import Circle # Import Circle element for disp
 from lib.P300VisualElement.Textrow import Textrow # Import textrow element for displaying the word to-be-copied
 from lib.P300Aux.P300Functions import *
 from lib.eyetracker import EyeTracker
+from io import open
 
 
 class ERPMatrix(VisualP300):

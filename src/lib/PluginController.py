@@ -22,6 +22,7 @@ import os
 import logging
 import six
 from six.moves import map
+from io import open
 
 
 def import_module_and_get_class(modname, classname):

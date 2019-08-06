@@ -31,6 +31,7 @@ from threading import Event, Timer
 import socket
 import json
 import six
+from io import open
 
 
 class Feedback(object):

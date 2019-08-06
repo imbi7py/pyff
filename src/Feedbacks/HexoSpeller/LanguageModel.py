@@ -22,6 +22,7 @@ import six.moves.cPickle as pickle
 from numpy import ones, outer, sum, isscalar, squeeze, array
 import pylab as p
 from . import Utils
+from io import open
 
 
 class LanguageModel():
