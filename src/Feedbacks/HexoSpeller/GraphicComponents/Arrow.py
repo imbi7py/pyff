@@ -19,6 +19,7 @@
 #import Feedbacks.HexoSpeller.Utils as Utils
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 from math import sqrt, acos
 from .GraphicComponentUtils import create_side, create_triangle
 
@@ -188,7 +189,7 @@ def scale(arrow, time_to_full_length, start_length, max_length, task):
 if __name__ == "__main__":
     from direct.directbase import DirectStart
     global base, render
-    print "Arrow::main"
+    print("Arrow::main")
     arrow = Arrow()
     arrow.set_angle_x_z_plane(45)
     #arrow.set_length(0.5)

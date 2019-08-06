@@ -32,6 +32,7 @@ design in an ERP-based brain-computer interface. submitted
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import sys, os, math
 
 import pygame
@@ -201,7 +202,7 @@ class ERPHex(VisualP300):
             try: 
                 self.datafile = open(self.datafilename, 'a')
             except IOError:
-                print "Cannot open datafile"
+                print("Cannot open datafile")
                 self.datafile = None
                 self.on_quit()
         # Init other variables

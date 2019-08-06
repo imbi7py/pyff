@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from __future__ import print_function
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -112,7 +113,7 @@ class SpellingInputHandler(CountInputHandler):
     def eeg_select(self, cls):
         if 0 <= cls < len(self._alphabet):
             symbol = self._alphabet[cls]
-            print "Received control signal: %s -> %s" % (str(cls), symbol)
+            print("Received control signal: %s -> %s" % (str(cls), symbol))
             if symbol == self._delete_symbol:
                 self._delete()
             else:

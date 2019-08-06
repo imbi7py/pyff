@@ -17,6 +17,7 @@
 
 
 from __future__ import absolute_import
+from __future__ import print_function
 import sys
 import os
 import logging
@@ -122,7 +123,7 @@ def main():
     pc = PluginController(["../Feedbacks", "../../../pyff-tu/src/Feedbacks"], FeedbackBase.Feedback.Feedback)
     pc.find_plugins()
     for key in pc.availablePlugins:
-        print key, pc.availablePlugins[key]
+        print(key, pc.availablePlugins[key])
 
 if __name__ == "__main__":
     main()

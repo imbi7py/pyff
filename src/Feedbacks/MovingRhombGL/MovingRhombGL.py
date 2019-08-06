@@ -20,6 +20,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import math
 import time
 
@@ -57,7 +58,7 @@ class MovingRhombGL(Feedback):
         self._run_soya_mainloop()
         
         soya.quit()
-        print "Stopped soya's main loop."
+        print("Stopped soya's main loop.")
         self._stopped = True
     
     def on_pause(self):

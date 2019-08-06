@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from __future__ import print_function
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -28,4 +29,4 @@ class CharacterSequenceTest(TestCase):
         palette.set(symbol_colors, color_groups)
         factory = CharacterSequenceFactory('!@#$%^?', True, 'E', palette)
         s = factory.sequences(4, [], [])
-        print [seq.burst_sequence for seq in s]
+        print([seq.burst_sequence for seq in s])

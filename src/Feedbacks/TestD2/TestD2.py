@@ -17,6 +17,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import random
 
 import pygame
@@ -76,18 +77,18 @@ class TestD2(PygameFeedback):
         cp = correctly_processed - self.e2
         # Average reaction time:
         rt_avg = elapsed_seconds // tn
-        print "Results:"
-        print "========"
-        print
-        print "Processed symbols: %i of %i" % (tn, self.number_of_symbols)
-        print "Elapsed time: %f sec" % elapsed_seconds
-        print "Correctly processed symbols: %i" % (correctly_processed)
-        print "Percentage of Errors: %f" % (error_rate)
-        print "Errors:  %i" % error
-        print "... errors of omission: %i" % self.e1
-        print "... errors of commission: %i" % self.e2
-        print "Concentration Performance: %i" % cp
-        print "Average reaction time: %f sec" % rt_avg
+        print("Results:")
+        print("========")
+        print()
+        print("Processed symbols: %i of %i" % (tn, self.number_of_symbols))
+        print("Elapsed time: %f sec" % elapsed_seconds)
+        print("Correctly processed symbols: %i" % (correctly_processed))
+        print("Percentage of Errors: %f" % (error_rate))
+        print("Errors:  %i" % error)
+        print("... errors of omission: %i" % self.e1)
+        print("... errors of commission: %i" % self.e2)
+        print("Concentration Performance: %i" % cp)
+        print("Average reaction time: %f sec" % rt_avg)
 
 
     def tick(self):
@@ -96,24 +97,24 @@ class TestD2(PygameFeedback):
             key = self.lastkey_unicode
             self.keypressed = False
             if key not in (self.key_target, self.key_nontarget):
-                print "Wrong key pressed."
+                print("Wrong key pressed.")
                 return
             else:
-                print key,
+                print(key, end=' ')
                 if key == self.key_nontarget \
                 and self.d2list[self.current_index] in TARGETS:
-                    print "Wrong (Not recognized D2)"
+                    print("Wrong (Not recognized D2)")
                     self.e1 += 1
                 elif key == self.key_target \
                 and self.d2list[self.current_index] in NON_TARGETS:
-                    print "Wrong (Confused D2)"
+                    print("Wrong (Confused D2)")
                     self.e2 += 1
                 else:
-                    print "Correct"
+                    print("Correct")
             self.current_index += 1
             if self.current_index > self.number_of_symbols - 1:
                 # Finished faster than we expected!
-                print "You're awesome dude!"
+                print("You're awesome dude!")
                 self.on_stop()
             else:
                 self.present_stimulus()
@@ -183,7 +184,7 @@ class TestD2(PygameFeedback):
 
     def present_stimulus(self):
         """Present the current stimulus."""
-        print self.d2list[self.current_index]
+        print(self.d2list[self.current_index])
         self.screen.fill(self.backgroundColor)
         symbol = self.d2list[self.current_index]
         self.screen.blit(self.symbol[symbol], 

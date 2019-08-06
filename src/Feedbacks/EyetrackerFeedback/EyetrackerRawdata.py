@@ -1,6 +1,7 @@
 # 2009 Matthias Sebastian Treder
 
 from __future__ import absolute_import
+from __future__ import print_function
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.eyetracker import EyeTracker
 
@@ -12,7 +13,7 @@ class EyetrackerRawdata(MainloopFeedback):
         self.et.start()
         
     def play_tick(self):
-        print self.et.x, self.et.y, self.et.duration
+        print(self.et.x, self.et.y, self.et.duration)
 
     def post_mainloop(self):
         # Stop eyetracker

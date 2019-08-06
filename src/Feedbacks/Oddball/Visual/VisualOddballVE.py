@@ -29,6 +29,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import pygame
 #import random
 import os
@@ -304,8 +305,8 @@ class VisualOddballVE(VisionEggFeedback):
             if ext == ('jpg' or 'jpeg' or 'png'):
                 dev.append(self.DIR_DEV + '/' + dv[d])
 
-        print std
-        print dev
+        print(std)
+        print(dev)
         return std, dev
         
         

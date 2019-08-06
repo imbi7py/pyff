@@ -22,6 +22,7 @@
 
 
 from __future__ import absolute_import
+from __future__ import print_function
 import logging
 import logging.handlers
 from optparse import OptionParser
@@ -121,17 +122,17 @@ the Free Software Foundation; either version 2 of the License, or
     except:
         logging.exception("Caught an exception, quitting FeedbackController.")
     finally:
-        print
-        print "Stopping FeedbackController...",
+        print()
+        print("Stopping FeedbackController...", end=' ')
         fc.stop()
-        print "Done."
+        print("Done.")
         if guiproc:
-            print "Stopping GUI...",
+            print("Stopping GUI...", end=' ')
             guiproc.terminate()
-            print "Done."
-        print "Stopping logging facilities...",
+            print("Done.")
+        print("Stopping logging facilities...", end=' ')
         logging.shutdown()
-        print "Done."
+        print("Done.")
 
 
 if __name__ == '__main__':

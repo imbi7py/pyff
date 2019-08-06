@@ -22,6 +22,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import cmd
 import threading
 import math
@@ -48,7 +49,7 @@ class Emulator(cmd.Cmd):
         return True
 
     def postloop(self):
-        print
+        print()
 
     def do_generate_cs(self, line):
         """Generates a control signal and sends it to the Feedback Controller."""
@@ -81,7 +82,7 @@ class Emulator(cmd.Cmd):
         self.stopping = False
         self.t = threading.Thread(target=self._cs_loop, args=(numbers,))
         self.t.start()
-        print "Enter: stop_cs to stop the signal."
+        print("Enter: stop_cs to stop the signal.")
 
 
     def _cs_loop(self, numbers=1):
@@ -105,7 +106,7 @@ class Emulator(cmd.Cmd):
             elif numbers <= 6:
                 self.signal.data = {"cl_output" : samples[:numbers]}
             else:
-                print "Error don't know how to handle %i numbers." % numbers
+                print("Error don't know how to handle %i numbers." % numbers)
 
             self.net.send_signal(self.signal)
 
@@ -117,7 +118,7 @@ class Emulator(cmd.Cmd):
     def do_status(self, line):
         """Get the status of the emulator."""
         for var, val in six.iteritems(self.__dict__):
-            print str(var), str(val)
+            print(str(var), str(val))
 
 
 

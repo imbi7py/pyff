@@ -1,5 +1,6 @@
 
 from __future__ import absolute_import
+from __future__ import print_function
 from xml.dom.minidom import Document
 import socket
 import time
@@ -36,7 +37,7 @@ class TobiQLAdapter(MainloopFeedback):
         elif self.cs >= RIGHT and (self.last == LEFT or self.last == NONE):
             self.send_signal(self.right_signal)
             self.last = RIGHT
-        print "%i \t %f\r" % (self.last, self.cs)
+        print("%i \t %f\r" % (self.last, self.cs))
 
     
     def on_control_event(self, data):

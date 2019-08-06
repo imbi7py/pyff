@@ -17,6 +17,7 @@
 
 
 from __future__ import absolute_import
+from __future__ import print_function
 from FeedbackBase.Feedback import Feedback
 
 import time
@@ -24,7 +25,7 @@ import time
 class Lesson03(Feedback):
     
     def on_init(self):
-        print "Feedback successfully loaded."
+        print("Feedback successfully loaded.")
         self.quitting, self.quit = False, False
         self.pause = False
     
@@ -32,7 +33,7 @@ class Lesson03(Feedback):
         self.quitting = True
         # Make sure we don't return on_quit until the main_loop (which runs in
         # a different thread!) quit.
-        print "Waiting for main loop to quit."
+        print("Waiting for main loop to quit.")
         while not self.quit:
             pass
         # Now the main loop quit and we can safely return
@@ -51,12 +52,12 @@ class Lesson03(Feedback):
         while True:
             time.sleep(0.5)
             if self.pause:
-                print "Feedback Paused."
+                print("Feedback Paused.")
                 continue
             elif self.quitting:
-                print "Leaving main loop."
+                print("Leaving main loop.")
                 break
-            print self._data
+            print(self._data)
             
-        print "Left main loop."
+        print("Left main loop.")
         self.quit = True

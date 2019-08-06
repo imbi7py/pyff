@@ -32,6 +32,7 @@ whenever you modified or added new trigger definitions.
 
 # Markers specifying the start and the end of the run. They should be sent
 # when the feedback is started resp. stopped.
+from __future__ import print_function
 RUN_START, RUN_END = 254, 255
 
 # Start resp. end of a trial
@@ -58,16 +59,16 @@ if __name__ == '__main__':
     for name, value in globals().items():
         # ignore magic variables
         if name.startswith('__') and name.endswith('__'):
-            print "Ignoring magic %s" % name
+            print("Ignoring magic %s" % name)
             continue
         if name == '_tmp':
             continue
         if not isinstance(value, int):
-            print "Ignoring non-int %s (%s)" % (name, str(value))
+            print("Ignoring non-int %s (%s)" % (name, str(value)))
         _tmp.append([value, name])
     _tmp.sort()
     for i in range(1, len(_tmp)):
         if _tmp[i][0] == _tmp[i-1][0]:
-            print "Found duplicate triggers (%i) %s and %s" % (_tmp[i][0],
-                    _tmp[i-1][1], _tmp[i][1])
+            print("Found duplicate triggers (%i) %s and %s" % (_tmp[i][0],
+                    _tmp[i-1][1], _tmp[i][1]))
 

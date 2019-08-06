@@ -30,6 +30,7 @@ Triggers: 10,11,12... for the symbols
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import sys,os,random,time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback

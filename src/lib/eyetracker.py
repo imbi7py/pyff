@@ -22,6 +22,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import threading
 import logging
 import sys, os
@@ -215,8 +216,8 @@ class EyeTracker(object):
             if(result == 0):
                 str_result = 'Calibration Result: ' + calibrationStatus[status.value]
                 str_improve = 'Improve: ' + str(improve.value)
-                print str_result
-                print str_improve
+                print(str_result)
+                print(str_improve)
                 self.logger.debug(str_result)
                 self.logger.debug(str_improve)
             else:

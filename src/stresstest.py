@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import absolute_import
+from __future__ import print_function
 import time
 
 from .lib.feedbackcontroller import FeedbackController
@@ -16,13 +17,13 @@ def main():
     feedbacks = fc.fbProcCtrl.get_feedbacks()
     
     for fb in feedbacks:
-        print "Starting %s" % fb
+        print("Starting %s" % fb)
         fc.fbProcCtrl.start_feedback(fb)
         
         fc.handle_signal(play_signal)
         time.sleep(1)
         
-        print "Stopping %s" % fb
+        print("Stopping %s" % fb)
         fc.fbProcCtrl.stop_feedback()
         
         failstop = []
@@ -33,9 +34,9 @@ def main():
             pass
         
 
-    print "Done testing Feedbacks, the following feedbacks failed to stop correctly:"
+    print("Done testing Feedbacks, the following feedbacks failed to stop correctly:")
     for fb in failstop:
-        print fb
+        print(fb)
     
     
 

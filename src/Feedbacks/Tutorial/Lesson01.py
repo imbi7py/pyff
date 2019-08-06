@@ -18,12 +18,13 @@
 
 
 from __future__ import absolute_import
+from __future__ import print_function
 from FeedbackBase.Feedback import Feedback
 
 class Lesson01(Feedback):
     
     def on_init(self):
-        print "Feedback successfully loaded."
+        print("Feedback successfully loaded.")
     
     def on_quit(self):
-        print "Feedback quit."
+        print("Feedback quit.")

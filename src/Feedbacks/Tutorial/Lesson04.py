@@ -17,6 +17,7 @@
 
 
 from __future__ import absolute_import
+from __future__ import print_function
 from FeedbackBase.Feedback import Feedback
 
 class Lesson04(Feedback):
@@ -29,10 +30,10 @@ class Lesson04(Feedback):
         # this one is equivalent to:
         # self.myVariable = self._someVariable
         self.myVariable = data.get("someVariable")
-        print self.myVariable
+        print(self.myVariable)
         
     def on_control_event(self, data):
         # this one is equivalent to:
         # self.eegTuple = self._data
         self.eegTuple = data
-        print self.eegTuple
+        print(self.eegTuple)

@@ -34,6 +34,7 @@ Button press: 9
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import sys,os,random,time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
@@ -134,7 +135,7 @@ class BoringClock(MainloopFeedback):
         if self.auditoryFeedback:
             dir = os.path.dirname(sys.modules[__name__].__file__) # Get current dir
             self.sound = pygame.mixer.Sound(dir + "/sound18.wav")
-        print self.sequence
+        print(self.sequence)
                
     def tick(self):
         # If last state is finished, proceed to next state

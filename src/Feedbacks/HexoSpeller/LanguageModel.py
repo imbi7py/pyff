@@ -17,6 +17,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import os
 import six.moves.cPickle as pickle
 from numpy import ones, outer, sum, isscalar, squeeze, array
@@ -215,7 +216,7 @@ if __name__ == "__main__":
     word = ''
     for i,letter in enumerate(to_be_spelled):
         probs = lm.get_probabilities(word)
-        print lm.update_symbol_list_sorting(word)
+        print(lm.update_symbol_list_sorting(word))
         p.subplot(len(to_be_spelled),1, i+1)
         p.plot(probs)
         p.plot(lm.hp)

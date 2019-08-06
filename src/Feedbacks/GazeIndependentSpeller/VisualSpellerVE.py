@@ -27,6 +27,7 @@ Serves as base class for spellers such as CakeSpeller and CenterSpeller.
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 from time import time, clock
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.P300Aux.P300Functions import random_flash_sequence
@@ -601,7 +602,7 @@ class VisualSpellerVE(MainloopFeedback):
                minimum = means[ii]
                classified = ii+1
 
-        print "\n**** Class: %d (mean=%f)\n" % (classified,means[classified-1])
+        print("\n**** Class: %d (mean=%f)\n" % (classified,means[classified-1]))
         return classified
 
 
@@ -625,7 +626,7 @@ class VisualSpellerVE(MainloopFeedback):
                 nClassified = sum([len(self._classifier_output[i]) for i in xrange(self._nr_elements)])
                 if nClassified < self._nr_elements * self.nr_sequences:
                     pygame.time.wait(20)
-                    print 'not enough classifier-outputs received! (something may be wrong)'
+                    print('not enough classifier-outputs received! (something may be wrong)')
                     return
 
                 ## classify and set output:
@@ -637,7 +638,7 @@ class VisualSpellerVE(MainloopFeedback):
                     if means[ii]<minimum:
                         minimum = means[ii]
                         classified = ii
-                print "\n**** Class: %d (mean=%f)\n" % (classified+1,means[classified])
+                print("\n**** Class: %d (mean=%f)\n" % (classified+1,means[classified]))
             else:
                 means = [None]*self._nr_elements
                 minimum = maxint
@@ -647,7 +648,7 @@ class VisualSpellerVE(MainloopFeedback):
                     if means[ii]<minimum:
                         minimum = means[ii]
                         classified = ii
-                print "\n**** Class: %d (mean=%f)\n" % (classified+1,means[classified])
+                print("\n**** Class: %d (mean=%f)\n" % (classified+1,means[classified]))
 
             ## Reset classifier output to empty lists
             self._init_classifier_output()
@@ -695,7 +696,7 @@ class VisualSpellerVE(MainloopFeedback):
                 t += 50
                 pygame.time.wait(50)
             if self._ErrP_classifier is None:
-                print "no ErrP classifier received! "
+                print("no ErrP classifier received! ")
             if self._ErrP_classifier:
                 self.send_parallel(self.ERROR_POTENTIAL)
                 self.logger.info("[TRIGGER] %d" % (self.ERROR_POTENTIAL))
@@ -714,7 +715,7 @@ class VisualSpellerVE(MainloopFeedback):
                 if len(self._desired_letters) > 0:
                     spelled_letter = self._desired_letters[:1]
                 else:
-                    print "??? moved beyond desired phrase in copy spelling ???"
+                    print("??? moved beyond desired phrase in copy spelling ???")
             else:
                 spelled_letter = self.letter_set[self._classified_element][self._classified_letter]
 

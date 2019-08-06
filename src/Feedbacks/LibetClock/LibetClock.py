@@ -22,6 +22,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import random
 import sys
 import math
@@ -206,9 +207,9 @@ class LibetClock(PygameFeedback):
             if self.completedTrials == 0:
                 self.send_parallel(self.GAME_START)  # sending this in pre_mainloop is too early for bbci_bet_apply
                                                 # (cf. variable start_marker_received in bbci_bet_apply)
-            print 'showClassifier: ' + str(self.showClassifier)
-            print 'cls_ival: ' + str(self.cls_ival)
-            print 'threshold: ' + str(self.threshold)
+            print('showClassifier: ' + str(self.showClassifier))
+            print('cls_ival: ' + str(self.cls_ival))
+            print('threshold: ' + str(self.threshold))
             self.send_parallel(self.TRIAL_START)
             self.classifier_log.append(list())
             self.cls_evolution_log.append(list())
@@ -288,8 +289,8 @@ class LibetClock(PygameFeedback):
                         else:
                             f = self.threshold+1
                     elif self.showClassifier == 'feedback':
-                        print 'self.f: ' + str(self.f)
-                        print 'self.f-threshold: ' + str(self.f-self.threshold)
+                        print('self.f: ' + str(self.f))
+                        print('self.f-threshold: ' + str(self.f-self.threshold))
                         f = self.f
                     else:
                         raise Exception('String option given by ''self.showClassifier'' unknown.')
@@ -329,8 +330,8 @@ class LibetClock(PygameFeedback):
     def end_of_trial_tick(self):
         if self.endOfTrialElapsed == 0:
             #print 'self.targetTransitionTimes: ' + str(self.targetTransitionTimes)
-            print 'trial ' + str(self.completedTrials)
-            print 'valid trial ' + str(self.validTrials)
+            print('trial ' + str(self.completedTrials))
+            print('valid trial ' + str(self.validTrials))
             self.time_accuracy()
             endTrialTime =  [self.intertrialInterval[0]-self.SADuration, self.intertrialInterval[0]-self.SADuration]
             nu = random.random()
@@ -412,7 +413,7 @@ class LibetClock(PygameFeedback):
             self.classifier_log[self.completedTrials].append(0.3)
 
     def write_classifier_log(self):
-        print 'Writing classifier log.'
+        print('Writing classifier log.')
         subdir = '/python_classifier_logs/'
         if not os.access(self.TODAY_DIR + subdir, os.F_OK):
             os.mkdir(self.TODAY_DIR + subdir)
@@ -427,7 +428,7 @@ class LibetClock(PygameFeedback):
         for trial in range(len(self.classifier_log)):
             l =len(self.classifier_log[trial])
             if l!=6:
-                print 'write_classifier_log: list length in trial %i not as expected (actual length: %i, expected length: %i).', (trial, l, 6)
+                print('write_classifier_log: list length in trial %i not as expected (actual length: %i, expected length: %i).', (trial, l, 6))
             for target in range(l):
                 if target == l-1:
                     f.write(str(self.classifier_log[trial][target]))
@@ -437,7 +438,7 @@ class LibetClock(PygameFeedback):
         f.close()
 
     def write_clsev_log(self):
-        print 'Writing classifier evolution log.'
+        print('Writing classifier evolution log.')
         subdir = '/python_clsev_logs/'
         if not os.access(self.TODAY_DIR + subdir, os.F_OK):
             os.mkdir(self.TODAY_DIR + subdir)

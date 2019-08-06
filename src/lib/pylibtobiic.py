@@ -20,6 +20,7 @@
 # 	Updated to 0.0.3 (25/10/2010)
 
 from __future__ import absolute_import
+from __future__ import print_function
 from xml.dom.minidom import Document
 from xml.dom.minidom import parseString
 import six
@@ -171,17 +172,17 @@ class ICMessage:
 
 	def Dump(self):
 		if self.classifiers.Empty():
-			print "[ICMessage::Dump] Eternal sunshine of an empty message"
+			print("[ICMessage::Dump] Eternal sunshine of an empty message")
 			return
 
-		print "[ICMessage::Dump] Dumping internal structure"
+		print("[ICMessage::Dump] Dumping internal structure")
 		for k in self.classifiers.map.keys():
 			v = self.classifiers.Get(k)
-			print "+ Classifier %s [\"%s\", ValueType=%d LabelType=%d]" % (v.GetName(), v.GetDescription(), v.GetValueType(), v.GetLabelType())
+			print("+ Classifier %s [\"%s\", ValueType=%d LabelType=%d]" % (v.GetName(), v.GetDescription(), v.GetValueType(), v.GetLabelType()))
 
 			for k2 in v.classes.map.keys():
 				v2 = v.classes.map[k2]
-				print "   --> Class Value=%.6f Label=%s" % (v2.GetValue(), v2.GetLabel())
+				print("   --> Class Value=%.6f Label=%s" % (v2.GetValue(), v2.GetLabel()))
 
 # 
 # 	ICClass
@@ -477,7 +478,7 @@ class ICSerializer:
 				if initialize:
 					if cptr.classes.Has(klabel):
 						return None
-					print klabel, tvalue
+					print(klabel, tvalue)
 					kptr = ICClass(klabel, float(tvalue))
 					cptr.classes.Add(kptr)
 				else:

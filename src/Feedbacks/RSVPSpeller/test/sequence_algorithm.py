@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits, Laura Acqualagna
 
 This program is free software; you can redistribute it and/or modify it under
@@ -68,7 +69,7 @@ class OriginalSequenceAlgorithm(object):
         self.alphabet=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ.,:<")
         self.alpharandom1=copy.copy(self.alphabet)
         random.shuffle(self.alpharandom1)
-        print self.alpharandom1
+        print(self.alpharandom1)
         if(num_seq<=10):
             for k in range(0,30):
                 i=0
@@ -78,7 +79,7 @@ class OriginalSequenceAlgorithm(object):
         else:
             self.alpharandom2=copy.copy(self.alpharandom1)
             random.shuffle(self.alpharandom2)
-            print self.alpharandom2
+            print(self.alpharandom2)
             for k in range(0,30):
                 i=0
                 while i<300:
@@ -88,8 +89,8 @@ class OriginalSequenceAlgorithm(object):
                     if(a_list[i]==k+1): a_list[i]=self.alpharandom2[k]
                     i+=1
             
-        print a_list[:300] 
-        print a_list[300:]   
+        print(a_list[:300]) 
+        print(a_list[300:])   
         return a_list
     
     def mono_del_elem(self,lista,num_seq):
@@ -109,7 +110,7 @@ class OriginalSequenceAlgorithm(object):
                     #print i
                     self.list=range(j,32,2**(i-1))
                     #print j
-                    print self.list
+                    print(self.list)
                     self.tmp=self.tmp+self.list
                     self.rev=copy.copy(self.tmp)
                     self.rev.reverse()
@@ -118,13 +119,13 @@ class OriginalSequenceAlgorithm(object):
                     #print i
                     self.list=range(j,32,2**(i-6))
                     #print j
-                    print self.list          
+                    print(self.list)          
                     self.tmp=self.tmp+self.list
                     self.rev=copy.copy(self.tmp)
                     self.rev.reverse()
             self.matrix= self.matrix+self.tmp+self.rev
 
-        print self.matrix   
+        print(self.matrix)   
         self.new_list=self.mono_del_elem(self.matrix,num_seq)
         self.mono_trial= self.mono_link(self.new_list,num_seq)
         self.bursts=self.mono_split(self.mono_trial,num_seq)
@@ -153,4 +154,4 @@ class SequenceAlgorithmTest(TestCase):
         changed_trial = changed.trial(1, True)
         self.assertEqual(len(changed_trial), len(orig_trial))
         self.assertEqual(len(changed_trial[0]), len(orig_trial[0]))
-        print changed_trial
+        print(changed_trial)

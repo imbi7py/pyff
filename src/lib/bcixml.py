@@ -19,6 +19,7 @@
 
 
 from __future__ import absolute_import
+from __future__ import print_function
 import logging
 import sys
 from xml.dom import minidom, Node
@@ -262,12 +263,12 @@ class TobiXmlDecoder(XmlDecoder):
         # go through all the classifiers...
         for classifier_name in icmessage.classifiers.map.keys():
             classifier_data = icmessage.classifiers.map[classifier_name]
-            print "[TOBI-IC] %s" % classifier_name
+            print("[TOBI-IC] %s" % classifier_name)
             # and all the classes inside the classifier...
             values = []
             for class_name in classifier_data.classes.map.keys():
                 class_data = classifier_data.classes.map[class_name]
-                print "[TOBI-IC] %s/%s: %.3f" % (classifier_name, class_name, class_data.GetValue())
+                print("[TOBI-IC] %s/%s: %.3f" % (classifier_name, class_name, class_data.GetValue()))
                 # is this the correct way to pass the data value on to pyff??
                 values.append(class_data.GetValue())
             l.append((u'cl_output', values))
@@ -575,25 +576,25 @@ def main():
 
     encoder = XmlEncoder()
     xml = encoder.encode_packet(signal)
-    print xml
+    print(xml)
 
     decoder = XmlDecoder()
     signal2 = decoder.decode_packet(xml)
     d2 = signal2.data
 
-    print "*** Elements of the original dictionary:"
+    print("*** Elements of the original dictionary:")
     for i in d.items():
-        print i
+        print(i)
 
-    print "*** Elements of the second dictionary:"
+    print("*** Elements of the second dictionary:")
     for i in d2.items():
-        print i
+        print(i)
 
-    print d == d2
-    print signal
-    print signal2
+    print(d == d2)
+    print(signal)
+    print(signal2)
 
-    print '***'
+    print('***')
 
     # the following types are not supported by JSON
     d.pop('set')
@@ -604,23 +605,23 @@ def main():
 
     encoder = JsonEncoder()
     xml = encoder.encode_packet(signal)
-    print xml
+    print(xml)
 
     decoder = JsonDecoder()
     signal2 = decoder.decode_packet(xml)
     d2 = signal2.data
 
-    print "*** Elements of the original dictionary:"
+    print("*** Elements of the original dictionary:")
     for i in d.items():
-        print i
+        print(i)
 
-    print "*** Elements of the second dictionary:"
+    print("*** Elements of the second dictionary:")
     for i in d2.items():
-        print i
+        print(i)
 
-    print d == d2
-    print signal
-    print signal2
+    print(d == d2)
+    print(signal)
+    print(signal2)
 
 
 if __name__ == "__main__":

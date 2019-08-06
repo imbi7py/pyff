@@ -41,6 +41,7 @@
 
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import print_function
 import random
 import sys
 import math
@@ -146,12 +147,12 @@ class Oddball(MainloopFeedback):
         elif self.DIR_STD=='' and self.show_standards:
             raise Exception('Directory containing standard stimuli has to be defined.')
             
-        print 'Loading stimuli....'
+        print('Loading stimuli....')
         for filename in os.listdir(self.DIR_STD):
             stds.append(self.load_stimulus(self.DIR_STD+'/'+filename))
         for filename in os.listdir(self.DIR_DEV):
             devs.append(self.load_stimulus(self.DIR_DEV+'/'+filename))
-        print 'Done.'               
+        print('Done.')               
         return stds, devs
 
     
