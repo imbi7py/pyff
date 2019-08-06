@@ -50,15 +50,17 @@ if __name__ == "__main__":
     applied = set()
     last_attempted_fixer = None
     last_applied_fixer = None
-    # First apply all the fixers that don't need six
-    for fixer_name in fixer_names:
-        if apply_fixer(fixer_name, no_six=True):
-            applied.add(fixer_name)
-    # On the second pass, allow fixers that need six
-    for fixer_name in fixer_names:
-        if fixer_name in applied:
-            continue
-        apply_fixer(fixer_name)
-    # Apply the explicitly delayed fixers
-    for fixer_name in fixer_names:
-        apply_fixer(fixer_name)
+    try:
+        # First apply all the fixers that don't need six
+        for fixer_name in fixer_names:
+            if apply_fixer(fixer_name, no_six=True):
+                applied.add(fixer_name)
+        # On the second pass, allow fixers that need six
+        for fixer_name in fixer_names:
+            if fixer_name in applied:
+                continue
+            apply_fixer(fixer_name)
+        # Apply the explicitly delayed fixers
+        for fixer_name in fixer_names:
+            apply_fixer(fixer_name)
+    finally:
