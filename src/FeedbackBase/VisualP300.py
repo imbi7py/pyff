@@ -27,6 +27,7 @@ import pygame
 from .MainloopFeedback import MainloopFeedback
 from lib.P300VisualElement.Textbox import Textbox
 from lib.P300Aux.P300Functions import wait_for_key, show_message
+from six.moves import range
 
 class VisualP300(MainloopFeedback):
     """

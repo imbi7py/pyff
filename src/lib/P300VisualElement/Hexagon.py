@@ -51,6 +51,7 @@ import math
 import pygame
 
 from .VisualElement import VisualElement
+from six.moves import range
 
 
 class Hexagon(VisualElement):

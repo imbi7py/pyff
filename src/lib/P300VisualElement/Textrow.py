@@ -45,6 +45,7 @@ from __future__ import absolute_import
 import pygame
 
 from .VisualElement import VisualElement
+from six.moves import range
 
 
 class Textrow(VisualElement):

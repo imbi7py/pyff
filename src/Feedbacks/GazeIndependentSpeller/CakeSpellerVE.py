@@ -35,6 +35,7 @@ from lib.P300Layout.CircularLayout import CircularLayout
 from VisionEgg.FlowControl import FunctionController
 
 import numpy as NP
+from six.moves import range
 
 class CakeSpellerVE(VisualSpellerVE):
     '''
@@ -105,7 +106,7 @@ class CakeSpellerVE(VisualSpellerVE):
         orientaion = [180., 0.,
                       180., 0.,
                       180., 0.]
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_edges.append(FilledTriangle(size=self.speller_radius,
                                                  position=self._shape_positions[i],
                                                  orientation=orientaion[i],
@@ -116,7 +117,7 @@ class CakeSpellerVE(VisualSpellerVE):
                                                   color=self.shape_color))
             
             ## add the letters of level 1:
-            for j in xrange(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
+            for j in range(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
                 self._letter_positions.append((self._letter_layout.positions[j][0]+self._shape_positions[i][0],
                                                self._letter_layout.positions[j][1]+self._shape_positions[i][1]))
                 self._ve_letters.append(Text(position=self._letter_positions[-1],
@@ -126,7 +127,7 @@ class CakeSpellerVE(VisualSpellerVE):
                                              anchor='center'))
         
         ## add letters of level 2:
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_letters.append(Text(position=self._shape_positions[i],
                                          text=" ",
                                          font_size=self.font_size_level2,
@@ -149,7 +150,7 @@ class CakeSpellerVE(VisualSpellerVE):
         
         ## add feedback letters:
         self._ve_feedback_letters = []
-        for i in xrange(self._nr_elements-1):
+        for i in range(self._nr_elements-1):
             self._ve_feedback_letters.append(Text(position=(self._letter_layout.positions[i][0]+self._centerPos[0],
                                                             self._letter_layout.positions[i][1]+self._centerPos[1]),
                                                   color=self.letter_color,
@@ -186,10 +187,10 @@ class CakeSpellerVE(VisualSpellerVE):
         set screen elements to standard state.
         '''
         is_level1 = self._current_level==1
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_shapes[i].set(color=(std and self.shape_color or self.stimuli_colors[i]), on=True)
             self._ve_letters[self._nr_letters + i].set(on=not is_level1, color=(std and self.letter_color or self.letter_stimulus_color))
-        for i in xrange(self._nr_letters):
+        for i in range(self._nr_letters):
             self._ve_letters[i].set(on=is_level1, color=(std and self.letter_color or self.letter_stimulus_color))
     
     def stimulus(self, i_element, on=True):
@@ -198,7 +199,7 @@ class CakeSpellerVE(VisualSpellerVE):
         '''
         self._ve_shapes[i_element].set(color=(on and self.stimuli_colors[i_element] or self.shape_color))
         if self._current_level==1:
-            for i in xrange(len(self.letter_set[i_element])):
+            for i in range(len(self.letter_set[i_element])):
                 self._ve_letters[(self._nr_elements-1)*i_element + i].set(color=(on and self.letter_stimulus_color or self.letter_color))
         else:
             self._ve_letters[self._nr_letters + i_element].set(color=(on and self.letter_stimulus_color or self.letter_color))
@@ -220,7 +221,7 @@ class CakeSpellerVE(VisualSpellerVE):
             '''level 1: present classified letter group in center and move letters to circles '''
             
             ## display letter group:
-            for i in xrange(self._nr_elements-1):
+            for i in range(self._nr_elements-1):
                 self._ve_feedback_letters[i].set(on=True,
                                                  text=self.letter_set[self._classified_element][i])
             ## turn on current element:
@@ -229,9 +230,9 @@ class CakeSpellerVE(VisualSpellerVE):
             ## turn off other letters:
             idx_start = self._classified_element*(self._nr_elements-1)
             idx_end = idx_start + self._nr_elements-1
-            for i in xrange(idx_start):
+            for i in range(idx_start):
                 self._ve_letters[i].set(on=False)
-            for i in xrange(idx_end, self._nr_letters):
+            for i in range(idx_end, self._nr_letters):
                 self._ve_letters[i].set(on=False)
             
             ## present:
@@ -240,9 +241,9 @@ class CakeSpellerVE(VisualSpellerVE):
             self._presentation.go()
             
             ## turn off current element:
-            for i in xrange(idx_start, idx_end):
+            for i in range(idx_start, idx_end):
                 self._ve_letters[i].set(on=False)
-            for i in xrange(self._nr_elements-1):
+            for i in range(self._nr_elements-1):
                 self._ve_feedback_letters[i].set(on=False)
             
             ## animate letters:
@@ -252,7 +253,7 @@ class CakeSpellerVE(VisualSpellerVE):
                 dt = t//self.animation_time
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 feedback_letters = []
-                for i in xrange(self._nr_elements-1):
+                for i in range(self._nr_elements-1):
                     pos = animate_sigmoid(NP.add(self._letter_layout.positions[i], self._centerPos), self._shape_positions[i], dt)
                     font_size = int(round(animate(self.font_size_level1, self.font_size_level2, dt)))
                     feedback_letters.append(Text(position=pos,
@@ -269,7 +270,7 @@ class CakeSpellerVE(VisualSpellerVE):
             self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 
             ## turn on level 2 letters:
-            for i in xrange(len(self.letter_set[self._classified_element])):
+            for i in range(len(self.letter_set[self._classified_element])):
                 self._ve_letters[self._nr_letters + i].set(on=True, text=self.letter_set[self._classified_element][i])
 
         else: 
@@ -289,9 +290,9 @@ class CakeSpellerVE(VisualSpellerVE):
                 self.stimulus(self._classified_letter, True)
             
             ## turn off other letters:
-            for i in xrange(self._classified_letter):
+            for i in range(self._classified_letter):
                 self._ve_letters[self._nr_letters + i].set(on=False)
-            for i in xrange(self._classified_letter+1, self._nr_elements):
+            for i in range(self._classified_letter+1, self._nr_elements):
                 self._ve_letters[self._nr_letters + i].set(on=False)
             
             ## present:
@@ -331,7 +332,7 @@ class CakeSpellerVE(VisualSpellerVE):
                 
                     
             ## turn on level 1 letters:
-            for i in xrange(self._nr_letters):
+            for i in range(self._nr_letters):
                 self._ve_letters[i].set(on=True)
         
         ## turn off feedback box and turn on fixationpoint:

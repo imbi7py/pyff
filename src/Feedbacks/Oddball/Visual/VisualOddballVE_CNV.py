@@ -34,6 +34,7 @@ from VisionEgg.Textures import Texture
 from Feedbacks.Oddball.Visual import VisualOddballVE
     
 from lib import marker
+from six.moves import range
     
 # TODO: 
 # - EVTL: hit-miss-counter

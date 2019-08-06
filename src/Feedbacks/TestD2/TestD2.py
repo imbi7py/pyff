@@ -23,6 +23,7 @@ import random
 import pygame
 
 from FeedbackBase.PygameFeedback import PygameFeedback
+from six.moves import range
 
 # Notation: Letter UpperLines BottomLines
 TARGETS = ['d11', 'd20', 'd02']

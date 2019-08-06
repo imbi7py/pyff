@@ -34,6 +34,7 @@ from lib.P300Layout.CircularLayout import CircularLayout
 from VisionEgg.FlowControl import FunctionController
 
 import numpy as NP
+from six.moves import range
 
 class HexoSpellerVE(VisualSpellerVE):
     '''
@@ -115,7 +116,7 @@ class HexoSpellerVE(VisualSpellerVE):
         self._letter_layout.positions.reverse()
         self._shape_positions = [(x+self.geometry[2]//2, y+self._spellerHeight//2) for (x, y) in circle_layout.positions]
         # add the standard elements:
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_edges.append(FilledCircle(radius=self._edge_radius,
                                                 position=self._shape_positions[i],
                                                 color=self.edge_color))
@@ -123,7 +124,7 @@ class HexoSpellerVE(VisualSpellerVE):
                                                 position=self._shape_positions[i],
                                                 color=self.shape_color))
             # add the letters of level 1:
-            for j in xrange(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
+            for j in range(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
                 self._letter_positions.append((self._letter_layout.positions[j][0]+self._shape_positions[i][0],
                                                self._letter_layout.positions[j][1]+self._shape_positions[i][1]))
                 self._ve_letters.append(Text(position=self._letter_positions[-1],
@@ -137,8 +138,8 @@ class HexoSpellerVE(VisualSpellerVE):
                                        radius=self.circle_radius*0.65*self.flash_size_factor,
                                        start=NP.pi//6.*5)
         letter_layout2.positions.reverse()
-        for i in xrange(self._nr_elements):
-            for j in xrange(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
+        for i in range(self._nr_elements):
+            for j in range(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
                 self._letter_positions.append((letter_layout2.positions[j][0]+self._shape_positions[i][0],
                                                letter_layout2.positions[j][1]+self._shape_positions[i][1]))
                 self._ve_letters.append(Text(position=self._letter_positions[-1],
@@ -149,7 +150,7 @@ class HexoSpellerVE(VisualSpellerVE):
                                              on=False))
         
         # add letters of level 2:
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_letters.append(Text(position=self._shape_positions[i],
                                          text=" ",
                                          font_size=self.font_size_level2,
@@ -158,7 +159,7 @@ class HexoSpellerVE(VisualSpellerVE):
                                          on=False))
             
         # add stimuli letters of level 2:
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_letters.append(Text(position=self._shape_positions[i],
                                          text=" ",
                                          font_size=int(NP.floor(self.font_size_level2*self.flash_size_factor)),
@@ -180,7 +181,7 @@ class HexoSpellerVE(VisualSpellerVE):
         
         ## add feedback letters:
         self._ve_feedback_letters = []
-        for i in xrange(self._nr_elements-1):
+        for i in range(self._nr_elements-1):
             self._ve_feedback_letters.append(Text(position=(self._letter_layout.positions[i][0]+self._centerPos[0],
                                                             self._letter_layout.positions[i][1]+self._centerPos[1]),
                                                   color=self.letter_color,
@@ -216,13 +217,13 @@ class HexoSpellerVE(VisualSpellerVE):
         set screen elements to standard state.
         '''
         is_level1 = self._current_level==1        
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_edges[i].set(radius=(std and self._edge_radius or self._edge_radius * self.flash_size_factor))
             self._ve_shapes[i].set(color=(std and  self.shape_color or self.stimuli_colors[i]),
                                    radius=(std and self._circle_radius or self._circle_radius * self.flash_size_factor))
             self._ve_letters[self._nr_letters*2 + i].set(on=(std and (not is_level1)))
             self._ve_letters[self._nr_letters*2 + self._nr_elements + i].set(on=((not std) and (not is_level1)))
-        for i in xrange(self._nr_letters):
+        for i in range(self._nr_letters):
             self._ve_letters[i].set(on=(std and is_level1))
             self._ve_letters[self._nr_letters + i].set(on=((not std) and is_level1))
         self._ve_fixationpoint.set(on=std)
@@ -239,7 +240,7 @@ class HexoSpellerVE(VisualSpellerVE):
                                        radius=self._circle_radius*(on and self.flash_size_factor or 1))
         self._ve_edges[i_element].set(radius=self._edge_radius*(on and self.flash_size_factor or 1))
         if self._current_level==1:
-            for i in xrange(len(self.letter_set[i_element])):
+            for i in range(len(self.letter_set[i_element])):
                 i_normal = (self._nr_elements-1) * i_element + i
                 i_stimulus = self._nr_letters + i_normal
                 self._ve_letters[i_normal].set(on=not on)
@@ -261,7 +262,7 @@ class HexoSpellerVE(VisualSpellerVE):
             '''level 1: present classified letter group in center and move letters to circles '''
             
             ## display letter group:
-            for i in xrange(self._nr_elements-1):
+            for i in range(self._nr_elements-1):
                 self._ve_feedback_letters[i].set(on=True,
                                                  text=self.letter_set[self._classified_element][i])
             ## turn on current element:
@@ -270,9 +271,9 @@ class HexoSpellerVE(VisualSpellerVE):
             ## turn off other letters:
             idx_start = self._classified_element*(self._nr_elements-1)
             idx_end = idx_start + self._nr_elements-1
-            for i in xrange(idx_start):
+            for i in range(idx_start):
                 self._ve_letters[i].set(on=False)
-            for i in xrange(idx_end, self._nr_letters):
+            for i in range(idx_end, self._nr_letters):
                 self._ve_letters[i].set(on=False)
             
             ## present:
@@ -281,9 +282,9 @@ class HexoSpellerVE(VisualSpellerVE):
             
             ## turn off current element:
             self.stimulus(self._classified_element, False)
-            for i in xrange(idx_start, idx_end):
+            for i in range(idx_start, idx_end):
                 self._ve_letters[i].set(on=False)
-            for i in xrange(self._nr_elements-1):
+            for i in range(self._nr_elements-1):
                 self._ve_feedback_letters[i].set(on=False)
             
             ## animate letters:
@@ -293,7 +294,7 @@ class HexoSpellerVE(VisualSpellerVE):
                 dt = t//self.animation_time
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 feedback_letters = []
-                for i in xrange(self._nr_elements-1):
+                for i in range(self._nr_elements-1):
                     pos = animate_sigmoid(NP.add(self._letter_layout.positions[i], self._centerPos), self._shape_positions[i], dt)
                     font_size = int(round(animate(self.font_size_level1, self.font_size_level2, dt)))
                     feedback_letters.append(Text(position=pos,
@@ -310,7 +311,7 @@ class HexoSpellerVE(VisualSpellerVE):
             self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 
             ## turn on level 2 letters:
-            for i in xrange(len(self.letter_set[self._classified_element])):
+            for i in range(len(self.letter_set[self._classified_element])):
                 self._ve_letters[self._nr_letters*2 + i].set(on=True, text=self.letter_set[self._classified_element][i])
                 self._ve_letters[self._nr_letters*2 + self._nr_elements + i].set(text=self.letter_set[self._classified_element][i])
                     
@@ -331,9 +332,9 @@ class HexoSpellerVE(VisualSpellerVE):
                 self.stimulus(self._classified_letter, True)
             
             ## turn off other letters:
-            for i in xrange(self._classified_letter):
+            for i in range(self._classified_letter):
                 self._ve_letters[self._nr_letters*2 + i].set(on=False)
-            for i in xrange(self._classified_letter+1, self._nr_elements):
+            for i in range(self._classified_letter+1, self._nr_elements):
                 self._ve_letters[self._nr_letters*2 + i].set(on=False)
             
             ## present:
@@ -375,7 +376,7 @@ class HexoSpellerVE(VisualSpellerVE):
                 
                     
             ## turn on level 1 letters:
-            for i in xrange(self._nr_letters):
+            for i in range(self._nr_letters):
                 self._ve_letters[i].set(on=True)
         
         ## turn off feedback box and turn on fixationpoint:

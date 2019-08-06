@@ -39,6 +39,7 @@ import sys, os, random, time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.P300Layout import CircularLayout
+from six.moves import range
 
 class BoringClock(MainloopFeedback):
     
@@ -64,7 +65,7 @@ class BoringClock(MainloopFeedback):
         self.stimTime = 30               # How long the stimulus is displayed (in frames)
         self.nCountdown = 1             # N of secs to count down
         # Triggers
-        self.triggers = range(10, 10+self.nEl) # 10,11,12,...
+        self.triggers = list(range(10, 10+self.nEl)) # 10,11,12,...
         self.triggerAdd = 20            # If current symbol matches the nth back symbol, this number is added to the trigger
         # Auditory settings
         self.auditoryFeedback = False       # Auditory feedback provided

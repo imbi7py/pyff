@@ -44,6 +44,7 @@ from __future__ import absolute_import
 import math
 import pygame
 from .VisualElement import VisualElement
+from six.moves import range
 
 class Circle(VisualElement):
 

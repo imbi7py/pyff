@@ -36,6 +36,7 @@ from numpy import sqrt
 #import numpy.oldnumeric as Numeric
 #import math
 import VisionEgg.GL as gl # get all OpenGL stuff in one namespace
+from six.moves import range
 
 class FilledHexagon(VisionEgg.Core.Stimulus):
     """Hexagonal stimulus. Adapted from http://www.visionegg.org
@@ -307,7 +308,7 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
                 )
         
             gl.glBegin(gl.GL_TRIANGLE_STRIP) 
-            for i in xrange(7):
+            for i in range(7):
                 j = i % 6
                 gl.glVertex3f(inn[j][0], inn[j][1], 0.0)
                 gl.glVertex3f(out[j][0], out[j][1], 0.0)
@@ -319,7 +320,7 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.edge_color) 
  
             gl.glBegin(gl.GL_LINES)
-            for i in xrange(6):
+            for i in range(6):
                 gl.glVertex3f(inn[i][0], inn[i][1], 0.0)
                 gl.glVertex3f(out[i][0], out[i][1], 0.0)
             gl.glEnd()
@@ -438,7 +439,7 @@ class StripeField(VisionEgg.Core.Stimulus):
             gl.glLineWidth(p.line_width)
 
             arrow_offset = p.width * p.angle
-            for i in xrange(- p.num_stripes // 2 - 1, p.num_stripes // 2 - 2):
+            for i in range(- p.num_stripes // 2 - 1, p.num_stripes // 2 - 2):
                 offset = i * p.dist_stripes
                 gl.glBegin(gl.GL_LINE_STRIP)
                 gl.glVertex3f(-p.width // 2., offset, 0.)
@@ -567,7 +568,7 @@ class DotField(VisionEgg.Core.Stimulus):
             # calculate dot dimensions
             r = p.dot_size // 2.
             circle_coords = []
-            for i in xrange(p.circle_steps):
+            for i in range(p.circle_steps):
                 alpha = (float(i) // float(p.circle_steps)) * 2 * math.pi
                 circle_coords.append((r * math.cos(alpha), r * math.sin(alpha)))
 

@@ -24,6 +24,7 @@ from numpy import ones, outer, sum, isscalar, squeeze, array
 import pylab as p
 from . import Utils
 from io import open
+from six.moves import range
 
 
 class LanguageModel():
@@ -223,7 +224,7 @@ if __name__ == "__main__":
         p.plot(lm.pp)
         p.legend(('probs', 'hp', 'pp'))
         p.ylabel(word)
-        p.xticks(range(29), lm.char_set_list)
+        p.xticks(list(range(29)), lm.char_set_list)
         word = word + letter
         
     p.show()

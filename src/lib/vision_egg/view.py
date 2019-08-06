@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import absolute_import
 import six
+from six.moves import range
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -273,7 +274,7 @@ class VisionEggView(object):
         'countdown_start' and 'countdown_symbol_duration'.
         """
         self._trigger(marker.COUNTDOWN_START, wait=True)
-        for i in self._iter(reversed(xrange(self._countdown_start + 1))):
+        for i in self._iter(reversed(range(self._countdown_start + 1))):
             self.center_word(str(i))
             self.present(self._countdown_symbol_duration)
         self._trigger(marker.COUNTDOWN_END, wait=True)

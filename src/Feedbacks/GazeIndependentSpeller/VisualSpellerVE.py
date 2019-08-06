@@ -49,6 +49,7 @@ from sys import platform, maxint
 
 from lib import marker
 from lib import serialport
+from six.moves import range
 
 
 class VisualSpellerVE(MainloopFeedback):
@@ -182,7 +183,7 @@ class VisualSpellerVE(MainloopFeedback):
         self._centerPos = (self.geometry[2]//2., self._spellerHeight//2.)
 
         self._nr_letters = 0
-        for i in xrange(len(self.letter_set)):
+        for i in range(len(self.letter_set)):
             self._nr_letters += len(self.letter_set[i])
 
         self._current_level = 1          # Index of current level
@@ -401,8 +402,8 @@ class VisualSpellerVE(MainloopFeedback):
     def __idle(self):
         if self.offline and len(self._desired_letters) > 0:
             # add new letter:
-            for e in xrange(len(self.letter_set)):
-                for l in xrange(len(self.letter_set[e])):
+            for e in range(len(self.letter_set)):
+                for l in range(len(self.letter_set[e])):
                     if self._desired_letters[0] == self.letter_set[e][l]:
                         self._classified_element = e
                         self._classified_letter = l
@@ -486,12 +487,12 @@ class VisualSpellerVE(MainloopFeedback):
                 self.flash_sequence = []
                 for _ in range(self.nr_sequences):
                     random_flash_sequence(self,
-                                      set=range(self._nr_elements),
+                                      set=list(range(self._nr_elements)),
                                       min_dist=self.min_dist,
                                       seq_len=self._nr_elements)
             # or else use fixed sequence:
             else:
-                self.flash_sequence = range(self._nr_elements)
+                self.flash_sequence = list(range(self._nr_elements))
 
 
         if self.randomize_sequence:
@@ -623,7 +624,7 @@ class VisualSpellerVE(MainloopFeedback):
             self._debug_classified = None
         else:
             if self.output_per_stimulus:
-                nClassified = sum([len(self._classifier_output[i]) for i in xrange(self._nr_elements)])
+                nClassified = sum([len(self._classifier_output[i]) for i in range(self._nr_elements)])
                 if nClassified < self._nr_elements * self.nr_sequences:
                     pygame.time.wait(20)
                     print('not enough classifier-outputs received! (something may be wrong)')
@@ -822,7 +823,7 @@ class VisualSpellerVE(MainloopFeedback):
 
     def _init_classifier_output(self):
         ## Empty lists
-        self._classifier_output = [list() for _ in xrange(self._nr_elements)]
+        self._classifier_output = [list() for _ in range(self._nr_elements)]
 
     def abort_trial_check(self):
         '''

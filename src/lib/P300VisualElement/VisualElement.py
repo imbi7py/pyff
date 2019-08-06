@@ -27,6 +27,7 @@ import random
 
 import pygame
 import six
+from six.moves import range
 
 
 class VisualElement(pygame.sprite.Sprite):
@@ -65,7 +66,7 @@ class VisualElement(pygame.sprite.Sprite):
             old_state = self.state
             rnd = random.Random()
             # Pick 2 random states: if first one is equal to current state, pick second one
-            s = range(self.nr_states)
+            s = list(range(self.nr_states))
             state2 = rnd.sample(s, 2)
             new_state = (state2[1] if state2[0] == self.state else state2[0])
         else:

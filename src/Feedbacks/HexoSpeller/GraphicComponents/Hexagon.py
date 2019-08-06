@@ -29,6 +29,7 @@ from direct.gui.OnscreenText import OnscreenText
 from pandac.PandaModules import TextNode, PandaNode, NodePath
 from pandac.PandaModules import GeomVertexFormat, GeomVertexData
 from pandac.PandaModules import Geom, GeomNode, GeomTrifans, GeomTristrips, GeomVertexWriter, PointLight, VBase4
+from six.moves import range
 #global render, loader
 
 

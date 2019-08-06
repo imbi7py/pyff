@@ -53,6 +53,7 @@ from lib.P300VisualElement.Textrow import Textrow # Import textrow element for d
 from lib.P300Aux.P300Functions import *
 from lib.eyetracker import EyeTracker
 from io import open
+from six.moves import range
 
 
 class ERPMatrix(VisualP300):

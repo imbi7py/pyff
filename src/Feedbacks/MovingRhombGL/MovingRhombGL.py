@@ -27,6 +27,7 @@ import time
 import soya
 
 from FeedbackBase.Feedback import Feedback
+from six.moves import range
 
 
 class MovingRhombGL(Feedback):

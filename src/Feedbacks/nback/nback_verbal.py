@@ -34,6 +34,7 @@ from __future__ import print_function
 import sys, os, random, time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
+from six.moves import range
 
 class nback_verbal(MainloopFeedback):
     
@@ -65,7 +66,7 @@ class nback_verbal(MainloopFeedback):
         self.nCountdown = 1             # N of secs to count down
         self.auditoryFeedback = True       # Auditory feedback provided
         # Triggers
-        self.triggers = range(10, 10+len(self.symbols)) # 10,11,12,...
+        self.triggers = list(range(10, 10+len(self.symbols))) # 10,11,12,...
         self.triggerAdd = 20            # If current symbol matches the nth back symbol, this number is added to the trigger
         # Auditory settings
         #self.auditoryFeedback = False   # If yes, gives a beep when a wrong response is given

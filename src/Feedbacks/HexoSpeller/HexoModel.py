@@ -27,6 +27,7 @@ The Hexagons are indexed 0 to 5, clockwise, the top one is number 0.
 from __future__ import division
 from __future__ import absolute_import
 from . import Utils
+from six.moves import range
 
 class HexoModel():
         

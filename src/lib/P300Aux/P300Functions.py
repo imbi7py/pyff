@@ -36,6 +36,7 @@ from __future__ import absolute_import
 import pygame
 
 from lib.P300VisualElement.Textbox import Textbox
+from six.moves import range
 
 
 " *** Interfacing with the keyboard *** "
@@ -305,7 +306,7 @@ def random_flash_sequence(self, set=None, min_dist=0, seq_len=None, repetition=F
         if true, groups are drawn with repetition (ie, indices can be repeated) 
     """
     if set is None:
-        set = range(len(self.groups))       # Take all groups
+        set = list(range(len(self.groups)))       # Take all groups
     if seq_len is None:
         seq_len = len(set)                  # If no argument provided, take length of sequence
 

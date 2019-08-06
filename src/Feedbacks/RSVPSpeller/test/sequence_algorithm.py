@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
+from six.moves import range
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits, Laura Acqualagna
 
 This program is free software; you can redistribute it and/or modify it under
@@ -108,7 +109,7 @@ class OriginalSequenceAlgorithm(object):
             if (i<=5): 
                 for j in range(0, 2**(i-1)):
                     #print i
-                    self.list=range(j, 32, 2**(i-1))
+                    self.list=list(range(j, 32, 2**(i-1)))
                     #print j
                     print(self.list)
                     self.tmp=self.tmp+self.list
@@ -117,7 +118,7 @@ class OriginalSequenceAlgorithm(object):
             else: 
                 for j in range(0, 2**(i-6)):
                     #print i
-                    self.list=range(j, 32, 2**(i-6))
+                    self.list=list(range(j, 32, 2**(i-6)))
                     #print j
                     print(self.list)          
                     self.tmp=self.tmp+self.list

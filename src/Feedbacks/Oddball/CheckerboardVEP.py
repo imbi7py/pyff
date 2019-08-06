@@ -25,6 +25,7 @@ import pygame
 import math
 
 from Feedbacks.Oddball.Visual import VisualOddball
+from six.moves import range
 
 
 class CheckerboardVEP(VisualOddball.VisualOddball):

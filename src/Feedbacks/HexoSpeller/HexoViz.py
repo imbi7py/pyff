@@ -31,6 +31,7 @@ import direct.gui.OnscreenText as ost
 from direct.task import Task
 from direct.gui.OnscreenText import OnscreenText
 from pandac.PandaModules import TextNode, PointLight, VBase4, AmbientLight
+from six.moves import range
 
 
 class HexoViz(DirectObject):

@@ -48,6 +48,7 @@ from FeedbackBase.VisionEggFeedback import VisionEggFeedback
     
 from lib import marker
 from io import open
+from six.moves import range
     
 # TODO: 
 # - EVTL: hit-miss-counter

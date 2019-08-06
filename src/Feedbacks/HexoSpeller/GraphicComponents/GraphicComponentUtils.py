@@ -23,6 +23,7 @@ from Feedbacks.HexoSpeller.Utils import rotate_phi_degrees_counter_clockwise
 from pandac.PandaModules import Geom, GeomNode, GeomTrifans, GeomTristrips, \
     GeomLines, GeomVertexFormat, GeomVertexData, GeomVertexReader, GeomVertexWriter, \
     PandaNode, NodePath, GeomTriangles
+from six.moves import range
 
 
 def create_line(x1, z1, x2, z2):

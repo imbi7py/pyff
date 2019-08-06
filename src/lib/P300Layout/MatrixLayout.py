@@ -22,6 +22,7 @@ left corner.
 """
 
 from __future__ import division
+from six.moves import range
 class MatrixLayout(object):
     
     def __init__(self, size=(200, 200), rows=6, cols=6):
@@ -52,7 +53,7 @@ class MatrixLayout(object):
         rows_cols = []
         # Get rows
         for r in range(self.rows):
-            rows_cols.append(range(r * self.cols, (r + 1) * self.cols))
+            rows_cols.append(list(range(r * self.cols, (r + 1) * self.cols)))
         # Get columns
         for c in range(self.cols):
             column = []

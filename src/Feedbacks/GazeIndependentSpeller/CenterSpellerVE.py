@@ -34,6 +34,7 @@ from lib.P300Layout.CircularLayout import CircularLayout
 from VisionEgg.FlowControl import FunctionController
 
 import numpy as NP
+from six.moves import range
 
 class CenterSpellerVE(VisualSpellerVE):
     '''
@@ -154,7 +155,7 @@ class CenterSpellerVE(VisualSpellerVE):
 
         ## create shapes:
         if self.do_animation:
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._ve_shapes.append(self.registered_shapes[self.shapes[i][0]](
                     position=self._centerPos,
                     color=self.shape_color[i],
@@ -171,7 +172,7 @@ class CenterSpellerVE(VisualSpellerVE):
                     radius=self.letter_radius,
                     start=NP.pi//6.*5)
             self._letter_layout.positions.reverse()
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 # store countdown position:
                 self._countdown_shape_positions.append((self._centerPos[0] + circle_layout.positions[i][0],
                     self._centerPos[1] + circle_layout.positions[i][1]))
@@ -179,7 +180,7 @@ class CenterSpellerVE(VisualSpellerVE):
                 # put shape in container:
                 self._ve_elements.append(self._ve_shapes[i])
 
-                for j in xrange(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
+                for j in range(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
                     # store position:
                     self._letter_positions.append((self._letter_layout.positions[j][0] + self._centerPos[0],
                         self._letter_layout.positions[j][1] + self._centerPos[1]))
@@ -197,7 +198,7 @@ class CenterSpellerVE(VisualSpellerVE):
                         on=False))
 
             # add letters of level 2:
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._letter_positions.append(self._centerPos)
                 self._countdown_letter_positions.append(self._countdown_shape_positions[i])
                 self._ve_letters.append(Text(position=self._centerPos,
@@ -219,7 +220,7 @@ class CenterSpellerVE(VisualSpellerVE):
 
             ## add feedback letters:
             self._ve_feedback_letters = []
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._ve_feedback_letters.append(Text(position=(self._letter_layout.positions[i][0]+self._centerPos[0],
                     self._letter_layout.positions[i][1]+self._centerPos[1]),
                     color=self.letter_color,
@@ -260,7 +261,7 @@ class CenterSpellerVE(VisualSpellerVE):
             circle_layout.positions.reverse()
             self._letter_layout.positions.reverse()
 
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._ve_shapes.append(self.registered_shapes[self.shapes[i][0]](
                     position=(self._centerPos[0] + circle_layout.positions[i][0],
                         self._centerPos[1] + circle_layout.positions[i][1]),
@@ -270,14 +271,14 @@ class CenterSpellerVE(VisualSpellerVE):
 
 
 
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 # store countdown position:
                 self._countdown_shape_positions.append((self._centerPos[0] + circle_layout.positions[i][0],
                     self._centerPos[1] + circle_layout.positions[i][1]))
                 # put shape in container:
                 self._ve_elements.append(self._ve_shapes[i])
 
-                for j in xrange(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
+                for j in range(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
                     # store position:
                     self._letter_positions.append((self._letter_layout.positions[j][0] + self._centerPos[0],
                         self._letter_layout.positions[j][1] + self._centerPos[1]))
@@ -296,7 +297,7 @@ class CenterSpellerVE(VisualSpellerVE):
                         on=False))
 
             # add letters of level 2:
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._letter_positions.append((self._letter_layout.positions[i][0] + self._centerPos[0],
                     self._letter_layout.positions[i][1] + self._centerPos[1]))
                 self._countdown_letter_positions.append((self._letter_layout.positions[i][0] + self._countdown_shape_positions[-1][0],
@@ -321,7 +322,7 @@ class CenterSpellerVE(VisualSpellerVE):
 
             ## add feedback letters:
             self._ve_feedback_letters = []
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._ve_feedback_letters.append(Text(position=(self._letter_layout.positions[i][0]+self._centerPos[0],
                     self._letter_layout.positions[i][1]+self._centerPos[1]),
                     color=self.letter_color,
@@ -369,13 +370,13 @@ class CenterSpellerVE(VisualSpellerVE):
         is_level1 = self._current_level==1
 
         ## turn on visible elements:
-        for i in xrange(self._nr_elements): # shapes
+        for i in range(self._nr_elements): # shapes
             self._ve_shapes[i].set(on=is_level1 or self.level_2_shapes)
 
-        for i in xrange(self._nr_letters): # level 1 letters
+        for i in range(self._nr_letters): # level 1 letters
             self._ve_letters[i].set(on=is_level1 )
 
-        for i in xrange(len(self.letter_set[self._classified_element])): # level 2 letters
+        for i in range(len(self.letter_set[self._classified_element])): # level 2 letters
             self._ve_letters[self._nr_letters + i].set(on=not is_level1,
                     text=(is_level1 and " " or self.letter_set[self._classified_element][i]))
 
@@ -385,19 +386,19 @@ class CenterSpellerVE(VisualSpellerVE):
         ## move all elements with their letters to countdown position:
         def update(t):
             dt = t//self.animation_time
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 pos = animate_sigmoid(self._centerPos, self._countdown_shape_positions[i], dt)
                 self._ve_shapes[i].set(position=pos) # shapes
                 self._ve_letters[self._nr_letters + i].set(position=pos) # level 2 letters
-            for i in xrange(self._nr_letters):
+            for i in range(self._nr_letters):
                 pos = animate_sigmoid(self._letter_positions[i], self._countdown_letter_positions[i], dt)
                 self._ve_letters[i].set(position=pos) # level 1 letters
 
         def update2(t): # if not do animation
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 self._ve_shapes[i].set(position=self._countdown_shape_positions[i])# shapes
                 self._ve_letters[self._nr_letters + i].set(position=self._countdown_shape_positions[i])# level 2 letters
-            for i in xrange(self._nr_letters):
+            for i in range(self._nr_letters):
                 self._ve_letters[i].set(position=self._countdown_letter_positions[i])# level 1 letters
 
         if self.do_animation:
@@ -412,20 +413,20 @@ class CenterSpellerVE(VisualSpellerVE):
         self._presentation.go()
         self._presentation.remove_controller(None, None, None)
 
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_shapes[i].set(position=self._countdown_shape_positions[i])
             self._ve_letters[self._nr_letters + i].set(position=self._countdown_shape_positions[i])
-        for i in xrange(self._nr_letters):
+        for i in range(self._nr_letters):
             self._ve_letters[i].set(position=self._countdown_letter_positions[i])
 
     def set_synchronized_countdown_screen(self):
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_shapes[i].set(on=False)
         if self._current_level==1:
-           for j in xrange(self._nr_letters):
+           for j in range(self._nr_letters):
               self._ve_letters[j].set(on=False)
         else:
-           for j in xrange(self._nr_elements+1):
+           for j in range(self._nr_elements+1):
               self._ve_letters[-j].set(on=False)
 
     def set_standard_screen(self):
@@ -439,11 +440,11 @@ class CenterSpellerVE(VisualSpellerVE):
 
         def update(t):
             dt = t//self.animation_time
-            for i in xrange(self._nr_elements):
+            for i in range(self._nr_elements):
                 pos = animate_sigmoid(self._countdown_shape_positions[i], self._centerPos, dt)
                 self._ve_shapes[i].set(position=pos) # shapes
                 self._ve_letters[self._nr_letters + i].set(position=pos) # level 2 letters
-            for i in xrange(self._nr_letters):
+            for i in range(self._nr_letters):
                 pos = animate_sigmoid(self._countdown_letter_positions[i], self._letter_positions[i], dt)
                 self._ve_letters[i].set(position=pos) # level 1 letters
 
@@ -457,10 +458,10 @@ class CenterSpellerVE(VisualSpellerVE):
         self._presentation.go()
         self._presentation.remove_controller(None, None, None)
 
-        for i in xrange(self._nr_elements):
+        for i in range(self._nr_elements):
             self._ve_shapes[i].set(position=self._centerPos, on=False)
             self._ve_letters[self._nr_letters + i].set(position=self._centerPos, on=False)
-        for i in xrange(self._nr_letters):
+        for i in range(self._nr_letters):
             self._ve_letters[i].set(position=self._letter_positions[i], on=False)
 
         self._ve_countdown.set(on=False, text=" ")
@@ -471,7 +472,7 @@ class CenterSpellerVE(VisualSpellerVE):
         '''
         if self._current_level==1:
             self._ve_shapes[i_element].set(on=on)
-            for i in xrange(len(self.letter_set[i_element])):
+            for i in range(len(self.letter_set[i_element])):
                 self._ve_letters[(self._nr_elements-1) * i_element + i].set(on=on and self.level_1_symbols)
         else:
             self._ve_shapes[i_element].set(on=(on and self.level_2_shapes))
@@ -502,7 +503,7 @@ class CenterSpellerVE(VisualSpellerVE):
         if self._current_level == 1:
             ## turn on/off center letter group:
             if not self.feedback_show_shape_at_center:
-                for i in xrange(self._nr_elements):
+                for i in range(self._nr_elements):
                     self._ve_feedback_letters[i].set(on=on,
                             text=(i<self._nr_elements-1 and
                                 self.letter_set[self._classified_element][i] or
@@ -519,7 +520,7 @@ class CenterSpellerVE(VisualSpellerVE):
                 ## turn on/off letters of selected element:
                 idx_start = self._classified_element*(self._nr_elements-1)
                 idx_end = idx_start + self._nr_elements-1
-                for i in xrange(idx_start, idx_end):
+                for i in range(idx_start, idx_end):
                     self._ve_letters[i].set(on=on, position=(on and
                         list(NP.add(pos, self._letter_layout.positions[i % (self._nr_elements-1)])) or
                         self._letter_positions[i]))
@@ -568,7 +569,7 @@ class CenterSpellerVE(VisualSpellerVE):
 
             if self.level_2_animation:
                 ## turn on all elements:
-                for i in xrange(self._nr_elements):
+                for i in range(self._nr_elements):
                     self._ve_shapes[i].set(on=self.level_2_shapes, position=self._countdown_shape_positions[i])
 
                 ## animate letters:
@@ -576,7 +577,7 @@ class CenterSpellerVE(VisualSpellerVE):
                     dt = t//self.animation_time
                     self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements)]
                     feedback_letters = []
-                    for i in xrange(self._nr_elements):
+                    for i in range(self._nr_elements):
                         pos = (animate_sigmoid(NP.add(self._letter_layout.positions[i], self._centerPos), self._countdown_shape_positions[i], dt))
                         font_size = int(round(animate(self.font_size_level1, self.font_size_level2, dt)))
                         color = (self.level_2_letter_colors and
@@ -604,7 +605,7 @@ class CenterSpellerVE(VisualSpellerVE):
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements)]
 
                 ## turn on level 2 letters:
-                for i in xrange(self._nr_elements):
+                for i in range(self._nr_elements):
                     text = (i==self._nr_elements-1 and
                             self.backdoor_symbol or
                             self.letter_set[self._classified_element][i])

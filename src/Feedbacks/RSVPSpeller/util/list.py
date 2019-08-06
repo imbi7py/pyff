@@ -1,4 +1,5 @@
 from __future__ import division
+from six.moves import range
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -16,7 +17,7 @@ program; if not, see <http://www.gnu.org/licenses/>.
 
 def slices(seq, length):
     count = len(seq) // length
-    return [seq[i * length:(i + 1) * length] for i in xrange(count)]
+    return [seq[i * length:(i + 1) * length] for i in range(count)]
 
 def remove_all(seq, elements):
     for e in elements:

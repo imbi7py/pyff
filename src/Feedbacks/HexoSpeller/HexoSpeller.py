@@ -23,6 +23,7 @@ from .HexoModel import HexoModel
 from .HexoViz import HexoViz
 from .LanguageModel import LanguageModel
 from .GraphicComponents import ColorSchemes
+from six.moves import range
 
 PARAMS = {
           "initial_arraw_angle": 0, # initial orientation of the arrow, in degrees
@@ -83,7 +84,7 @@ class Marker():
     state_change_animation_level_two_to_one_end = 42
     selected_hex_level_one = [11, 12, 13, 14, 15, 16] # hex 1-6 was selected at level 1
     selected_hex_level_two = [21, 22, 23, 24, 25, 26] # hex 1-6 was selected at level 2
-    selected_letter = range(61, 61+30)   # code for the selected symbols, the list will be indexed according to the 
+    selected_letter = list(range(61, 61+30))   # code for the selected symbols, the list will be indexed according to the 
                                         # symbol list that comes with the language model
     feedback_init = 200
     status_change_to_play = 210

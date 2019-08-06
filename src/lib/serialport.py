@@ -30,6 +30,7 @@
 from __future__ import absolute_import
 import serial
 from threading import Timer
+from six.moves import range
 
 
 class SerialPort(object):

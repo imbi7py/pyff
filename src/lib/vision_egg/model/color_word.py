@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 from six.moves import zip
+from six.moves import range
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -69,7 +70,7 @@ class ColorWord(TextList):
         self._target_size = target_size or symbol_size
 
     def shuffle_colors(self):
-        colors = ([uniform(0, 1) for i in xrange(3)] for e in self)
+        colors = ([uniform(0, 1) for i in range(3)] for e in self)
         self.set_colors(colors)
 
     def _set_colors(self):

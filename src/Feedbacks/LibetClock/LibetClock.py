@@ -32,6 +32,7 @@ import pygame
 
 from FeedbackBase.PygameFeedback import PygameFeedback
 from io import open
+from six.moves import range
 
 
 class LibetClock(PygameFeedback):

@@ -45,6 +45,7 @@ from lib.P300VisualElement.Textrow import Textrow
 from lib.P300Aux.P300Functions import *
 from lib.eyetracker import EyeTracker
 from io import open
+from six.moves import range
 
 
 class ERPHex(VisualP300):

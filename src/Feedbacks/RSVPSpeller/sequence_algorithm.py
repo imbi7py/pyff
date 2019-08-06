@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import absolute_import
 from six.moves import map
+from six.moves import range
 __copyright__ = """ Copyright (c) 2010 Laura Acqualagna
 
 This program is free software; you can redistribute it and/or modify it under
@@ -93,13 +94,13 @@ class RSVP(object):
             self.tmp=[]
             if (i<=5): 
                 for j in range(0, 2**(i-1)):
-                    self.list=range(j, 32, 2**(i-1))
+                    self.list=list(range(j, 32, 2**(i-1)))
                     self.tmp=self.tmp+self.list
                     self.rev=copy.copy(self.tmp)
                     self.rev.reverse()
             else: 
                 for j in range(0, 2**(i-6)):
-                    self.list=range(j, 32, 2**(i-6))
+                    self.list=list(range(j, 32, 2**(i-6)))
                     self.tmp=self.tmp+self.list
                     self.rev=copy.copy(self.tmp)
                     self.rev.reverse()

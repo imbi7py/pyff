@@ -31,6 +31,7 @@ import math
 import pygame
 
 from FeedbackBase.PygameFeedback import PygameFeedback
+from six.moves import range
 
 
 class FeedbackCursorArrow(PygameFeedback):

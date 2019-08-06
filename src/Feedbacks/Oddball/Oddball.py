@@ -54,6 +54,7 @@ import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib import marker
 from lib import serialport
+from six.moves import range
 
 class Oddball(MainloopFeedback):
     

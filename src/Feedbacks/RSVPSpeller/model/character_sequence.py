@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import absolute_import
 from six.moves import map
+from six.moves import range
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -55,7 +56,7 @@ class CharacterSequence(list):
         burst sequence, keep as a list of burst lists.
         """
         nsym = len(self.burst_sequence)
-        self._colors = list(map(self._positional_color, xrange(nsym)))
+        self._colors = list(map(self._positional_color, range(nsym)))
         zipped = zip(self.burst_sequence, self._colors)
         self[:] = zipped
         self.bursts = slices(zipped, self._burst_len)
@@ -92,28 +93,28 @@ class CharacterSequenceFactory(object):
         off, don't preserve. Restrict to 10 targets.
         """
         start, stop = target_count_interval
-        target_count = choice(range(start, stop + 1))
+        target_count = choice(list(range(start, stop + 1)))
         target_count = min(target_count, 10)
         bursts = self._rsvp.trial(2, self._alt_color) 
         seq = sum(bursts[:3], [])
         if self._alt_color:
-            indexes = range(0, len(seq), 3)
+            indexes = list(range(0, len(seq), 3))
             random_index = lambda: self._color_offset + choice(indexes)
             while len([l for l in seq if l == self._target]) < target_count:
                 seq[random_index()] = self._target
         else:
-            indexes = range(0, len(seq))
+            indexes = list(range(0, len(seq)))
             random_index = lambda: choice(indexes)
             while indexes and len([l for l in seq if l == self._target]) < target_count:
                 index = random_index()
                 seq[index] = self._target
-                remove_all(indexes, range(index - 1, index + 2))
+                remove_all(indexes, list(range(index - 1, index + 2)))
         return self.sequence(seq)
 
     def sequences(self, count, pre=[], post=[]):
         main_bursts = self._rsvp.trial(count, self._alt_color) 
         main_seqs = [sum(main_bursts[i:i + 3], []) for i in
-                     xrange(0, len(main_bursts), 3)]
+                     range(0, len(main_bursts), 3)]
         extra = self.extra_sequence
         sequences = list(map(extra, pre)) + list(map(self.sequence, main_seqs)) + list(map(extra,
                                                                          post))

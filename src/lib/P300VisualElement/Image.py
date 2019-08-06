@@ -38,6 +38,7 @@ import os.path
 import pygame
 
 from .VisualElement import VisualElement
+from six.moves import range
 
 
 class Image(VisualElement):

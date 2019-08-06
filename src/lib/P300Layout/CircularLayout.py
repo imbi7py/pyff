@@ -30,6 +30,7 @@ if you do not want it to be placed on the top.
 from __future__ import division
 from __future__ import absolute_import
 import math
+from six.moves import range
 
 class CircularLayout(object):
     
