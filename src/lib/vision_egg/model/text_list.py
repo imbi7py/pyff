@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from functools import reduce
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
