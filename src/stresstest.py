@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import time
 
 from .lib.feedbackcontroller import FeedbackController
-import .lib import bcixml
+from .lib import bcixml
 
 
 play_signal = bcixml.BciSignal(None, [bcixml.CMD_PLAY], bcixml.INTERACTION_SIGNAL)
