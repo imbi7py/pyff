@@ -15,13 +15,14 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from __future__ import absolute_import
 
 import time, os
 from FeedbackBase.MainloopFeedback import MainloopFeedback
-from HexoModel import HexoModel
-from HexoViz import HexoViz
-from LanguageModel import LanguageModel
-import GraphicComponents.ColorSchemes as ColorSchemes
+from .HexoModel import HexoModel
+from .HexoViz import HexoViz
+from .LanguageModel import LanguageModel
+from .GraphicComponents import ColorSchemes
 
 PARAMS = {
           "initial_arraw_angle" : 0, # initial orientation of the arrow, in degrees
