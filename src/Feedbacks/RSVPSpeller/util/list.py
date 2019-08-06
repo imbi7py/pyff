@@ -1,4 +1,5 @@
 from __future__ import division
+from __future__ import absolute_import
 from six.moves import range
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 

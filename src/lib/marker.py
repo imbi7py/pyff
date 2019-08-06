@@ -33,6 +33,7 @@ whenever you modified or added new trigger definitions.
 # Markers specifying the start and the end of the run. They should be sent
 # when the feedback is started resp. stopped.
 from __future__ import print_function
+from __future__ import absolute_import
 from six.moves import range
 RUN_START, RUN_END = 254, 255
 

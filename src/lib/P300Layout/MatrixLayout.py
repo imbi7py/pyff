@@ -22,6 +22,7 @@ left corner.
 """
 
 from __future__ import division
+from __future__ import absolute_import
 from six.moves import range
 class MatrixLayout(object):
     
