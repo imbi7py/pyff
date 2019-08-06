@@ -26,6 +26,7 @@ specifies a 2x2 design. The output is [(1,3),(1,4),(2,3),(2,4),(1,3),(1,4),(2,3)
 """
 
 
+from __future__ import division
 def orthogonalDesign(factors,nTrials,buildup=[],trials=[]):
 
     # recursion exit strategy
@@ -38,7 +39,7 @@ def orthogonalDesign(factors,nTrials,buildup=[],trials=[]):
         nSubconditions = 1
         for ii in range(len(factors)):
             nSubconditions *= len(factors[ii])
-        for ii in range(nTrials/nSubconditions):
+        for ii in range(nTrials//nSubconditions):
             orthogonalDesign(factors,None,[],trials)
         return trials
     else:

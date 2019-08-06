@@ -20,6 +20,7 @@ VisualP300 provides a framework for running P300 experiments within pyff.
 """
 
 
+from __future__ import division
 import sys,os,random
 import pygame
 from MainloopFeedback import MainloopFeedback
@@ -223,11 +224,11 @@ class VisualP300(MainloopFeedback):
             self.screen = pygame.display.set_mode((self.screenWidth,self.screenHeight))
         self.background = pygame.Surface( (self.canvasWidth,self.canvasHeight) )
         self.background.fill(self.bgcolor)
-        self.background_rect = self.background.get_rect(center = (self.screenWidth/2,self.screenHeight/2) )
+        self.background_rect = self.background.get_rect(center = (self.screenWidth//2,self.screenHeight//2) )
         # Background for whole screen (needs lots of time to paint, use self.background in most cases)
         self.all_background = pygame.Surface( (self.screenWidth,self.screenHeight) )
         self.all_background.fill(self.bgcolor)
-        self.all_background_rect = self.all_background.get_rect(center = (self.screenWidth/2,self.screenHeight/2) )
+        self.all_background_rect = self.all_background.get_rect(center = (self.screenWidth//2,self.screenHeight//2) )
         self.screen.blit(self.all_background,self.all_background_rect)
         pygame.display.flip()
         self.screen.blit(self.all_background,self.all_background_rect)
@@ -428,7 +429,7 @@ class VisualP300(MainloopFeedback):
         else:
             # Position element so that it's centered on the screen
             (x,y) = self.layout.positions[nr_elements]
-            element.pos = (x+self.screenWidth/2,y+self.screenHeight/2)
+            element.pos = (x+self.screenWidth//2,y+self.screenHeight//2)
             self.elements.append(element)
 
     def add_group(self,group):

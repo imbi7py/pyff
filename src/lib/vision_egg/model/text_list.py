@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -32,11 +33,11 @@ class TextList(list):
         height = self._max_height
         width = self._width
         pos = list(self._position)
-        pos[0] -= width / 2.
-        pos[1] -= height / 2.
+        pos[0] -= width // 2.
+        pos[1] -= height // 2.
         for t in self:
             s = t.parameters.size
-            w = s[0] / 2.
+            w = s[0] // 2.
             pos[0] += w
             t.set(position=copy(pos))
             pos[0] += w + self._spacing

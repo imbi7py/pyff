@@ -17,6 +17,7 @@
 
 
 #import Feedbacks.HexoSpeller.Utils as Utils
+from __future__ import division
 from Feedbacks.HexoSpeller.Utils import rotate_phi_degrees_counter_clockwise
 from pandac.PandaModules import Geom, GeomNode, GeomTrifans, GeomTristrips, \
     GeomLines, GeomVertexFormat, GeomVertexData, GeomVertexReader, GeomVertexWriter, \
@@ -145,7 +146,7 @@ def get_center_point(node_path):
     bottom_left_front, top_right_back = node_path.getTightBounds() # get the bounding box
     c = [0,0,0] # init center point of the bounding box
     for i in range(3):
-        c[i] = (top_right_back[i] - bottom_left_front[i]) / 2.0 + bottom_left_front[i]
+        c[i] = (top_right_back[i] - bottom_left_front[i]) // 2.0 + bottom_left_front[i]
     return c
     
 def center_node(node_path):

@@ -40,6 +40,7 @@ its features manually and calling refresh.
 """
 
     
+from __future__ import division
 import pygame
 
 from VisualElement import VisualElement
@@ -99,7 +100,7 @@ class Textrow(VisualElement):
         xpos = self.leftmarge
         for s in chunks:
             w = s.get_width()
-            r = s.get_rect(center=(xpos + w / 2, self.size[1] / 2 + 2))  # +2 for vertical alignment
+            r = s.get_rect(center=(xpos + w // 2, self.size[1] // 2 + 2))  # +2 for vertical alignment
             self.image.blit(s, r)
             xpos += w
 

@@ -24,6 +24,7 @@ log:
 2011-02-18: Added FilledCross stimulus (Priska Herger)
 '''
 
+from __future__ import division
 import math
 
 import logging
@@ -123,9 +124,9 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
             gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
         
-            a = p.radius/2.0
+            a = p.radius//2.0
             r2 = p.radius**2
-            b = sqrt(r2 - r2/4.0)
+            b = sqrt(r2 - r2//4.0)
         
             gl.glBegin(gl.GL_TRIANGLE_FAN) 
             gl.glVertex3f(0.0, 0.0, 0.0)
@@ -279,9 +280,9 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
             gl.glEnable(gl.GL_BLEND) 
             gl.glEnable(gl.GL_LINE_SMOOTH) 
         
-            a = p.radius/2.0
+            a = p.radius//2.0
             r2 = p.radius**2
-            b = sqrt(r2 - r2/4.0)
+            b = sqrt(r2 - r2//4.0)
             out = (
                 (a, b),
                 (p.radius, 0.),
@@ -291,9 +292,9 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
                 (-a, b),
                 (a, b)
                 )
-            a = p.opening_radius/2.0
+            a = p.opening_radius//2.0
             r2 = p.opening_radius**2
-            b = sqrt(r2 - r2/4.0)
+            b = sqrt(r2 - r2//4.0)
             inn = (
                 (a, b),
                 (p.opening_radius, 0.),
@@ -436,12 +437,12 @@ class StripeField(VisionEgg.Core.Stimulus):
             gl.glLineWidth(p.line_width)
 
             arrow_offset = p.width * p.angle
-            for i in xrange(- p.num_stripes / 2 - 1, p.num_stripes / 2 - 2):
+            for i in xrange(- p.num_stripes // 2 - 1, p.num_stripes // 2 - 2):
                 offset = i * p.dist_stripes
                 gl.glBegin(gl.GL_LINE_STRIP)
-                gl.glVertex3f(-p.width / 2., offset, 0.)
+                gl.glVertex3f(-p.width // 2., offset, 0.)
                 gl.glVertex3f(0., offset + arrow_offset, 0.)
-                gl.glVertex3f(p.width / 2., offset, 0.)
+                gl.glVertex3f(p.width // 2., offset, 0.)
                 gl.glEnd()
 
             gl.glLineWidth(old_width)
@@ -563,17 +564,17 @@ class DotField(VisionEgg.Core.Stimulus):
                 gl.glEnd()
 
             # calculate dot dimensions
-            r = p.dot_size / 2.
+            r = p.dot_size // 2.
             circle_coords = []
             for i in xrange(p.circle_steps):
-                alpha = (float(i) / float(p.circle_steps)) * 2 * math.pi
+                alpha = (float(i) // float(p.circle_steps)) * 2 * math.pi
                 circle_coords.append((r * math.cos(alpha), r * math.sin(alpha)))
 
             # draw dot field
-            y = - p.height / 2
-            while y < p.height / 2:
-                x = - p.width / 2
-                while x < p.width / 2:
+            y = - p.height // 2
+            while y < p.height // 2:
+                x = - p.width // 2
+                while x < p.width // 2:
                     circle(x, y, circle_coords)
                     x += p.dot_distance
                 y += p.dot_distance
@@ -684,8 +685,8 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
             gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
             
-            a = p.size/2.0
-            b = a/3.0 * sqrt(3.0)
+            a = p.size//2.0
+            b = a//3.0 * sqrt(3.0)
             r = b*2.0
                     
             gl.glBegin(gl.GL_TRIANGLES)
@@ -705,8 +706,8 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                 gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND) 
                 
-                a2 = p.innerSize/2.0
-                b2 = a2/3.0 * sqrt(3.0)
+                a2 = p.innerSize//2.0
+                b2 = a2//3.0 * sqrt(3.0)
                 r2 = b2*2.0
                         
                 gl.glBegin(gl.GL_TRIANGLES)
@@ -724,8 +725,8 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                 gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA)
                 gl.glEnable(gl.GL_BLEND)
                 
-                a3 = p.watermark_size/2.0
-                b3 = a3/3.0 * sqrt(3.0)
+                a3 = p.watermark_size//2.0
+                b3 = a3//3.0 * sqrt(3.0)
                 r3 = b3*2.0
                         
                 gl.glBegin(gl.GL_TRIANGLES)
@@ -781,8 +782,8 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
         if anchor == 'center':
             center = position
         else:
-            a = size/2.0
-            b = a/3.0 * sqrt(3.0)
+            a = size//2.0
+            b = a//3.0 * sqrt(3.0)
             r = b*2.0
             if anchor == 'lowerleft': # lower left point of the triangle
                 center = (position[0] + a, position[1] + b)
@@ -901,8 +902,8 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
             gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
             
-            a = p.size/2.0
-            b = a/3.0 * sqrt(3.0)
+            a = p.size//2.0
+            b = a//3.0 * sqrt(3.0)
             r = b*2.0
                     
             gl.glBegin(gl.GL_TRIANGLES)
@@ -944,7 +945,7 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
                 gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND)
 
-                w = p.watermark_size/2
+                w = p.watermark_size//2
         
                 gl.glBegin(gl.GL_QUADS)
                 gl.glVertex3f(-w,-w, 0.0)
@@ -1000,8 +1001,8 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
         if anchor == 'center':
             center = position
         else:
-            a = size/2.0
-            b = a/3.0 * sqrt(3.0)
+            a = size//2.0
+            b = a//3.0 * sqrt(3.0)
             r = b*2.0
             if anchor == 'lowerleft': # lower left point of the triangle
                 center = (position[0] + a, position[1] + b)
@@ -1115,8 +1116,8 @@ class FilledCross(VisionEgg.Core.Stimulus):
             gl.glTranslate(center[0],center[1],0.0) 
             gl.glRotate(p.orientation,0.0,0.0,1.0) 
 
-            w = p.size[0]/2.0
-            h = (p.size[1] - w)/2.0
+            w = p.size[0]//2.0
+            h = (p.size[1] - w)//2.0
 
             # paint and place square
             if len(p.innerColor)==3: 
@@ -1184,7 +1185,7 @@ class FilledCross(VisionEgg.Core.Stimulus):
                 gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND)
 
-                w2 = p.watermark_size/2
+                w2 = p.watermark_size//2
         
                 gl.glBegin(gl.GL_QUADS)
                 gl.glVertex3f(-w2, 0, 0.0)

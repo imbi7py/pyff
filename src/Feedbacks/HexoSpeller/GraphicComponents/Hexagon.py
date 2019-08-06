@@ -16,6 +16,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import division
 from Feedbacks.HexoSpeller.Utils import degrees_to_radians, rotate_phi_degrees_clockwise
 from GraphicComponentUtils import center_node, center_node_on_xyz, get_center_point, create_hexagon, create_side
 from math import cos
@@ -83,17 +84,17 @@ class Hexagon():
         # create the individual components of the hexagon and put them together
         front_side = create_hexagon(radius)[0]
         node_path = hex_path.attachNewNode(front_side)
-        node_path.setY(-width/2.0)
+        node_path.setY(-width//2.0)
         node_path.setR(30)
         back_side = create_hexagon(radius)[0]
         node_path = hex_path.attachNewNode(back_side)
         node_path.setH(180)
-        node_path.setY(width/2.0)
+        node_path.setY(width//2.0)
         node_path.setR(30)
         side_dist = cos(degrees_to_radians(30))*radius
         for phi in range(0,360,60):
             rot_path = hex_path.attachNewNode(PandaNode(''))
-            side = create_side((-radius/2.0, width/2.0), (radius/2.0, -width/2.0))[0]
+            side = create_side((-radius//2.0, width//2.0), (radius//2.0, -width//2.0))[0]
             side_path = rot_path.attachNewNode(side)
             side_path.setP(-90)
             side_path.setZ(side_dist)
@@ -105,7 +106,7 @@ class Hexagon():
         test_letter = 'W'
         # the larger back side text field
         x,z = 0,0
-        y = (width/2.0+Hexagon.text_distance)
+        y = (width//2.0+Hexagon.text_distance)
         text = TextNode('')
         #font = loader.loadFont("cmss12.egg")
         #text.setFont(font)
@@ -125,7 +126,7 @@ class Hexagon():
             text.setTextColor(0,0,0,1)
             text_path = self.root_node_path.attachNewNode(text)
             self.front_side_text.append(text_path)
-            x,z = rotate_phi_degrees_clockwise(phi, (0,radius/1.6))
+            x,z = rotate_phi_degrees_clockwise(phi, (0,radius//1.6))
             text_path.node().setText(test_letter)
             center_node_on_xyz(text_path, x, -y, z)
             self.front_side_text_coordinates.append((x,-y,z))

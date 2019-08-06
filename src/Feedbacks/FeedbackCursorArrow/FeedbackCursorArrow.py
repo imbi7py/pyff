@@ -22,6 +22,7 @@
 """CursorArrow BCI Feedback."""
 
 
+from __future__ import division
 import random
 import sys
 import math
@@ -255,7 +256,7 @@ class FeedbackCursorArrow(PygameFeedback):
 
         self.update_cursor()
 
-        if abs(self.pos) >= self.size/2:
+        if abs(self.pos) >= self.size//2:
             self.check_for_hit_miss(); return
 
         self.draw_all()
@@ -291,7 +292,7 @@ class FeedbackCursorArrow(PygameFeedback):
         """
         if self.showsPause:
             return
-        self.do_print("Pause", self.fontColor, self.size/4)
+        self.do_print("Pause", self.fontColor, self.size//4)
         self.showsPause = True
 
 
@@ -327,12 +328,12 @@ class FeedbackCursorArrow(PygameFeedback):
             self.countdownElapsed = 0
             # initialize targets for the upcoming trial block randomly (equal 'left' and 'right' trials)
             self.targetDirections = [1] * int(self.pauseAfter)
-            self.targetDirections[0:int(self.pauseAfter / 2)] = [0] * int(self.pauseAfter / 2)
+            self.targetDirections[0:int(self.pauseAfter // 2)] = [0] * int(self.pauseAfter // 2)
             random.shuffle(self.targetDirections)
             return
-        t = (self.countdownFrom * 1000 - self.countdownElapsed) / 1000
+        t = (self.countdownFrom * 1000 - self.countdownElapsed) // 1000
         self.draw_init()
-        self.do_print(str(t), self.countdownColor, self.size/3, True)
+        self.do_print(str(t), self.countdownColor, self.size//3, True)
 
 
     def gameover_tick(self):
@@ -343,7 +344,7 @@ class FeedbackCursorArrow(PygameFeedback):
             return
         self.do_print(["Game Over! (%i : %i)" % (self.hitMiss[0], self.hitMiss[1]),
                        'Line success (%s,%s): %i%%, %i%%' % (self.availableDirections[0], self.availableDirections[1], 100*self.punchlinePos1, 100*self.punchlinePos2)],
-                       self.fontColor, self.size/15)
+                       self.fontColor, self.size//15)
         self.showsGameover = True
 
 
@@ -387,22 +388,22 @@ class FeedbackCursorArrow(PygameFeedback):
         if self.damping == 'linear':
             if abs(self.pos)>self.s1:
                 s = abs(self.pos)-self.s1
-                t = self.t2 - (math.sqrt(4*self.s2*(self.s2-s))/self.v0)
-                return self.v0 * ((self.t2-t)/self.t2)
+                t = self.t2 - (math.sqrt(4*self.s2*(self.s2-s))//self.v0)
+                return self.v0 * ((self.t2-t)//self.t2)
             else:
                 return self.v0
         elif self.damping == 'distance':
             if self.trialElapsed == 0:
-                self.v0 = self.s1/(self.FPS*self.durationUntilBorder/1000.0)
+                self.v0 = self.s1//(self.FPS*self.durationUntilBorder//1000.0)
             if abs(self.pos)>self.s1:
                 s = abs(self.pos)-self.s1
-                return (1.0*(self.borderWidth-s)/self.borderWidth)*self.v0
+                return (1.0*(self.borderWidth-s)//self.borderWidth)*self.v0
             else:
                 return self.v0
 
     def check_for_hit_miss(self):
         if self.reject:
-            if abs(self.pos) <= self.arrowRect.width/2:
+            if abs(self.pos) <= self.arrowRect.width//2:
                 self.send_parallel(self.TRIAL_END_REJECT)
                 self.reject = True; return
 
@@ -415,13 +416,13 @@ class FeedbackCursorArrow(PygameFeedback):
             if self.hitIfLateral:
                 self.hit = True
                 if self.availableDirections[self.targetDirection] == self.direction:
-                    if self.pos<0 and self.punchline1Rect.centerx>self.screenWidth/2+self.pos:
+                    if self.pos<0 and self.punchline1Rect.centerx>self.screenWidth//2+self.pos:
                         self.punchline1Rect = self.update_punchline(self.punchline1, self.pos, self.availableDirections[0])
-                        self.punchlinePos1 = abs(self.pos+self.innerRect.width/2.0)/self.borderWidth
+                        self.punchlinePos1 = abs(self.pos+self.innerRect.width//2.0)//self.borderWidth
                         self.punchline1.fill(self.punchLineColorImpr)
-                    elif self.pos>0 and self.punchline2Rect.centerx<self.screenWidth/2+self.pos:
+                    elif self.pos>0 and self.punchline2Rect.centerx<self.screenWidth//2+self.pos:
                         self.punchline2Rect = self.update_punchline(self.punchline2, self.pos, self.availableDirections[1])
-                        self.punchlinePos2 = abs(self.pos-self.innerRect.width/2.0)/self.borderWidth
+                        self.punchlinePos2 = abs(self.pos-self.innerRect.width//2.0)//self.borderWidth
                         self.punchline2.fill(self.punchLineColorImpr)
         else:
             self.miss = True
@@ -434,13 +435,13 @@ class FeedbackCursorArrow(PygameFeedback):
     def update_punchline(self, punchline, newpos, direction):
         newpos = abs(newpos)
         if direction==self.LEFT:
-            return punchline.get_rect(midtop=(self.screenWidth/2-newpos, 0))
+            return punchline.get_rect(midtop=(self.screenWidth//2-newpos, 0))
         elif direction==self.RIGHT:
-            return punchline.get_rect(midtop=(self.screenWidth/2+newpos, 0))
+            return punchline.get_rect(midtop=(self.screenWidth//2+newpos, 0))
         elif direction==self.UP:
-            return punchline.get_rect(midleft=(self.borderRect.left,self.screenHeight/2-newpos))
+            return punchline.get_rect(midleft=(self.borderRect.left,self.screenHeight//2-newpos))
         elif direction==self.DOWN:
-            return punchline.get_rect(midleft=(self.borderRect.left,self.screenHeight/2+newpos))
+            return punchline.get_rect(midleft=(self.borderRect.left,self.screenHeight//2+newpos))
 
     def reset_punchline_color(self):
         self.punchline1.fill(self.punchLineColor)
@@ -454,7 +455,7 @@ class FeedbackCursorArrow(PygameFeedback):
         self.direction = self.availableDirections[0]
         if self.pos > 0:
             self.direction = self.availableDirections[1]
-        border = self.borderRect.width/2
+        border = self.borderRect.width//2
         self.pos = min(border, max(-border, self.pos));
         arrowPos = { self.LEFT  : (-abs(self.pos),0),
                      self.RIGHT : (abs(self.pos),0),
@@ -472,7 +473,7 @@ class FeedbackCursorArrow(PygameFeedback):
         if not color:
             color = self.fontColor
         if not size:
-            size = self.size/10
+            size = self.size//10
 
         font = pygame.font.Font(None, size)
         if not superimpose:
@@ -480,10 +481,10 @@ class FeedbackCursorArrow(PygameFeedback):
 
         if type(text) is list:
             height = pygame.font.Font.get_linesize(font)
-            top = -(2*len(text)-1)*height/2
+            top = -(2*len(text)-1)*height//2
             for t in range(len(text)):
                 surface = font.render(text[t], 1, color)
-                self.screen.blit(surface, surface.get_rect(midtop=(self.screenWidth/2, self.screenHeight/2+top+t*2*height)))
+                self.screen.blit(surface, surface.get_rect(midtop=(self.screenWidth//2, self.screenHeight//2+top+t*2*height)))
         else:
             surface = font.render(text, 1, color)
             self.screen.blit(surface, surface.get_rect(center=self.screen.get_rect().center))
@@ -497,21 +498,21 @@ class FeedbackCursorArrow(PygameFeedback):
         self.screen = pygame.display.get_surface()
         (self.screenWidth, self.screenHeight) = (self.screen.get_width(), self.screen.get_height())
         self.size = min(self.screen.get_height(), self.screen.get_width())
-        self.borderWidth = int(self.size*self.borderWidthRatio/2)
-        self.offsetX = (self.screenWidth-self.size)/2
-        self.s1 = self.size/2-self.borderWidth
+        self.borderWidth = int(self.size*self.borderWidthRatio//2)
+        self.offsetX = (self.screenWidth-self.size)//2
+        self.s1 = self.size//2-self.borderWidth
         self.s2 = self.borderWidth
 
         if self.dampedMovement:
-            self.v0 = self.s2/(1.0*self.t2) + self.s1/(2.0*self.t1)
+            self.v0 = self.s2//(1.0*self.t2) + self.s1//(2.0*self.t1)
             self.dampingTime = self.durationPerTrial-self.durationUntilBorder
-            self.t1 = self.FPS * self.durationUntilBorder/1000
-            self.t2 = self.FPS * self.dampingTime/1000
+            self.t1 = self.FPS * self.durationUntilBorder//1000
+            self.t2 = self.FPS * self.dampingTime//1000
         else:
-            self.v0 = (self.size * 0.5) / (self.durationPerTrial*self.FPS/1000.0)
+            self.v0 = (self.size * 0.5) // (self.durationPerTrial*self.FPS//1000.0)
 
         # arrow
-        scale = self.size / 3
+        scale = self.size // 3
         scaledArrow = [(P[0]*scale, P[1]*scale) for P in self.arrowPointlist]
         self.arrow = pygame.Surface((scale, scale))
         self.arrowRect = self.arrow.get_rect(center=self.screen.get_rect().center)
@@ -519,12 +520,12 @@ class FeedbackCursorArrow(PygameFeedback):
         pygame.draw.polygon(self.arrow, self.arrowColor, scaledArrow)
 
         # cursor
-        scale = self.size / 5
+        scale = self.size // 5
         self.cursor = pygame.Surface((scale, scale))
         self.cursorRect = self.cursor.get_rect(center=self.screen.get_rect().center)
         self.cursor.set_colorkey((0,0,0))
-        pygame.draw.line(self.cursor, self.cursorColor, (0,scale/2),(scale,scale/2), 10)
-        pygame.draw.line(self.cursor, self.cursorColor, (scale/2,0),(scale/2,scale), 10)
+        pygame.draw.line(self.cursor, self.cursorColor, (0,scale//2),(scale,scale//2), 10)
+        pygame.draw.line(self.cursor, self.cursorColor, (scale//2,0),(scale//2,scale), 10)
 
         # background + border
         self.background = pygame.Surface((self.screen.get_width(), self.screen.get_height()))
@@ -548,20 +549,20 @@ class FeedbackCursorArrow(PygameFeedback):
                      self.DOWN:  1}
 
         self.punchline1 = pygame.Surface(self.punchlineSize[self.availableDirections[0]])
-        self.punchline1Rect = self.update_punchline(self.punchline1, self.sign[self.availableDirections[0]]*self.innerRect.width/2, self.availableDirections[0])
+        self.punchline1Rect = self.update_punchline(self.punchline1, self.sign[self.availableDirections[0]]*self.innerRect.width//2, self.availableDirections[0])
         self.punchline1.fill(self.punchLineColor)
 
         self.punchline2 = pygame.Surface(self.punchlineSize[self.availableDirections[1]])
         self.punchline2.fill(self.punchLineColor)
-        self.punchline2Rect = self.update_punchline(self.punchline2, self.sign[self.availableDirections[1]]*self.innerRect.width/2, self.availableDirections[1])
+        self.punchline2Rect = self.update_punchline(self.punchline2, self.sign[self.availableDirections[1]]*self.innerRect.width//2, self.availableDirections[1])
 
         if self.resized:
             self.resized = False
             target = self.availableDirections[self.targetDirection]
-            self.pos = (1.0*self.size/self.size_old) * self.pos
+            self.pos = (1.0*self.size//self.size_old) * self.pos
             self.update_cursor()
-            self.punchline1Rect = self.update_punchline(self.punchline1, self.sign[self.availableDirections[0]]*(self.innerRect.width/2+self.punchlinePos1*self.borderWidth), self.availableDirections[0])
-            self.punchline2Rect = self.update_punchline(self.punchline2, self.sign[self.availableDirections[1]]*(self.innerRect.width/2+self.punchlinePos2*self.borderWidth), self.availableDirections[1])
+            self.punchline1Rect = self.update_punchline(self.punchline1, self.sign[self.availableDirections[0]]*(self.innerRect.width//2+self.punchlinePos1*self.borderWidth), self.availableDirections[0])
+            self.punchline2Rect = self.update_punchline(self.punchline2, self.sign[self.availableDirections[1]]*(self.innerRect.width//2+self.punchlinePos2*self.borderWidth), self.availableDirections[1])
             self.myarrow = pygame.transform.rotate(self.arrow, self.directions[target])
             self.myarrowRect = self.myarrow.get_rect(center=self.screen.get_rect().center)
             self.draw_all()

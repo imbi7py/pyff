@@ -39,6 +39,7 @@
 
 """Base Class for Oddball Experiments."""
 
+from __future__ import division
 import random
 import sys
 import math
@@ -233,7 +234,7 @@ class Oddball(MainloopFeedback):
 
 
     def pause_tick(self):
-        self.do_print("Pause", self.fontColor, self.size / 6)
+        self.do_print("Pause", self.fontColor, self.size // 6)
 
 
     def play_tick(self):
@@ -400,7 +401,7 @@ class Oddball(MainloopFeedback):
             self.send_parallel(marker.PAUSE_END)
             return
         
-        self.do_print("Short Break...", self.fontColor, self.size / 10)
+        self.do_print("Short Break...", self.fontColor, self.size // 10)
 
 
     def countdown_tick(self):
@@ -427,8 +428,8 @@ class Oddball(MainloopFeedback):
             return        
         
         # draw countdown on screen
-        t = ((self.countdown_from + 1) * 1000 - self.countdownElapsed) / 1000
-        self.do_print(str(t), self.countdownColor, self.size / 4)
+        t = ((self.countdown_from + 1) * 1000 - self.countdownElapsed) // 1000
+        self.do_print(str(t), self.countdownColor, self.size // 4)
         
     
     def beforestim_tick(self):
@@ -456,7 +457,7 @@ class Oddball(MainloopFeedback):
                 s = self.hitstr + str(self.responses[0]) + self.missstr + str(self.responses[1]) + self.falsestr + str(self.responses[ - 1])
             else:
                 s = self.hitstr + str(self.responses[0]) + self.missstr + str(self.responses[1])
-            self.do_print(s, self.fontColor, self.size / 10)
+            self.do_print(s, self.fontColor, self.size // 10)
         pygame.time.wait(self.gameover_duration)
         
        
@@ -467,7 +468,7 @@ class Oddball(MainloopFeedback):
         if not color:
             color = self.fontColor
         if not size:
-            size = self.size / 10
+            size = self.size // 10
         if not center:
             center = self.screen.get_rect().center
 
@@ -554,7 +555,7 @@ class Oddball(MainloopFeedback):
             ptr = 0
             while ptr < N:        
                 togo= N-ptr
-                prob= devs_to_be_placed/floor(togo/2)        
+                prob= devs_to_be_placed//floor(togo//2)        
                 if random.random() < prob:
                     sequence[ptr] = 1
                     devs_to_be_placed = devs_to_be_placed - 1

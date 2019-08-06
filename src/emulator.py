@@ -20,6 +20,7 @@
 """A BCI-system emulator."""
 
 
+from __future__ import division
 import cmd
 import threading
 import math
@@ -88,8 +89,8 @@ class Emulator(cmd.Cmd):
             c += 1
             r = math.radians(c)
             sample1 = math.sin(r)
-            sample2 = math.sin(r/2-90.0)
-            sample3 = math.sin(r/3-180.0)
+            sample2 = math.sin(r//2-90.0)
+            sample3 = math.sin(r//3-180.0)
             sample4 = math.sin(r-270.0)
             sample5 = math.sin(r-45.0)
             sample6 = math.sin(r-135.0)

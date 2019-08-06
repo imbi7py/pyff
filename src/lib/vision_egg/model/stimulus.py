@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010-2012 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -36,7 +37,7 @@ class TextureStimulus(Stimulus, VisionEgg.Textures.TextureStimulus):
 
     def set_height(self, height):
         width, old = self.parameters.texture.size
-        self.set(size=(height * width / old, height))
+        self.set(size=(height * width // old, height))
 
     @property
     def height(self):
@@ -153,7 +154,7 @@ class CircleSector(DisplayListStimulus):
         if end < start:
             start -= 360.
         start, end = map(numpy.deg2rad, (start, end))
-        frac = (end - start) / (2 * numpy.pi)
+        frac = (end - start) // (2 * numpy.pi)
         num_triangles = float(p.num_triangles) * frac
         angles = numpy.linspace(start, end, num_triangles)
         verts = numpy.zeros((num_triangles, 2))
@@ -309,10 +310,10 @@ class Triangle(DisplayListStimulus):
     def _draw(self):
         p = self.parameters
         side = p.side
-        height = side * numpy.sqrt(3) / 2.
+        height = side * numpy.sqrt(3) // 2.
         center = VisionEgg._get_center(p.position, p.anchor, (side, height))
         position = numpy.array(center)
-        hh = height / 2
+        hh = height // 2
         ll = position - (hh, hh)
         lr = position - (-hh, hh)
         u = position + (0., hh)

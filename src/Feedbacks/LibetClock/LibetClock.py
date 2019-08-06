@@ -20,6 +20,7 @@
 
 """LibetClock Feedback."""
 
+from __future__ import division
 import random
 import sys
 import math
@@ -72,7 +73,7 @@ class LibetClock(PygameFeedback):
         self.cls_evolution_log = []
 
         self.revolutionTime = 4000  # time the clock hand needs for one revolution (in ms)
-        self.quarterTime = self.revolutionTime/4
+        self.quarterTime = self.revolutionTime//4
         self.nRev = 2               # number of clockhand revolutions per trial
         self.intertrialInterval = [2500, 3500]     # (in ms)
         self.showClassifier = 'random'   # 'none', 'random', 'feedback'
@@ -88,7 +89,7 @@ class LibetClock(PygameFeedback):
         self.screenHeight =  self.screenPos[3]#600
         self.countdownFrom = 3
         self.threshold = 0
-        self.redClockDuration = self.revolutionTime/8
+        self.redClockDuration = self.revolutionTime//8
         self.SADuration = 1000
         self.cls_ival = (-400, -200)
         self.keypress_tolerance = 50     # time deviation tolerate (in ms) of the keypress from
@@ -184,7 +185,7 @@ class LibetClock(PygameFeedback):
             self.start_animation = False
             self.trialSAElapsed = 0
         else:
-            angle = max(90,90+(self.arcAngle-90) * (1.0*(self.SADuration-self.trialSAElapsed)/self.SADuration))
+            angle = max(90,90+(self.arcAngle-90) * (1.0*(self.SADuration-self.trialSAElapsed)//self.SADuration))
             self.arc.fill(self.backgroundColor)
             self.arcRect.topleft = self.screen.get_rect().topleft
             pygame.draw.arc(self.arc, self.arcColor, self.arcRect, math.radians(90), math.radians(angle), self.arcWidth)
@@ -210,7 +211,7 @@ class LibetClock(PygameFeedback):
             self.classifier_log.append(list())
             self.cls_evolution_log.append(list())
             self.mrk_log = True
-            pygame.draw.circle(self.clock, self.clockColor, (self.diameter/2,self.diameter/2), self.diameter/2)
+            pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
             self.firstTickOfTrial = False
             self.redClock = False
             self.redClockElapsed = 0
@@ -240,7 +241,7 @@ class LibetClock(PygameFeedback):
         # Teste ob zeit fuer alten Trial abgelaufen ist
         if self.trialElapsed >= self.durationPerTrial:
                 self.trialElapsed = 0
-                pygame.draw.circle(self.clock, self.clockColor, (self.diameter/2,self.diameter/2), self.diameter/2)
+                pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
                 self.arcRect.topleft = self.screen.get_rect().topleft
                 pygame.draw.arc(self.arc, self.arcColor, self.arcRect, math.radians(90), math.radians(self.arcAngle), self.arcWidth)
                 self.arcRect.center = self.screencenter
@@ -251,7 +252,7 @@ class LibetClock(PygameFeedback):
         if self.redClock:
             self.redClockElapsed += self.elapsed
             if self.redClockDuration<self.redClockElapsed:
-                pygame.draw.circle(self.clock, self.clockColor, (self.diameter/2,self.diameter/2), self.diameter/2)
+                pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
                 self.redClockElapsed = 0
                 self.redClock = False
 
@@ -292,7 +293,7 @@ class LibetClock(PygameFeedback):
                         raise Exception('String option given by ''self.showClassifier'' unknown.')
 
                     if f <= self.threshold:
-                        pygame.draw.circle(self.clock, self.redClockColor, (self.diameter/2,self.diameter/2), self.diameter/2)
+                        pygame.draw.circle(self.clock, self.redClockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
                         self.redClock = True
                         self.send_parallel(self.CLASSIFIER_MOVE)
                         self.classifierTime = self.trialElapsed
@@ -301,7 +302,7 @@ class LibetClock(PygameFeedback):
 
         # calculate new position of the clock hand
         angle_t0 = -self.clockhandAngle-self.currTargetAngle[self.target]
-        self.clockhandAngle = self.nRev * max(-360, -360 * (1.0*self.trialElapsed/(self.nRev*self.revolutionTime)))
+        self.clockhandAngle = self.nRev * max(-360, -360 * (1.0*self.trialElapsed//(self.nRev*self.revolutionTime)))
         self.clockhand_rotated = pygame.transform.rotate(self.clockhand, self.clockhandAngle)
         self.clockhandRect_rotated = self.clockhand_rotated.get_rect(center=self.screencenter)
         self.clockhandRect_rotated.center = self.clockhandRect.center
@@ -346,8 +347,8 @@ class LibetClock(PygameFeedback):
             else:
                 self.start_animation = True
         self.draw_all(False)
-        center = (self.screencenter[0], self.screencenter[1]/2)
-        self.do_print(self.infostr, self.infocolor, self.size/20, True)#, center)
+        center = (self.screencenter[0], self.screencenter[1]//2)
+        self.do_print(self.infostr, self.infocolor, self.size//20, True)#, center)
 
 
     def time_accuracy(self):
@@ -360,7 +361,7 @@ class LibetClock(PygameFeedback):
         elif self.buttonPressed:           # calculate time difference between optimal and actual keypress
             t = self.buttonPressTime%(self.quarterTime)
             timediff = min(t, abs(t-(self.quarterTime)))
-            if self.buttonPressTime <= self.durationPerTrial-self.revolutionTime-(self.quarterTime/2):
+            if self.buttonPressTime <= self.durationPerTrial-self.revolutionTime-(self.quarterTime//2):
                     self.infocolor = self.fb_color_bad
                     self.infostr = ['Press key only during', 'the last revolution.']
                     self.validTrials -= 1
@@ -469,7 +470,7 @@ class LibetClock(PygameFeedback):
         if self.showsPause:
             return
         self.send_parallel(self.GAME_STATUS_PAUSE)
-        self.do_print("Pause", self.fontColor, self.size/4)
+        self.do_print("Pause", self.fontColor, self.size//4)
         self.showsPause = True
 
 
@@ -509,9 +510,9 @@ class LibetClock(PygameFeedback):
             self.countdown = False
             self.countdownElapsed = 0
             return
-        t = str((self.countdownFrom * 1000 - self.countdownElapsed) / 1000)
+        t = str((self.countdownFrom * 1000 - self.countdownElapsed) // 1000)
         self.draw_all(False)
-        self.do_print(t, self.countdownColor, self.size/3, True)
+        self.do_print(t, self.countdownColor, self.size//3, True)
 
 
     def gameover_tick(self):
@@ -520,7 +521,7 @@ class LibetClock(PygameFeedback):
         """
         if self.showsGameover:
             return
-        self.do_print("Finished!", self.fontColor, self.size/15)
+        self.do_print("Finished!", self.fontColor, self.size//15)
         self.showsGameover = True
         if self.writeClassifierLog:
             self.write_classifier_log()
@@ -536,7 +537,7 @@ class LibetClock(PygameFeedback):
         if not color:
             color = self.fontColor
         if not size:
-            size = self.size/10
+            size = self.size//10
         if not pos:
             pos = self.screencenter
 
@@ -547,7 +548,7 @@ class LibetClock(PygameFeedback):
 
         if type(text) is list:
             height = pygame.font.Font.get_linesize(font)
-            top = -(2*len(text)-1)*height/2
+            top = -(2*len(text)-1)*height//2
             for t in range(len(text)):
                 surface = font.render(text[t], 1, color)
 
@@ -576,18 +577,18 @@ class LibetClock(PygameFeedback):
         self.background.fill(self.backgroundColor)
 
         # init clock
-        self.diameter = int(self.size/5)*2
+        self.diameter = int(self.size//5)*2
         #img = pygame.image.load(os.path.join(path, 'clockface.bmp')).convert_alpha()
         #self.clock = pygame.Surface((self.diameter,self.diameter))
         #self.clock = pygame.transform.scale(img, (self.diameter,self.diameter))
 
         self.clock = pygame.Surface((self.diameter,self.diameter))
         self.clock.set_colorkey((0,0,0))
-        pygame.draw.circle(self.clock, self.clockColor, (self.diameter/2,self.diameter/2), self.diameter/2)
+        pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
         self.clockRect = self.clock.get_rect(center=self.screencenter, size=(self.diameter, self.diameter))
 
         # fixation points
-        fp_dia = int(self.diameter/40)*2
+        fp_dia = int(self.diameter//40)*2
         fp_color = (1,1,1)
         self.fixpoint_pos = [self.clockRect.midtop,self.clockRect.midleft,self.clockRect.midbottom,self.clockRect.midright]
         self.fixpoints = []
@@ -595,7 +596,7 @@ class LibetClock(PygameFeedback):
         for fp in range(len(self.fixpoint_pos)):
             self.fixpoints.append(pygame.Surface((fp_dia,fp_dia)))
             self.fixpoints[fp].set_colorkey((0,0,0))
-            pygame.draw.circle(self.fixpoints[fp], fp_color, (fp_dia/2,fp_dia/2), fp_dia/2)
+            pygame.draw.circle(self.fixpoints[fp], fp_color, (fp_dia//2,fp_dia//2), fp_dia//2)
             self.fpRect.append(self.fixpoints[fp].get_rect(center=self.fixpoint_pos[fp], size=(fp_dia, fp_dia)))
 
         # init clock dial
@@ -615,10 +616,10 @@ class LibetClock(PygameFeedback):
         self.clockhand =  pygame.Surface((self.diameter, self.diameter))
         self.clockhand.fill(self.backgroundColor)
         self.clockhand.set_colorkey(self.backgroundColor)
-        pygame.draw.line(self.clockhand, (200,200,200), (self.diameter/2,0), (self.diameter/2, self.diameter/2), dialThickness*2)
+        pygame.draw.line(self.clockhand, (200,200,200), (self.diameter//2,0), (self.diameter//2, self.diameter//2), dialThickness*2)
         self.clockhandRect = self.clockhand.get_rect(center=self.screencenter)
         #self.hideRect = pygame.Rect(self.clockhandRect.midleft,(self.clockhandRect.width, self.clockhandRect.height/2))
-        self.drawRect = pygame.Rect(self.clockhandRect.topleft,(self.clockhandRect.width,self.clockhandRect.height/2))
+        self.drawRect = pygame.Rect(self.clockhandRect.topleft,(self.clockhandRect.width,self.clockhandRect.height//2))
 
         #self.hideRect = pygame.Rect(0,0,self.clockhandRect.width, self.clockhandRect.height/2)
         #self.hideRect.midtop = self.screencenter
@@ -631,7 +632,7 @@ class LibetClock(PygameFeedback):
         self.arc = pygame.Surface((self.diarc, self.diarc))
         self.arc.set_colorkey((0,0,0))
         p = self.screen.get_rect().topleft
-        self.arcRect = self.arc.get_rect(center=(p[0]+self.diarc/2,p[1]+self.diarc/2))
+        self.arcRect = self.arc.get_rect(center=(p[0]+self.diarc//2,p[1]+self.diarc//2))
         pygame.draw.arc(self.arc, self.arcColor, self.arcRect, math.radians(90), math.radians(self.arcAngle), self.arcWidth)
         self.arcRect.center = self.screencenter
         self.draw_all()

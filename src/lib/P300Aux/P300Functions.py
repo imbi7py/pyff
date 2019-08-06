@@ -31,6 +31,7 @@ Many of these functions use pygame
 """
 
 
+from __future__ import division
 import pygame
 
 from lib.P300VisualElement.Textbox import Textbox
@@ -111,13 +112,13 @@ def show_message(self, text, box=False):
         self.screen.blit(self.background, self.background_rect)
         font = pygame.font.Font(None, self.textsize)
         textimage = font.render(text, True, self.textcolor);
-        textrect = textimage.get_rect(center=(self.screenWidth / 2, self.screenHeight / 2))
+        textrect = textimage.get_rect(center=(self.screenWidth // 2, self.screenHeight // 2))
         self.screen.blit(textimage, textrect)
         pygame.display.flip()
     else:
         edgecolor = 100, 100, 255
         boxsize = (500, 300)
-        textbox = Textbox(pos=(self.screenWidth / 2, self.screenHeight / 2), text=text, textsize=self.textsize, size=boxsize, edgecolor=edgecolor)
+        textbox = Textbox(pos=(self.screenWidth // 2, self.screenHeight // 2), text=text, textsize=self.textsize, size=boxsize, edgecolor=edgecolor)
         textbox.refresh()
         self.screen.blit(self.background, self.background_rect)
         self.screen.blit(textbox.image, textbox.rect)
@@ -147,11 +148,11 @@ def fadeout_message(self, text, box=False, opts=None):
     if not box:
         font = pygame.font.Font(None, textsize)
         textimage = font.render(text, True, textcolor);
-        textrect = textimage.get_rect(center=(self.screenWidth / 2, self.screenHeight / 2))
+        textrect = textimage.get_rect(center=(self.screenWidth // 2, self.screenHeight // 2))
     else:
         edgecolor = 100, 100, 255
         boxsize = (500, 300)
-        textbox = Textbox(pos=(self.screenWidth / 2, self.screenHeight / 2), text=text, textsize=textsize, size=boxsize, edgecolor=edgecolor)
+        textbox = Textbox(pos=(self.screenWidth // 2, self.screenHeight // 2), text=text, textsize=textsize, size=boxsize, edgecolor=edgecolor)
         textbox.refresh()
         textimage = textbox.image
         textrect = textbox.rect
@@ -171,7 +172,7 @@ def fadeout_message(self, text, box=False, opts=None):
     end_time = current_time + fadeout_time
     # Start fading out in 50 ms steps
     while current_time < end_time:
-        fade = 255 * (end_time - current_time) / fadeout_time   # Fading value 255 - 0
+        fade = 255 * (end_time - current_time) // fadeout_time   # Fading value 255 - 0
         back.set_alpha(round(fade))
         #bef = pygame.time.get_ticks()
         self.screen.blit(self.background, [0, 0])
@@ -211,9 +212,9 @@ def fade_image(self, surface, rect, fade_time=1000, fade_in=True, transparent=(1
     #cnt=0            # Count the number of iterations through the loop
     while current_time < end_time:
         if fade_in:
-            fade = 255 * (1 - (end_time - current_time) / float(fade_time))   # Fade in
+            fade = 255 * (1 - (end_time - current_time) // float(fade_time))   # Fade in
         else:
-            fade = 255 * (end_time - current_time) / float(fade_time)   # Fade out
+            fade = 255 * (end_time - current_time) // float(fade_time)   # Fade out
         back.set_alpha(round(fade))
         self.screen.blit(self.background, [0, 0])
         #bef = pygame.time.get_ticks()
@@ -249,7 +250,7 @@ def fade_and_zoom(self, surface, start_rect, end_rect, anim_time=1000, fade_in=T
     start_time = current_time = pygame.time.get_ticks() 
     # Fade in 20 ms steps
     while current_time < start_time + anim_time:
-        f = (current_time - start_time) / float(anim_time)
+        f = (current_time - start_time) // float(anim_time)
         fade = (255 * f if fade_in else 255 * (1 - f))
         back.set_alpha(round(fade))
         # Get new rect

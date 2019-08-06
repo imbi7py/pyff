@@ -20,6 +20,7 @@
 An oddball paradigm. The count is entered via the keyboard at the end
 of the sequence and its sent as a trigger (incremented by 100).
 """
+from __future__ import division
 import pygame
 import math
 import sys
@@ -43,9 +44,9 @@ class P300_Rectangle(VisualOddball.VisualOddball):
         self.responsetime_duration = 0     
         self.backgroundColor = (50,50,50)
         self.within_dev_perc = [0.5,0.5]#[0.5, 0.5]  # sum must be 1
-        self.within_std_perc = [1/3,1/3,1/3]  # sum must be 1
+        self.within_std_perc = [1//3,1//3,1//3]  # sum must be 1
         self.userresp = ''
-        self.size = (self.screen_pos[-1]*2/3,self.screen_pos[-1]/10) #moved here
+        self.size = (self.screen_pos[-1]*2//3,self.screen_pos[-1]//10) #moved here
         
     def load_stimulus(self,filename):
         """

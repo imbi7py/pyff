@@ -39,6 +39,7 @@ Circle objects have the following features:
  * bunter_kreis
     if true and circular layout is used, each letter is assigned a unique color provided in textcolor
 """
+from __future__ import division
 import math
 import pygame
 from VisualElement import VisualElement
@@ -103,18 +104,18 @@ class Circle(VisualElement):
             if not circular_layout:  # Just normal text
                 textimage = font.render(text, self.antialias, textcolor);
                 textrect = textimage.get_rect()
-                w2, h2 = textrect.width / 2, textrect.height / 2
+                w2, h2 = textrect.width // 2, textrect.height // 2
             else:
                 # Calculate the letter positions
                 nrLetters = len(text)
-                angDistance = 2 * math.pi / nrLetters     # Angular distance between letters
+                angDistance = 2 * math.pi // nrLetters     # Angular distance between letters
                 for j in range(nrLetters):
                     # Check if multiple colors are available
                     if self.bunter_kreis: color_now = textcolor[j]
                     else: color_now = textcolor
                     theta = angDistance * j + circular_offset
-                    x = (radius - textsize / 2) * math.cos(theta) + radius
-                    y = (radius - textsize / 2) * math.sin(theta) + radius
+                    x = (radius - textsize // 2) * math.cos(theta) + radius
+                    y = (radius - textsize // 2) * math.sin(theta) + radius
                     self.textimages[j] = font.render(text[j], self.antialias, color_now)
                     self.textrects[j] = self.textimages[j].get_rect(center=(x, y))
                     # Save the letter positions for state=0

@@ -32,6 +32,7 @@ Jump: 8
 Button press: 9
 """
 
+from __future__ import division
 import sys,os,random,time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
@@ -89,7 +90,7 @@ class BoringClock(MainloopFeedback):
             self.screen = pygame.display.set_mode((self.screenPos[2],self.screenPos[3]))
         self.background = pygame.Surface((self.screenPos[2],self.screenPos[3])) 
         self.background.fill(self.bgcolor)
-        self.background_rect = self.background.get_rect(center = (self.screenPos[2]/2,self.screenPos[3]/2) )
+        self.background_rect = self.background.get_rect(center = (self.screenPos[2]//2,self.screenPos[3]//2) )
         self.screen.blit(self.background,self.background_rect)
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font(None, self.size)
@@ -121,7 +122,7 @@ class BoringClock(MainloopFeedback):
         self.clockPos = 0             # Current position of clock
         self.currentTick = 0            # Tick counter
         self.sequence = [0]*self.nClockTicks    # Sequence of presented symbols
-        self.screenCenter = (self.screenPos[2]/2,self.screenPos[3]/2)
+        self.screenCenter = (self.screenPos[2]//2,self.screenPos[3]//2)
         # States
         self.state = self.COUNTDOWN
         self.state_finished = False
@@ -166,7 +167,7 @@ class BoringClock(MainloopFeedback):
             self.clock.tick(self.fps)
             
     def countdown(self):
-        if self.currentTick/self.fps == self.nCountdown:
+        if self.currentTick//self.fps == self.nCountdown:
             self.send_parallel(self.COUNTDOWN_END)
             # Finished counting, draw background
             self.state_finished = True
@@ -176,7 +177,7 @@ class BoringClock(MainloopFeedback):
             if self.currentTick == 0:        # the very first tick
                 self.send_parallel(self.COUNTDOWN_START)
             # New number
-            count = self.nCountdown - (self.currentTick+1)/self.fps
+            count = self.nCountdown - (self.currentTick+1)//self.fps
             txt = self.font.render(str(count),1,self.colDot)
             txt_rect = txt.get_rect(center=self.screenCenter)
             self.screen.blit(self.background,self.background_rect)
@@ -185,7 +186,7 @@ class BoringClock(MainloopFeedback):
             self.currentTick += 1
         else:
             # Keep drawing the same number
-            count = self.nCountdown - self.currentTick/self.fps
+            count = self.nCountdown - self.currentTick//self.fps
             txt = self.font.render(str(count),1,self.colDot)
             txt_rect = txt.get_rect(center=self.screenCenter)
             self.screen.blit(self.background,self.background_rect)
@@ -281,7 +282,7 @@ class BoringClock(MainloopFeedback):
         clock-tick sequence into equi-sized halves and then placing a 
         jump within each partition.
         """
-        nPartition = self.nClockTicks / self.nJumps     # size of each partition (containing one jump each)
+        nPartition = self.nClockTicks // self.nJumps     # size of each partition (containing one jump each)
         # First partition
         idx = random.randint(self.minDist,nPartition-1)
         self.sequence[idx] = 1

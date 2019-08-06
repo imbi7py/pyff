@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -24,7 +25,7 @@ import VisionEgg
 from lib.vision_egg.util.frame_counter import FrameCounter
 
 _refresh_rate = VisionEgg.config.VISIONEGG_MONITOR_REFRESH_HZ
-_frame_duration = 1. / _refresh_rate
+_frame_duration = 1. // _refresh_rate
 
 def _frames(time):
     return int(round(float(time) * _refresh_rate))

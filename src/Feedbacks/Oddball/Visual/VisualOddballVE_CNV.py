@@ -17,6 +17,7 @@
 
 """Class for Visual Oddball Experiments using Vision Egg for Stimulus Presentation."""
 
+from __future__ import division
 import pygame
 #import random
 import os
@@ -61,7 +62,7 @@ class VisualOddballVE_CNV(VisualOddballVE.VisualOddballVE):
         self.font_size = 120
         self.font_color_name = "white" #(200, 80, 118) #(145, 54, 146)
         self.bg_color = (198, 210, 221)
-        self.center = [self.geometry[2]/2, self.geometry[3]/2]        
+        self.center = [self.geometry[2]//2, self.geometry[3]//2]        
         self.nTrials = 20
         self.nTrials_per_block = 6   # has to be an even number
         self.countdown_start = 3
@@ -98,7 +99,7 @@ class VisualOddballVE_CNV(VisualOddballVE.VisualOddballVE):
         
     def run(self):
         
-        nBlocks = int(ceil(1.0*self.nTrials/self.nTrials_per_block))
+        nBlocks = int(ceil(1.0*self.nTrials//self.nTrials_per_block))
         self.create_log()
                  
         for n in range(nBlocks):

@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -34,7 +35,7 @@ class CharacterSequence(list):
 
     def __init_attributes(self):
         self._random = Random('BBCI')
-        self._burst_signi_len = len(self.sequence) / self._burst_count
+        self._burst_signi_len = len(self.sequence) // self._burst_count
         self._redundance_len = len(self._redundance)
         self._burst_len = self._burst_signi_len + self._redundance_len
         self._sequence = copy(self.sequence)

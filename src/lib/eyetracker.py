@@ -20,6 +20,7 @@
 #
 #
 
+from __future__ import division
 import threading
 import logging
 import sys, os
@@ -173,7 +174,7 @@ class EyeTracker(object):
                         self.time_h = now.hour
                         self.time_m = now.minute
                         self.time_s = now.second
-                        self.time_ms = now.microsecond / 1000
+                        self.time_ms = now.microsecond // 1000
                         self.x = int(data.positionX)
                         self.y = int(data.positionY)
                         self.duration = int(data.duration)

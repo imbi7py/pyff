@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010 Laura Acqualagna
 
 This program is free software; you can redistribute it and/or modify it under
@@ -24,7 +25,7 @@ class RSVP(object):
     def color_algorithm(self,n_seq):
         self.col_trial=[]
         n_col = len(self.groups) 
-        len_group=len(self.alphabet)/n_col
+        len_group=len(self.alphabet)//n_col
         i=0
         for i in range(0,n_seq):
             j=0
@@ -85,7 +86,7 @@ class RSVP(object):
         
     def mono_algorithm(self,num_seq):
         self.matrix=[]
-        num=num_seq/2
+        num=num_seq//2
         for i in range(1,num+1):
             self.tmp=[]
             if (i<=5): 

@@ -38,6 +38,7 @@ design in an ERP-based brain-computer interface. submitted
 """
 
 
+from __future__ import division
 import sys, math
 
 import pygame
@@ -143,19 +144,19 @@ class ERPMatrix(VisualP300):
         # Add fixation dot
         if self.et_fixate_center:
             dot = Circle(radius=3, color=(160, 160, 255))
-            dot.pos = (self.screenWidth / 2, self.screenHeight / 2)
+            dot.pos = (self.screenWidth // 2, self.screenHeight // 2)
             dot.refresh()
             dot.update()
             self.deco.append(dot)
         # Add text row
         self.textrow = Textrow(text="", textsize=42, color=(255, 255, 255), size=(450, 42), edgecolor=(55, 100, 255), antialias=True, colorkey=(0, 0, 0), highlight=[1], highlight_color=(255, 0, 0), highlight_size=62)
-        self.textrow.pos = (self.screenWidth / 2, (self.screenHeight - self.canvasHeight) / 2 + 21)
+        self.textrow.pos = (self.screenWidth // 2, (self.screenHeight - self.canvasHeight) // 2 + 21)
         self.textrow.refresh()
         self.textrow.update()
         self.deco.append(self.textrow)
         # Add count row (where count is entered by participant)
         self.countrow = Textrow(text="", textsize=60, color=(150, 150, 255), size=(100, 60), edgecolor=(255, 255, 255), antialias=True, colorkey=(0, 0, 0))
-        self.countrow.pos = (self.screenWidth / 2, self.screenHeight / 2)
+        self.countrow.pos = (self.screenWidth // 2, self.screenHeight // 2)
         self.countrow.refresh()
         self.countrow.update(0)
         # Add deco to deco group
@@ -206,7 +207,7 @@ class ERPMatrix(VisualP300):
             word = self.words[self.current_word]
             font = pygame.font.Font(None, self.textsize)
             self.next_word_image = font.render("Next word: " + word, True, self.textcolor);
-            self.next_word_rect = self.next_word_image.get_rect(center=(self.screenWidth / 2, self.screenHeight / 2))
+            self.next_word_rect = self.next_word_image.get_rect(center=(self.screenWidth // 2, self.screenHeight // 2))
             # Paint it
             self.screen.blit(self.all_background, self.all_background_rect)
             pygame.display.flip()
@@ -285,7 +286,7 @@ class ERPMatrix(VisualP300):
         # Determine whether fixate center or fixate target
         if self.et_fixate_center:
             # Fixate center
-            self.et_targetxy = (self.screenWidth / 2, self.screenHeight / 2)
+            self.et_targetxy = (self.screenWidth // 2, self.screenHeight // 2)
         else:
             # Fixate target
             self.et_targetxy = self.elements[ind].pos    

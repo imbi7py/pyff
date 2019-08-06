@@ -18,6 +18,7 @@
 """Stimulus-Only Feedback."""
 
 
+from __future__ import division
 import math
 import time
 
@@ -80,8 +81,8 @@ class MovingRhombGL(Feedback):
         centerVerticesLeft = []
         centerVerticesRight = []
         for i in range(self.rhomb_n):
-            l = soya.Vertex(rhomb_world,self.rhomb_radius * math.sin(2.0 * math.pi * i / self.rhomb_n),0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i / self.rhomb_n))
-            r = soya.Vertex(rhomb_world,self.rhomb_radius * math.sin(2.0 * math.pi * i / self.rhomb_n),0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i / self.rhomb_n))
+            l = soya.Vertex(rhomb_world,self.rhomb_radius * math.sin(2.0 * math.pi * i // self.rhomb_n),0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i // self.rhomb_n))
+            r = soya.Vertex(rhomb_world,self.rhomb_radius * math.sin(2.0 * math.pi * i // self.rhomb_n),0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i // self.rhomb_n))
             l.diffuse = self.rhomb_color1
             r.diffuse = self.rhomb_color2
             centerVerticesLeft.append(l)

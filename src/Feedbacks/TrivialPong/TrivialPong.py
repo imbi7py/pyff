@@ -20,6 +20,7 @@
 """Trivial Pong BCI Feedback."""
 
 
+from __future__ import division
 import os
 
 import pygame
@@ -51,7 +52,7 @@ class TrivialPong(PygameFeedback):
 
     def play_tick(self):
         width, height = self.screenSize
-        w_half = width / 2.
+        w_half = width // 2.
         # move bar and ball
         pos = w_half + w_half * self.val
         self.barrect.center = pos, height - 20

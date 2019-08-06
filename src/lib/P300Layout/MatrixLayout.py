@@ -21,6 +21,7 @@ The positions are defined row-wise, starting in the top
 left corner. 
 """
 
+from __future__ import division
 class MatrixLayout(object):
     
     def __init__(self, size=(200, 200), rows=6, cols=6):
@@ -29,13 +30,13 @@ class MatrixLayout(object):
         self.cols = cols
         width, height = size
         # Determine positions
-        distx = width / (cols - 1)    # x distance between elements
-        disty = height / (rows - 1)   # y distance between elements
+        distx = width // (cols - 1)    # x distance between elements
+        disty = height // (rows - 1)   # y distance between elements
         
         for r in range(rows):
             for c in range(cols):
-                x = round(distx * c - width / 2)
-                y = round(disty * r - height / 2)
+                x = round(distx * c - width // 2)
+                y = round(disty * r - height // 2)
                 self.positions.append((x, y))
 
     def get_rows_cols(self):

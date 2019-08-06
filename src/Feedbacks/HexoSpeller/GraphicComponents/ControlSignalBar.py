@@ -16,6 +16,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import division
 from direct.showbase.DirectObject import DirectObject
 import direct.gui.OnscreenText as ost
 from direct.task import Task
@@ -100,26 +101,26 @@ class ControlSignalBar():
     def _create_frame(self, height, width, thresholds, root_node_path):
         # create surrounding first
         # bottom line
-        node, _vdata = create_line(-width/2.0, 0, width/2.0, 0)
+        node, _vdata = create_line(-width//2.0, 0, width//2.0, 0)
         root_node_path.attachNewNode(node)
         # left line
-        node, _vdata = create_line(-width/2.0, 0, -width/2.0, height)
+        node, _vdata = create_line(-width//2.0, 0, -width//2.0, height)
         root_node_path.attachNewNode(node)
         # top line
-        node, _vdata = create_line(-width/2.0, height, width/2.0, height)
+        node, _vdata = create_line(-width//2.0, height, width//2.0, height)
         root_node_path.attachNewNode(node)
         # right line
-        node, _vdata = create_line(width/2.0, 0, width/2.0, height)
+        node, _vdata = create_line(width//2.0, 0, width//2.0, height)
         root_node_path.attachNewNode(node)
         # create the threshold lines
         t1, t2 = thresholds
-        node, self.t1_vdata = create_line(-width/2.0, t1, width/2.0, t1)
+        node, self.t1_vdata = create_line(-width//2.0, t1, width//2.0, t1)
         root_node_path.attachNewNode(node)
-        node, self.t2_vdata = create_line(-width/2.0, t2, width/2.0, t2)
+        node, self.t2_vdata = create_line(-width//2.0, t2, width//2.0, t2)
         root_node_path.attachNewNode(node)
     
     def _create_bar(self, height, width, root_node_path):
-        node, self.bar_vdata = create_side((-width/2.0, height), (width/2.0, 0), False)
+        node, self.bar_vdata = create_side((-width//2.0, height), (width//2.0, 0), False)
         root_node_path.attachNewNode(node)
         
 

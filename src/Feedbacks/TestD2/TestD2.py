@@ -15,6 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from __future__ import division
 import random
 
 import pygame
@@ -35,7 +36,7 @@ class TestD2(PygameFeedback):
         self.random_seed = 1234
         # Standard D2 configuration
         self.number_of_symbols = 47 * 14
-        self.seconds_per_symbol = 20 / 47.
+        self.seconds_per_symbol = 20 // 47.
         self.targets_percent = 45.45
         # Color of the symbols
         self.color = [0, 0, 0]
@@ -63,17 +64,17 @@ class TestD2(PygameFeedback):
 
 
     def post_mainloop(self):
-        elapsed_seconds = self.clock.tick() / 1000.
+        elapsed_seconds = self.clock.tick() // 1000.
         PygameFeedback.post_mainloop(self)
         # Total number of items processed
         tn = self.current_index + 1
         error = self.e1 + self.e2
-        error_rate = 100. * error / tn
+        error_rate = 100. * error // tn
         correctly_processed = tn - error
         # concentration performance := correctly_processed - e2 
         cp = correctly_processed - self.e2
         # Average reaction time:
-        rt_avg = elapsed_seconds / tn
+        rt_avg = elapsed_seconds // tn
         print "Results:"
         print "========"
         print
@@ -121,7 +122,7 @@ class TestD2(PygameFeedback):
         """Generate the D2 list."""
         random.seed(self.random_seed)
         # number of targets and non_targets
-        targets = int(round(self.number_of_symbols * self.targets_percent / 100))
+        targets = int(round(self.number_of_symbols * self.targets_percent // 100))
         non_targets = int(self.number_of_symbols - targets)
         assert(targets + non_targets == self.number_of_symbols)
         l = [random.choice(TARGETS) for i in range(targets)] + \
@@ -142,7 +143,7 @@ class TestD2(PygameFeedback):
     def generate_symbols(self):
         """Generate surfaces all possible symbols."""
         # thickness of the lines (should match thickness of the font
-        linewidth = self.fontheight / 11
+        linewidth = self.fontheight // 11
         font = pygame.font.Font(None, self.fontheight)
         surface_d = font.render("d", True, self.color)
         surface_p = font.render("p", True, self.color)
@@ -152,14 +153,14 @@ class TestD2(PygameFeedback):
         surface_l1 = pygame.Surface((width, height), pygame.SRCALPHA)
         surface_l2 = pygame.Surface((width, height), pygame.SRCALPHA)
         pygame.draw.line(surface_l1, self.color,
-                         (width / 2, height / 10),
-                         (width / 2, height - height / 10), linewidth)
+                         (width // 2, height // 10),
+                         (width // 2, height - height // 10), linewidth)
         pygame.draw.line(surface_l2, self.color,
-                         (width / 3, height / 10),
-                         (width / 3, height - height / 10), linewidth)
+                         (width // 3, height // 10),
+                         (width // 3, height - height // 10), linewidth)
         pygame.draw.line(surface_l2, self.color,
-                         (2 * width / 3, height / 10),
-                         (2 * width / 3, height - height / 10), linewidth)
+                         (2 * width // 3, height // 10),
+                         (2 * width // 3, height - height // 10), linewidth)
         # Combine letters and lines to the actual symbols and store them in a dict
         self.symbol = {}
         for symbol in TARGETS + NON_TARGETS:

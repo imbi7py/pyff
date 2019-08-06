@@ -22,6 +22,7 @@ its states.
 """
 
     
+from __future__ import division
 import sys
 
 import pygame
@@ -50,7 +51,7 @@ pygame.display.update()
 
 """ Loop between the states and pause in between """
 width, height = screenSize
-e.pos = (width / 2, height / 2)
+e.pos = (width // 2, height // 2)
 e.refresh()
 e.update(0)
 pos = 0

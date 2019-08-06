@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -36,7 +37,7 @@ class View(VisionEggView):
     def reinit(self):
         VisionEggView.reinit(self)
         sz = self.screen.size
-        self._center_text.set_position((sz[0] / 2., sz[1] - self._symbol_vpos))
+        self._center_text.set_position((sz[0] // 2., sz[1] - self._symbol_vpos))
 
     def init(self):
         self.__init_text()
@@ -46,7 +47,7 @@ class View(VisionEggView):
         the symbol position.
         """
         sz = self.screen.size
-        self._word = TargetWord(position=(sz[0] / 2., sz[1] -
+        self._word = TargetWord(position=(sz[0] // 2., sz[1] -
                                               self._word_vpos),
                                     symbol_size=self._word_font_size,
                                     target_size=self._word_target_font_size,
@@ -55,7 +56,7 @@ class View(VisionEggView):
                                     center_at_target=True)
         self.add_stimuli(self._word)
         if self._show_alphabet:
-            self._alphabet = self.add_color_word(position=(sz[0] / 2., sz[1] -
+            self._alphabet = self.add_color_word(position=(sz[0] // 2., sz[1] -
                                                            self._alphabet_vpos),
                                                  font_size=
                                                  self._alphabet_font_size)

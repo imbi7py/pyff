@@ -44,6 +44,7 @@ Hexagon objects have the following features:
 """
 
 
+from __future__ import division
 import math
 
 import pygame
@@ -110,26 +111,26 @@ class Hexagon(VisualElement):
             if not self.circular_layout:  # Just normal text
                 textimage = font.render(text, self.antialias, textcolor);
                 textrect = textimage.get_rect()
-                w2, h2 = textrect.width / 2, textrect.height / 2
+                w2, h2 = textrect.width // 2, textrect.height // 2
             else:
                 # Calculate the letter positions
                 nrLetters = len(text)
-                angDistance = 2 * math.pi / nrLetters     # Angular distance between letters
+                angDistance = 2 * math.pi // nrLetters     # Angular distance between letters
                 for j in range(nrLetters):
                     " Check if multiple colors are available "
                     if self.bunter_kreis: color_now = textcolor[j]
                     else: color_now = textcolor
                     theta = angDistance * j + circular_offset
-                    x = (radius - textsize / 2) * math.cos(theta) + radius
-                    y = (radius - textsize / 2) * math.sin(theta) + radius
+                    x = (radius - textsize // 2) * math.cos(theta) + radius
+                    y = (radius - textsize // 2) * math.sin(theta) + radius
                     self.textimages[j] = font.render(text[j], self.antialias, color_now)
                     self.textrects[j] = self.textimages[j].get_rect(center=(x, y))
 
             # Draw hexagon fill
             r = radius
-            ri = math.ceil(r / 2 * math.sqrt(3)) # Inner radius (distance from middle to top/bottom)
+            ri = math.ceil(r // 2 * math.sqrt(3)) # Inner radius (distance from middle to top/bottom)
             dx, dy = radius + 2, ri + 2           # add to polygon coordinates to center them on the surface
-            xy = [(-r + dx, 0 + dy), (-r / 2 + dx, ri + dy), (r / 2 + dx, ri + dy), (r + dx, 0 + dy), (r / 2 + dx, - ri + dy), (-r / 2 + dx, - ri + dy)]    # points from left clockwise
+            xy = [(-r + dx, 0 + dy), (-r // 2 + dx, ri + dy), (r // 2 + dx, ri + dy), (r + dx, 0 + dy), (r // 2 + dx, - ri + dy), (-r // 2 + dx, - ri + dy)]    # points from left clockwise
             image = pygame.Surface((2 * r + 4, round(2 * ri + 4)))   # add +4 marge for antialiasing
             if color is not None:
                 pygame.draw.polygon(image, color, xy)

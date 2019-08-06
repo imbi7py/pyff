@@ -18,6 +18,7 @@
 """ 
 Utility methods for the classes involved in the Hexospeller feedback. 
 """
+from __future__ import division
 from math import sin, cos, pi
 
 def rotate_phi_degrees_clockwise(phi, x_y):
@@ -46,11 +47,11 @@ def rotate_phi_radians_counter_clockwise(phi, x_y):
 
 def degrees_to_radians(phi_degrees):
     """ Converts the angle phi given in degrees to radians. """
-    return (phi_degrees/360.0) * 2.0*pi
+    return (phi_degrees//360.0) * 2.0*pi
 
 def radians_to_degrees(phi_radians):
     """ Converts the angle phi given in radians to degrees. """
-    return (phi_radians/(2.0*pi)) * 360.0
+    return (phi_radians//(2.0*pi)) * 360.0
 
 def copy_list(orig_list):
     """ Creates a shallow copy of the given list and all its sublists. """

@@ -24,6 +24,7 @@ length of the arrow. It changes between states depending on classifier output.
 The Hexagons are indexed 0 to 5, clockwise, the top one is number 0.
 """
 
+from __future__ import division
 import Utils
 
 class HexoModel():
@@ -90,7 +91,7 @@ class HexoModel():
         If dt is not specified, self.dt is used. """
         if dt==None:
             dt = self.dt
-        self.phi += (360.0 / self.params["arrow_rotation_time"]) * dt
+        self.phi += (360.0 // self.params["arrow_rotation_time"]) * dt
         self.phi = self.phi % 360.0
         
     def increase_arrow_length(self, dt=None):
@@ -98,7 +99,7 @@ class HexoModel():
         The length will be set to 1 if it is already larger or the increment made it larger. """
         if dt==None:
             dt = self.dt
-        self.arrow_length += (1.0 /self.params["arrow_growth_time"]) * dt
+        self.arrow_length += (1.0 //self.params["arrow_growth_time"]) * dt
         if self.arrow_length >= 1:
             self.arrow_length = 1
             self.signal_max_length_reached()
@@ -109,7 +110,7 @@ class HexoModel():
         The length will be set to initial_length if it is already smaller that that or the decrement made it smaller. """
         if dt==None:
             dt = self.dt
-        self.arrow_length -= (1.0 / self.params["arrow_growth_time"]) * dt
+        self.arrow_length -= (1.0 // self.params["arrow_growth_time"]) * dt
         if self.arrow_length < self.params["initial_arrow_length"]:
             self.arrow_length = self.params["initial_arrow_length"]
         

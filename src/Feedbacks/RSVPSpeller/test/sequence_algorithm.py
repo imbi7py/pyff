@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits, Laura Acqualagna
 
 This program is free software; you can redistribute it and/or modify it under
@@ -26,7 +27,7 @@ class OriginalSequenceAlgorithm(object):
         self.group=[]
         
         self.alphabet=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ.,:<")
-        len_group=len(self.alphabet)/n_col
+        len_group=len(self.alphabet)//n_col
         
         k=0
         for k in range(0,n_col):
@@ -99,7 +100,7 @@ class OriginalSequenceAlgorithm(object):
         
     def mono_algorithm(self,num_seq):
         self.matrix=[]
-        num=num_seq/2
+        num=num_seq//2
         for i in range(1,num+1):
             self.tmp=[]
             if (i<=5): 

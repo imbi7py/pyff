@@ -30,6 +30,7 @@ design in an ERP-based brain-computer interface. submitted
 
 """
 
+from __future__ import division
 import sys, os, math
 
 import pygame
@@ -127,7 +128,7 @@ class ERPHex(VisualP300):
         color , radius = (255, 255, 255), 60
         # Create the top-level display
         for i in range(self.nr_elements):
-            e = Circle(nr_states=3, color=color, radius=radius, text=self.hex_letters[i], textcolor=self.hex_textcolor, colorkey=(0, 0, 0), circular_layout=True, circular_offset= - math.pi / 2)
+            e = Circle(nr_states=3, color=color, radius=radius, text=self.hex_letters[i], textcolor=self.hex_textcolor, colorkey=(0, 0, 0), circular_layout=True, circular_offset= - math.pi // 2)
             e.set_states(0, {"textsize":45, "radius":74})
             e.set_states(1, {"textsize":70, "radius":100})
             # Also add a blank version (for animation)
@@ -143,19 +144,19 @@ class ERPHex(VisualP300):
         if self.et_fixate_center:
             dotcolor, dotradius = (160, 160, 255), 5
             dot = Circle(radius=dotradius, color=dotcolor)
-            dot.pos = (self.screenWidth / 2, self.screenHeight / 2)
+            dot.pos = (self.screenWidth // 2, self.screenHeight // 2)
             dot.refresh()
             dot.update()
             self.deco.append(dot)
         # Add text row
         self.textrow = Textrow(text="", textsize=42, color=(255, 255, 255), size=(450, 42), edgecolor=(55, 100, 255), antialias=True, colorkey=(0, 0, 0), highlight=[1], highlight_color=(255, 0, 0), highlight_size=62)
-        self.textrow.pos = (self.screenWidth / 2, (self.screenHeight - self.canvasHeight) / 2 + 22)
+        self.textrow.pos = (self.screenWidth // 2, (self.screenHeight - self.canvasHeight) // 2 + 22)
         self.textrow.refresh()
         self.textrow.update()
         self.deco.append(self.textrow)
         # Add count row (where count is entered by participant)
         self.countrow = Textrow(text="", textsize=60, color=(150, 150, 255), size=(100, 60), edgecolor=(255, 255, 255), antialias=True, colorkey=(0, 0, 0))
-        self.countrow.pos = (self.screenWidth / 2, self.screenHeight / 2)
+        self.countrow.pos = (self.screenWidth // 2, self.screenHeight // 2)
         self.countrow.refresh()
         self.countrow.update()
         
@@ -233,7 +234,7 @@ class ERPHex(VisualP300):
             word = self.words[self.current_word]
             font = pygame.font.Font(None, self.textsize)
             next_word_image = font.render("Next word: " + word, True, self.textcolor);
-            next_word_rect = next_word_image.get_rect(center=(self.screenWidth / 2, self.screenHeight / 2))
+            next_word_rect = next_word_image.get_rect(center=(self.screenWidth // 2, self.screenHeight // 2))
             # Paint it
             self.screen.blit(self.all_background, self.all_background_rect)
             pygame.display.flip()
@@ -330,7 +331,7 @@ class ERPHex(VisualP300):
         # Determine whether fixate center or fixate target
         if self.et_fixate_center:
             # Fixate center
-            self.et_targetxy = (self.screenWidth / 2, self.screenHeight / 2)
+            self.et_targetxy = (self.screenWidth // 2, self.screenHeight // 2)
         else:
             # Fixate target
             self.et_targetxy = self.elements[target].pos    
@@ -405,7 +406,7 @@ class ERPHex(VisualP300):
                     self.start_pos[i] = (x + elx, y + ely)
                     # End positions of letters are centered on zero
                     x, y = self.end_pos[i]
-                    self.end_pos[i] = (x + self.screenWidth / 2, y + self.screenHeight / 2)
+                    self.end_pos[i] = (x + self.screenWidth // 2, y + self.screenHeight // 2)
                 self.current_tick += 1
             elif self.current_tick <= self.animation_time:
                 # Animate
@@ -536,7 +537,7 @@ class ERPHex(VisualP300):
         " Set elements to 'empty' states and get letter positions "
         " 'reverse' performs the reverse motion pattern "
         " Get current position "
-        p = t / float(self.animation_time)     # Position parameters
+        p = t // float(self.animation_time)     # Position parameters
         font = pygame.font.Font(None, int(round(self.end_size * p + self.start_size * (1 - p))))
         # paint everything 
         self.screen.blit(self.background, self.background_rect)

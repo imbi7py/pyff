@@ -20,6 +20,7 @@
 """MovingRhomb Stimulus."""
 
 
+from __future__ import division
 import math
 import random
 
@@ -49,7 +50,7 @@ class MovingRhomb(PygameFeedback):
         self.random_angle = 5 # degrees
 
         # TODO: move this to init_graphics
-        self.v = (self.w * 1000) / (self.duration * self.FPS)
+        self.v = (self.w * 1000) // (self.duration * self.FPS)
 
     def pre_mainloop(self):
         PygameFeedback.pre_mainloop(self)
@@ -107,8 +108,8 @@ class MovingRhomb(PygameFeedback):
         #self.h = self.screen.get_height()
 
         # Scale some stuff
-        rhomb_w = self.w / 20
-        rhomb_h = self.h / 20
+        rhomb_w = self.w // 20
+        rhomb_h = self.h // 20
 
         # Paint the Surfaces
         self.background = pygame.Surface((self.w, self.h)).convert()
@@ -117,10 +118,10 @@ class MovingRhomb(PygameFeedback):
         self.rhomb_up = pygame.Surface((rhomb_w, rhomb_h)).convert()
         self.rhomb_down = pygame.Surface((rhomb_w, rhomb_h)).convert()
 
-        top = (rhomb_w/2, 0)
-        left = (rhomb_w, rhomb_h/2)
-        bottom = (rhomb_w/2, rhomb_h)
-        right = (0, rhomb_h/2)
+        top = (rhomb_w//2, 0)
+        left = (rhomb_w, rhomb_h//2)
+        bottom = (rhomb_w//2, rhomb_h)
+        right = (0, rhomb_h//2)
 
         rhomb_points = (top, left, bottom, right)
         left_points = (top, bottom, left)

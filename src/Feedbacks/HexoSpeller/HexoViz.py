@@ -15,6 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from __future__ import division
 import Utils
 import sys
 from math import sqrt
@@ -219,7 +220,7 @@ class HexoViz(DirectObject):
 
     def normalize_control_signal(self, v):
         """ Assuming a given control signal range (e.g. -1 to 1), the given value is mapped to the range 0 to 1. """
-        return (v+1)/2.0
+        return (v+1)//2.0
             
     def _create_control_signal_viz(self):
         """ Creates and initializes the visualization of the classifier output. """
@@ -248,7 +249,7 @@ class HexoViz(DirectObject):
         """ Creates and positions the Hexagons. """
         # position them around the center point with radius r
         r = self.params["hex_distance_to_middle"] # distance from the center to the middle point of each hex
-        hex_inner_r = r / sqrt(3) - self.params["gap_width_between_hexagons"]
+        hex_inner_r = r // sqrt(3) - self.params["gap_width_between_hexagons"]
         # create the hex objects first
         for i in range(6):
             hex = Hexagon(radius=hex_inner_r, width=self.params["hex_depth"], color=self.params["hexagon_default_color"], hex_index=i)
@@ -326,7 +327,7 @@ class HexoViz(DirectObject):
         current_angle = hexagon_list[0].get_node_path().getH() # here I assume all hexagons have the same angle!!!
         if current_angle >= stop_angle or current_angle < start_angle:
             return Task.done
-        phi = start_angle + 180 * task.time/rotation_time
+        phi = start_angle + 180 * task.time//rotation_time
         phi = phi % 360
         for hexagon in hexagon_list:
             hexagon.get_node_path().setH(phi)
@@ -338,7 +339,7 @@ class HexoViz(DirectObject):
         if task.time >= rotation_time:
             return Task.done
         angle_diff = (stop_phi - start_phi) % 360
-        phi = start_phi + angle_diff * task.time/rotation_time
+        phi = start_phi + angle_diff * task.time//rotation_time
         arrow.get_node_path().setR(phi)
         return Task.cont
     

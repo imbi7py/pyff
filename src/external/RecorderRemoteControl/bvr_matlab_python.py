@@ -1,3 +1,4 @@
+from __future__ import division
 import sys
 import time
 
@@ -40,7 +41,7 @@ if (len(sys.argv) > 1):
     elif(fcn == 'viewsignalsandwait'):
         waitTime = 2
         if(len(sys.argv) > 2):
-            waitTime = float(sys.argv[2]) / 1000
+            waitTime = float(sys.argv[2]) // 1000
 
         if(getState() != 1):
             viewData()

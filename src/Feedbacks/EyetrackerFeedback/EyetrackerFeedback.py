@@ -16,6 +16,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import division
 import sys, random, os
 
 import pygame
@@ -75,7 +76,7 @@ class EyetrackerFeedback(MainloopFeedback):
         self.objects_rect.append(star.get_rect(center=(star_dist, self.screenHeight - star_dist)))
         self.objects_rect.append(star.get_rect(center=(self.screenWidth - star_dist, star_dist)))
         self.objects_rect.append(star.get_rect(center=(self.screenWidth - star_dist, self.screenHeight - star_dist)))
-        self.objects_rect.append(star.get_rect(center=(self.screenWidth / 2, self.screenHeight / 2)))
+        self.objects_rect.append(star.get_rect(center=(self.screenWidth // 2, self.screenHeight // 2)))
         self.screen.blit(self.background, self.background_rect)
         pygame.display.flip()
         # Start eye tracker
@@ -94,7 +95,7 @@ class EyetrackerFeedback(MainloopFeedback):
             self.screen = pygame.display.set_mode((self.screenWidth, self.screenHeight))
         self.background = pygame.Surface((self.canvasWidth, self.canvasHeight)) 
         self.background.fill(self.bgcolor)
-        self.background_rect = self.background.get_rect(center=(self.screenWidth / 2, self.screenHeight / 2))
+        self.background_rect = self.background.get_rect(center=(self.screenWidth // 2, self.screenHeight // 2))
         self.screen.blit(self.background, self.background_rect)
         pygame.display.flip()
         self.font = pygame.font.Font(None, self.textsize)

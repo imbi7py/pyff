@@ -25,6 +25,7 @@ Serves as base class for spellers such as CakeSpeller and CenterSpeller.
 
 
 
+from __future__ import division
 from time import time, clock
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.P300Aux.P300Functions import random_flash_sequence
@@ -176,7 +177,7 @@ class VisualSpellerVE(MainloopFeedback):
 
 
         self._spellerHeight = self.geometry[3] - self.letterbox_size[1]
-        self._centerPos = (self.geometry[2]/2., self._spellerHeight/2.)
+        self._centerPos = (self.geometry[2]//2., self._spellerHeight//2.)
 
         self._nr_letters = 0
         for i in xrange(len(self.letter_set)):
@@ -277,27 +278,27 @@ class VisualSpellerVE(MainloopFeedback):
                               sync_swap=True)
 
         ## create letter box on top:
-        self._ve_letterbox = Target2D(position=(self._centerPos[0], self.geometry[3] * (1 - 0.01) - self.letterbox_size[1]/2.),
+        self._ve_letterbox = Target2D(position=(self._centerPos[0], self.geometry[3] * (1 - 0.01) - self.letterbox_size[1]//2.),
                                      size=(self.letterbox_size[0], self.letterbox_size[1]),
                                      color=self.phrase_color)
-        self._ve_innerbox = Target2D(position=(self._centerPos[0], self.geometry[3] * (1 - 0.01) - self.letterbox_size[1]/2.),
+        self._ve_innerbox = Target2D(position=(self._centerPos[0], self.geometry[3] * (1 - 0.01) - self.letterbox_size[1]//2.),
                                size=(self.letterbox_size[0]-6, self.letterbox_size[1]-6),
                                color=self.bg_color)
 
-        self._current_letter_position = (self._centerPos[0], self.geometry[3] * (1 - 0.015) - self.letterbox_size[1]/2.)
+        self._current_letter_position = (self._centerPos[0], self.geometry[3] * (1 - 0.015) - self.letterbox_size[1]//2.)
         self._ve_current_letter = Text(position=self._current_letter_position,
                              text=(len(self._desired_letters[:1])==0 and " " or self._desired_letters[:1]),
                              font_size=self.font_size_current_letter,
                              color=self.current_letter_color,
                              anchor='center')
 
-        self._ve_desired_letters = Text(position=(self._centerPos[0] + 5 + self.letterbox_size[0]/2., self._current_letter_position[1]),
+        self._ve_desired_letters = Text(position=(self._centerPos[0] + 5 + self.letterbox_size[0]//2., self._current_letter_position[1]),
                                         text=(len(self._desired_letters[1:])==0 and " " or self._desired_letters[1:]),
                                         font_size=self.font_size_phrase,
                                         color=self.phrase_color,
                                         anchor='left')
 
-        self._ve_spelled_phrase = Text(position=(self._centerPos[0] - 5 - self.letterbox_size[0]/2., self._current_letter_position[1]),
+        self._ve_spelled_phrase = Text(position=(self._centerPos[0] - 5 - self.letterbox_size[0]//2., self._current_letter_position[1]),
                                        text=(len(self._spelled_phrase)==0 and " " or self._spelled_phrase),
                                        font_size=self.font_size_phrase,
                                        color=self.phrase_color,
@@ -336,8 +337,8 @@ class VisualSpellerVE(MainloopFeedback):
                                        on=False)
 
         ## create oscillator circle:
-        self._ve_oscillator = FilledCircle(position=(self.osc_size/2+10,self.osc_size/2+10),
-                                       radius=self.osc_size/2,
+        self._ve_oscillator = FilledCircle(position=(self.osc_size//2+10,self.osc_size//2+10),
+                                       radius=self.osc_size//2,
                                        color=self.osc_color,
                                        on=False)
 
@@ -594,7 +595,7 @@ class VisualSpellerVE(MainloopFeedback):
         minimum = maxint
         classified = None
         for ii in range(self._nr_elements):
-            means[ii] = sum(self._classifier_output[ii]) /nr
+            means[ii] = sum(self._classifier_output[ii]) //nr
             if means[ii]<minimum:
                minimum = means[ii]
                classified = ii+1
@@ -631,7 +632,7 @@ class VisualSpellerVE(MainloopFeedback):
                 minimum = maxint
                 classified = None
                 for ii in range(self._nr_elements):
-                    means[ii] = sum(self._classifier_output[ii]) / self.nr_sequences
+                    means[ii] = sum(self._classifier_output[ii]) // self.nr_sequences
                     if means[ii]<minimum:
                         minimum = means[ii]
                         classified = ii
@@ -641,7 +642,7 @@ class VisualSpellerVE(MainloopFeedback):
                 minimum = maxint
                 classified = None
                 for ii in range(self._nr_elements):
-                    means[ii] = sum(self._classifier_output[ii]) /self.nr_sequences
+                    means[ii] = sum(self._classifier_output[ii]) //self.nr_sequences
                     if means[ii]<minimum:
                         minimum = means[ii]
                         classified = ii
@@ -786,8 +787,8 @@ class VisualSpellerVE(MainloopFeedback):
         # play warning sound
 
         def sine_array_onecycle(hz, peak,sample_rate):
-            length = sample_rate / float(hz)
-            omega = NP.pi * 2 / length
+            length = sample_rate // float(hz)
+            omega = NP.pi * 2 // length
             xvalues = NP.arange(int(length)) * omega
             return (peak * NP.sin(xvalues))
 
@@ -991,8 +992,8 @@ def animate_sigmoid(pos_start, pos_end, dt, accel=10.):
     return NP.add(pos_start, NP.divide(NP.subtract(pos_end, pos_start), (1. + NP.exp(-accel*dt + 0.5*accel))))
 
 def animate_sigmoid2D(pos_start, pos_end, t, T, accel=10.):
-    return (pos_start[0] + (pos_end[0]-pos_start[0])/(1. + NP.exp(-accel*(t/T) + 0.5*accel)),
-            pos_start[1] + (pos_end[1]-pos_start[1])/(1. + NP.exp(-accel*(t/T) + 0.5*accel)))
+    return (pos_start[0] + (pos_end[0]-pos_start[0])//(1. + NP.exp(-accel*(t//T) + 0.5*accel)),
+            pos_start[1] + (pos_end[1]-pos_start[1])//(1. + NP.exp(-accel*(t//T) + 0.5*accel)))
 
 if __name__ == '__main__':
     import CenterSpellerVE

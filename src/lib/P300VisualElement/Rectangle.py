@@ -29,6 +29,7 @@ Rectangle objects have the following features:
 """
 
 
+from __future__ import division
 import pygame
 
 from VisualElement import VisualElement
@@ -79,7 +80,7 @@ class Rectangle(VisualElement):
             if self.antialias is not None:
                 textimage = pygame.transform.rotate(textimage, rotate)
             textrect = textimage.get_rect()
-            w2, h2 = textrect.width / 2, textrect.height / 2
+            w2, h2 = textrect.width // 2, textrect.height // 2
             # Get the rectangle
             if self.antialias:
                 """

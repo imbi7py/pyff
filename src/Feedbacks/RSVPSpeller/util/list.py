@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -14,7 +15,7 @@ program; if not, see <http://www.gnu.org/licenses/>.
 """
 
 def slices(seq, length):
-    count = len(seq) / length
+    count = len(seq) // length
     return [seq[i * length:(i + 1) * length] for i in xrange(count)]
 
 def remove_all(seq, elements):

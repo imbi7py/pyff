@@ -24,6 +24,7 @@ Treder MS, Schmidt NS, Blankertz B (2011). Gaze-independent brain-computer inter
 
 Requires VisionEgg
 '''
+from __future__ import division
 from VisualSpellerVE import VisualSpellerVE, animate_sigmoid, animate
 from VEShapes import FilledTriangle, FilledHexagon,FilledHourglass,FilledCross
 from VisionEgg.MoreStimuli import FilledCircle, Target2D
@@ -163,11 +164,11 @@ class CenterSpellerVE(VisualSpellerVE):
             ## add letters of level 1:
             circle_layout = CircularLayout(nr_elements=self._nr_elements,
                     radius=self.speller_radius,
-                    start=NP.pi/6.*5)
+                    start=NP.pi//6.*5)
             circle_layout.positions.reverse()
             self._letter_layout = CircularLayout(nr_elements=self._nr_elements,
                     radius=self.letter_radius,
-                    start=NP.pi/6.*5)
+                    start=NP.pi//6.*5)
             self._letter_layout.positions.reverse()
             for i in xrange(self._nr_elements):
                 # store countdown position:
@@ -251,10 +252,10 @@ class CenterSpellerVE(VisualSpellerVE):
             ## add letters of level 1:
             circle_layout = CircularLayout(nr_elements=self._nr_elements,
                     radius=self.speller_radius,
-                    start=NP.pi/6.*5)
+                    start=NP.pi//6.*5)
             self._letter_layout = CircularLayout(nr_elements=self._nr_elements,
                     radius=self.letter_radius,
-                    start=NP.pi/6.*5)
+                    start=NP.pi//6.*5)
             circle_layout.positions.reverse()
             self._letter_layout.positions.reverse()
 
@@ -382,7 +383,7 @@ class CenterSpellerVE(VisualSpellerVE):
 
         ## move all elements with their letters to countdown position:
         def update(t):
-            dt = t/self.animation_time
+            dt = t//self.animation_time
             for i in xrange(self._nr_elements):
                 pos = animate_sigmoid(self._centerPos, self._countdown_shape_positions[i], dt)
                 self._ve_shapes[i].set(position=pos) # shapes
@@ -436,7 +437,7 @@ class CenterSpellerVE(VisualSpellerVE):
         # move all elements with their letters to standard position:
 
         def update(t):
-            dt = t/self.animation_time
+            dt = t//self.animation_time
             for i in xrange(self._nr_elements):
                 pos = animate_sigmoid(self._countdown_shape_positions[i], self._centerPos, dt)
                 self._ve_shapes[i].set(position=pos) # shapes
@@ -571,7 +572,7 @@ class CenterSpellerVE(VisualSpellerVE):
 
                 ## animate letters:
                 def update(t):
-                    dt = t/self.animation_time
+                    dt = t//self.animation_time
                     self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements)]
                     feedback_letters = []
                     for i in xrange(self._nr_elements):
@@ -626,7 +627,7 @@ class CenterSpellerVE(VisualSpellerVE):
             ## animate letter, but not if backdoor classified:
             if self._classified_letter < len(self.letter_set[self._classified_element]):
                 def update(t):
-                    dt = t/self.animation_time
+                    dt = t//self.animation_time
                     self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-1]
                     pos = animate_sigmoid(self._centerPos, self._current_letter_position, dt)
                     color = (self.level_2_letter_colors and

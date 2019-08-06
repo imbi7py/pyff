@@ -26,6 +26,7 @@
 
 """Class for Visual Oddball Experiments."""
 
+from __future__ import division
 import pygame
 
 from Feedbacks.Oddball import Oddball
@@ -51,14 +52,14 @@ class VisualOddball(Oddball.Oddball):
         """
         Creates standard and deviant stimuli.          
         """        
-        size = (self.screen_pos[-1]/3,self.screen_pos[-1]/3)
+        size = (self.screen_pos[-1]//3,self.screen_pos[-1]//3)
         # create deviant stimulus
         dev1 = pygame.Surface(size)
         dev1.fill((255,0,0))
         # create standard stimulus
         std1 = pygame.Surface(size)
         std1Rect = std1.get_rect(center=(320,240))
-        hs = int(size[0]/2)
+        hs = int(size[0]//2)
         pygame.draw.circle(std1, (0,255,0), (hs,hs), hs)
         return [std1], [dev1]
 

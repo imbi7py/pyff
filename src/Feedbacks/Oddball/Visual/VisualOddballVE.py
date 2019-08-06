@@ -27,6 +27,7 @@
 
 """Class for Visual Oddball Experiments using Vision Egg for Stimulus Presentation."""
 
+from __future__ import division
 import pygame
 #import random
 import os
@@ -121,7 +122,7 @@ class VisualOddballVE(VisionEggFeedback):
         
     def run(self):
 
-        nBlocks = int(ceil(1.0*self.nTrials/self.nTrials_per_block))
+        nBlocks = int(ceil(1.0*self.nTrials//self.nTrials_per_block))
         self.create_log() 
          
         for n in range(nBlocks):
@@ -133,8 +134,8 @@ class VisualOddballVE(VisionEggFeedback):
                 self.create_stim_seq()
                 
             # Init image and text object            
-            self.image = self.add_image_stimulus(position=[self.geometry[2]/2, self.geometry[3]/2])
-            self.text = self.add_text_stimulus(position=(self.geometry[2]/2,self.geometry[3]/2),on=False) #[self.geometry[2]/2, self.geometry[3]/2])
+            self.image = self.add_image_stimulus(position=[self.geometry[2]//2, self.geometry[3]//2])
+            self.text = self.add_text_stimulus(position=(self.geometry[2]//2,self.geometry[3]//2),on=False) #[self.geometry[2]/2, self.geometry[3]/2])
     
             # This feedback uses a generator function for controlling the stimulus
             # transition. Note that the function has to be called before passing
@@ -311,9 +312,9 @@ class VisualOddballVE(VisionEggFeedback):
         Creates standard and deviant stimuli.          
         """        
         # The stimului. This can be anything compatible with VisionEgg
-        dev = FilledCircle(color=(0,1.0,0), position=[self.geometry[2]/2, self.geometry[3]/2], radius=100)
-        std1 = Target2D(color=(0,0,1.0), position=[self.geometry[2]/2, self.geometry[3]/2], size=(200,200))
-        std2= Target2D(color=(1.0,0,0), position=[self.geometry[2]/2, self.geometry[3]/2], size=(200,200))
+        dev = FilledCircle(color=(0,1.0,0), position=[self.geometry[2]//2, self.geometry[3]//2], radius=100)
+        std1 = Target2D(color=(0,0,1.0), position=[self.geometry[2]//2, self.geometry[3]//2], size=(200,200))
+        std2= Target2D(color=(1.0,0,0), position=[self.geometry[2]//2, self.geometry[3]//2], size=(200,200))
         #dev = Text(text='Deviant', font_size=72, position=(300, 200), anchor='center')
         #std1 = Text(text='Standard I', font_size=72, position=(300, 200), anchor='center')
         #std2 = Text(text='Standard II', font_size=72, position=(300, 200), anchor='center')        
@@ -339,7 +340,7 @@ class VisualOddballVE(VisionEggFeedback):
             ptr = 0
             while ptr < N:        
                 togo= N-ptr
-                prob= devs_to_be_placed/floor(togo/2)        
+                prob= devs_to_be_placed//floor(togo//2)        
                 if random.random() < prob:
                     sequence[ptr] = 1
                     devs_to_be_placed = devs_to_be_placed - 1

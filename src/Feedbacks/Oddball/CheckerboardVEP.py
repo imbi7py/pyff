@@ -19,6 +19,7 @@
 
 """Checkerboard-flipping used to generate a visual evoked potential (VEP)."""
 
+from __future__ import division
 import pygame
 import math
 
@@ -70,10 +71,10 @@ class CheckerboardVEP(VisualOddball.VisualOddball):
                 rect = (x*self.squaresize,y*self.squaresize,self.squaresize,self.squaresize)
                 if not(self.squaresPerSide%2==0 and x==0):
                     sign = -sign
-                pygame.draw.rect(cb1, colors[(sign*1+1)/2], rect)
-                pygame.draw.rect(cb2, colors[(sign*-1+1)/2], rect)                
-        pygame.draw.circle(cb1, red, (size[0]/2, size[0]/2), self.fixdotsize)
-        pygame.draw.circle(cb2, red, (size[0]/2, size[0]/2), self.fixdotsize)
+                pygame.draw.rect(cb1, colors[(sign*1+1)//2], rect)
+                pygame.draw.rect(cb2, colors[(sign*-1+1)//2], rect)                
+        pygame.draw.circle(cb1, red, (size[0]//2, size[0]//2), self.fixdotsize)
+        pygame.draw.circle(cb2, red, (size[0]//2, size[0]//2), self.fixdotsize)
         return [cb1], [cb2]
 
     def start_stimulus(self, stim):

@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -119,8 +120,8 @@ class VisionEggView(object):
         fixation cross etc.
         """
         sz = self.screen.size
-        self._center_text = self.add_color_word(position=(sz[0] / 2.,
-                                                          sz[1] / 2.),
+        self._center_text = self.add_color_word(position=(sz[0] // 2.,
+                                                          sz[1] // 2.),
                                                 font_size=self._font_size)
 
     def add_viewport(self, viewport):

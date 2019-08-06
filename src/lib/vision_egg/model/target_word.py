@@ -1,3 +1,4 @@
+from __future__ import division
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -33,7 +34,7 @@ class Frame(Stimulus):
 
     def __init__(self, position, size, line_width=2, **kw):
         Stimulus.__init__(self, **kw)
-        ul = (position[0] - size[0] / 2., position[1])
+        ul = (position[0] - size[0] // 2., position[1])
         add = lambda a, b: map(operator.add, a, b)
         self._vertices = [[ul[0], ul[1], 0],
                           [ul[0] + size[0], ul[1], 0],

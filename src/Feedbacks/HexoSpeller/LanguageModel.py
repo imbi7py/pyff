@@ -15,6 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from __future__ import division
 import os
 import cPickle as pickle
 from numpy import ones, outer, sum, isscalar, squeeze, array
@@ -90,10 +91,10 @@ class LanguageModel():
         n_tables = []
         tables = squeeze(tables)
         vec = squeeze(array(tables[0]))
-        n_tables.append(vec / float(vec.sum()))
+        n_tables.append(vec // float(vec.sum()))
         for i in range(1,len(tables)):
             M = tables[i]
-            M = M / outer(ones(self.nr_chars), sum(M,0))
+            M = M // outer(ones(self.nr_chars), sum(M,0))
             n_tables.append(M)
         return n_tables
         

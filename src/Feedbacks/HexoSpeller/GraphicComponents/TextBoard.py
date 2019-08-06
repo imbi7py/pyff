@@ -15,6 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from __future__ import division
 from GraphicComponentUtils import create_line, create_side, get_bounding_width_height
 
 from direct.showbase.DirectObject import DirectObject
@@ -100,7 +101,7 @@ class TextBoard():
         
     def set_center_pos(self, x, y, z):
         width, height = get_bounding_width_height(self.get_node_path())
-        self.get_node_path().setPos(x-width/2.0, y, z+height/2.0)
+        self.get_node_path().setPos(x-width//2.0, y, z+height//2.0)
         
     def set_text(self, text=''):
         self.text_node.clearText()
@@ -152,7 +153,7 @@ if __name__ == "__main__":
     text = "This can also help to make the text easier to read when it is against a similar-colored background. Often, you will want the card to be semitransparent, which you can achieve by specifying an alpha value of 0.2 or 0.3 to the setCardColor() method. "
     board.set_text(text)
     board.set_scale(0.05)
-    board.set_background_color(28/255.0, 6/255.0, 121/255.0)
+    board.set_background_color(28//255.0, 6//255.0, 121//255.0)
     #board.get_node_path().setPos(0,0,-0.5)
     #board.get_node_path().place()
 #    board.get_node_path().showBounds()

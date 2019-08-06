@@ -25,6 +25,7 @@ Treder MS, Schmidt NS, Blankertz B (2011). Gaze-independent brain-computer inter
 Requires VisionEgg and Pygame.
 
 '''
+from __future__ import division
 from VisualSpellerVE import VisualSpellerVE, animate, animate_sigmoid #,animate_sinusoid
 from VEShapes import FilledTriangle
 from VisionEgg.MoreStimuli import Target2D, FilledCircle
@@ -90,10 +91,10 @@ class CakeSpellerVE(VisualSpellerVE):
         ## create triangles:
         self._letter_layout = CircularLayout(nr_elements=self._nr_elements,
                                        radius=self.letter_radius,
-                                       start=NP.pi/6.*5)
+                                       start=NP.pi//6.*5)
         self._letter_layout.positions.reverse()
-        a = self.speller_radius / 2.
-        b = a * NP.sqrt(3) / 3.
+        a = self.speller_radius // 2.
+        b = a * NP.sqrt(3) // 3.
         self._shape_positions = [(self._centerPos[0],     self._centerPos[1] + 2*b),
                                  (self._centerPos[0] + a, self._centerPos[1] + b),
                                  (self._centerPos[0] + a, self._centerPos[1] - b),
@@ -247,7 +248,7 @@ class CakeSpellerVE(VisualSpellerVE):
             self._presentation.set(go_duration=(self.animation_time, 'seconds'))
             self._viewport.parameters.stimuli.extend([None]*(self._nr_elements-1))
             def update(t):
-                dt = t/self.animation_time
+                dt = t//self.animation_time
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 feedback_letters = []
                 for i in xrange(self._nr_elements-1):
@@ -307,7 +308,7 @@ class CakeSpellerVE(VisualSpellerVE):
                 self._presentation.set(go_duration=(self.animation_time, 'seconds'))
                 self._viewport.parameters.stimuli.append(None)
                 def update(t):
-                    dt = t/self.animation_time
+                    dt = t//self.animation_time
                     self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-1]
                     pos = animate_sigmoid(self._centerPos, self._current_letter_position, dt)
                     color = animate_sigmoid(self.letter_color, self.current_letter_color, dt) 

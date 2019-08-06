@@ -17,6 +17,7 @@
 
 
 #import Feedbacks.HexoSpeller.Utils as Utils
+from __future__ import division
 from math import sqrt, acos
 from GraphicComponentUtils import create_side, create_triangle
 
@@ -90,15 +91,15 @@ class Arrow():
         """ Creates the shaft sides individually and rotates and shifts them so that
         they form the shaft. """
         # front 
-        front_node, vdata = create_side((-width/2.0, length), (width/2.0, 0), static=False)
+        front_node, vdata = create_side((-width//2.0, length), (width//2.0, 0), static=False)
         front_path = root_node_path.attachNewNode(front_node)
-        front_path.setY(-depth/2.0)
+        front_path.setY(-depth//2.0)
         self.shaft_vdata.append(vdata)
         # back 
-        back_node, vdata = create_side((-width/2.0, length), (width/2.0, 0), static=False)
+        back_node, vdata = create_side((-width//2.0, length), (width//2.0, 0), static=False)
         back_path = root_node_path.attachNewNode(back_node)
         back_path.setH(180)
-        back_path.setY(depth/2.0)
+        back_path.setY(depth//2.0)
         self.shaft_vdata.append(vdata)
 #        # top
 #        top_node, vdata = create_side((-width/2.0, depth/2.0), (width/2.0, -depth/2.0), static=False)
@@ -107,34 +108,34 @@ class Arrow():
 #        top_path.setZ(length)
 #        self.shaft_vdata.append(vdata)
         # bottom
-        bottom_node, vdata = create_side((-width/2.0, depth/2.0), (width/2.0, -depth/2.0), static=False)
+        bottom_node, vdata = create_side((-width//2.0, depth//2.0), (width//2.0, -depth//2.0), static=False)
         bottom_path = root_node_path.attachNewNode(bottom_node)
         bottom_path.setP(90)
         # right
-        right_node, vdata = create_side((-depth/2.0, length), (depth/2.0, 0), static=False)
+        right_node, vdata = create_side((-depth//2.0, length), (depth//2.0, 0), static=False)
         right_path = root_node_path.attachNewNode(right_node)
         right_path.setH(90)
-        right_path.setX(width/2.0)
+        right_path.setX(width//2.0)
         self.shaft_vdata.append(vdata)
         # left
-        left_node, vdata = create_side((-depth/2.0, length), (depth/2.0, 0), static=False)
+        left_node, vdata = create_side((-depth//2.0, length), (depth//2.0, 0), static=False)
         left_path = root_node_path.attachNewNode(left_node)
         left_path.setH(-90)
-        left_path.setX(-width/2.0)
+        left_path.setX(-width//2.0)
         self.shaft_vdata.append(vdata)
         
     def _create_tip(self, length, width, depth, root_node_path):
         # front 
-        front_node = create_triangle((-width/2.0,0), (0,length), (width/2.0,0))
+        front_node = create_triangle((-width//2.0,0), (0,length), (width//2.0,0))
         front_path = root_node_path.attachNewNode(front_node)
-        front_path.setY(-depth/2.0)
+        front_path.setY(-depth//2.0)
         # back
-        back_node = create_triangle((-width/2.0,0), (0,length), (width/2.0,0))
+        back_node = create_triangle((-width//2.0,0), (0,length), (width//2.0,0))
         back_path = root_node_path.attachNewNode(back_node)
         back_path.setH(180)
-        back_path.setY(depth/2.0)
+        back_path.setY(depth//2.0)
         # bottom
-        bottom_node, _vdata = create_side((-width/2.0,depth/2.0), (width/2.0,-depth/2.0))
+        bottom_node, _vdata = create_side((-width//2.0,depth//2.0), (width//2.0,-depth//2.0))
         bottom_path = root_node_path.attachNewNode(bottom_node)
         bottom_path.setP(90)
 #        # top right
@@ -177,7 +178,7 @@ def scale(arrow, time_to_full_length, start_length, max_length, task):
         arrow.set_length(start_length)
     else:
         t = task.time % time_to_full_length
-        t = t/time_to_full_length
+        t = t//time_to_full_length
         length_diff = max_length - start_length
         new_length = start_length+t*length_diff
         arrow.set_length(new_length)

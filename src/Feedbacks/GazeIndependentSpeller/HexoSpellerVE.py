@@ -24,6 +24,7 @@ Treder MS, Schmidt NS, Blankertz B (2011). Gaze-independent brain-computer inter
 
 Requires VisionEgg and Pygame.
 '''
+from __future__ import division
 from VisualSpellerVE import VisualSpellerVE, animate, animate_sigmoid 
 from VisionEgg.MoreStimuli import Target2D, FilledCircle
 from VisionEgg.Text import Text
@@ -105,13 +106,13 @@ class HexoSpellerVE(VisualSpellerVE):
         ## create and place the circles and letters:
         circle_layout = CircularLayout(nr_elements=self._nr_elements,
                                        radius=self.speller_radius,
-                                       start=NP.pi/6.*5)
+                                       start=NP.pi//6.*5)
         circle_layout.positions.reverse()
         self._letter_layout = CircularLayout(nr_elements=self._nr_elements,
                                        radius=self.circle_radius*0.65,
-                                       start=NP.pi/6.*5)
+                                       start=NP.pi//6.*5)
         self._letter_layout.positions.reverse()
-        self._shape_positions = [(x+self.geometry[2]/2, y+self._spellerHeight/2) for (x,y) in circle_layout.positions]
+        self._shape_positions = [(x+self.geometry[2]//2, y+self._spellerHeight//2) for (x,y) in circle_layout.positions]
         # add the standard elements:
         for i in xrange(self._nr_elements):
             self._ve_edges.append(FilledCircle(radius=self._edge_radius,
@@ -133,7 +134,7 @@ class HexoSpellerVE(VisualSpellerVE):
         # add the stimuli letters of level 1:
         letter_layout2 = CircularLayout(nr_elements=self._nr_elements,
                                        radius=self.circle_radius*0.65*self.flash_size_factor,
-                                       start=NP.pi/6.*5)
+                                       start=NP.pi//6.*5)
         letter_layout2.positions.reverse()
         for i in xrange(self._nr_elements):
             for j in xrange(len(self.letter_set[i])): # warning: self.letter_set must be at least of length self._nr_elements!!!
@@ -288,7 +289,7 @@ class HexoSpellerVE(VisualSpellerVE):
             self._presentation.set(go_duration=(self.animation_time, 'seconds'))
             self._viewport.parameters.stimuli.extend([None]*(self._nr_elements-1))
             def update(t):
-                dt = t/self.animation_time
+                dt = t//self.animation_time
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 feedback_letters = []
                 for i in xrange(self._nr_elements-1):
@@ -350,7 +351,7 @@ class HexoSpellerVE(VisualSpellerVE):
                 self._viewport.parameters.stimuli.append(None)
                 def update(t):
                     # Add one screen refresh (otherwise animation lags by 1 frame)
-                    dt = t/self.animation_time
+                    dt = t//self.animation_time
                     self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-1]
                     pos = animate_sigmoid(self._centerPos, self._current_letter_position, dt)
                     color = animate_sigmoid(self.letter_color, self.current_letter_color, dt)
