@@ -149,7 +149,7 @@ class XmlDecoder(object):
         elif type in FLOAT_TYPE:
             return VARIABLE, (name, float(value))
         elif type in LONG_TYPE:
-            return VARIABLE, (name, long(value))
+            return VARIABLE, (name, int(value))
         elif type in COMPLEX_TYPE:
             if value.startswith("(") and value.endswith(")"):
                 value = value[1:-1]
@@ -337,7 +337,7 @@ class XmlEncoder(object):
             type = INTEGER_TYPE
         elif isinstance(value, float):
             type = FLOAT_TYPE
-        elif isinstance(value, long):
+        elif isinstance(value, int):
             type = LONG_TYPE
         elif isinstance(value, complex):
             type = COMPLEX_TYPE
