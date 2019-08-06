@@ -21,6 +21,7 @@
 
 from xml.dom.minidom import Document
 from xml.dom.minidom import parseString
+import six
 
 ICTYPES_ENTRY_UNDEF 		= "undef"
 ICTYPES_ENTRY_PROB 			= "prob"
@@ -65,7 +66,7 @@ class ICSetClass:
 		return pclass
 
 	def Remove(self, lclass):
-		if not isinstance(lclass, basestring):
+		if not isinstance(lclass, six.string_types):
 			lclass = lclass.GetLabel()
 
 		if not self.map.has_key(lclass):
@@ -76,7 +77,7 @@ class ICSetClass:
 		return r
 	
 	def Get(self, lclass):
-		if not isinstance(lclass, basestring):
+		if not isinstance(lclass, six.string_types):
 			lclass = lclass.GetLabel()
 
 		if not self.map.has_key(lclass):
@@ -85,7 +86,7 @@ class ICSetClass:
 		return self.map[lclass]
 
 	def Has(self, lclass):
-		if not isinstance(lclass, basestring):
+		if not isinstance(lclass, six.string_types):
 			lclass = lclass.GetLabel()
 
 		return self.map.has_key(lclass)
@@ -114,7 +115,7 @@ class ICSetClassifier:
 		return pclr
 
 	def Remove(self, nclr):
-		if not isinstance(nclr, basestring):
+		if not isinstance(nclr, six.string_types):
 			nclr = nclr.GetName()
 
 		if not self.map.has_key(nclr):
@@ -125,7 +126,7 @@ class ICSetClassifier:
 		return r
 
 	def Get(self, nclr):
-		if not isinstance(nclr, basestring):
+		if not isinstance(nclr, six.string_types):
 			nclr = nclr.GetName()
 
 		if not self.map.has_key(nclr):
@@ -134,7 +135,7 @@ class ICSetClassifier:
 		return self.map[nclr]
 
 	def Has(self, nclr):
-		if not isinstance(nclr, basestring):
+		if not isinstance(nclr, six.string_types):
 			nclr = nclr.GetName()
 
 		return self.map.has_key(nclr)

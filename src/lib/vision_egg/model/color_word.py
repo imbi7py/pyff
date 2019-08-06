@@ -18,6 +18,7 @@ from random import uniform
 import logging
 
 from text_list import TextList
+import six
 
 class ColorWord(TextList):
     def __init__(self, position=(0, 0), text='', target=None, symbol_size=72,
@@ -54,7 +55,7 @@ class ColorWord(TextList):
         if isinstance(target, int) and 0 <= target <= len(self.text):
             self._target = self.text[target]
             self._target_index = target
-        elif isinstance(target, basestring) and target in self.text:
+        elif isinstance(target, six.string_types) and target in self.text:
             self._target = target
             self._target_index = self.text.index(target)
         else:

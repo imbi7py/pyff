@@ -16,6 +16,7 @@ program; if not, see <http://www.gnu.org/licenses/>.
 from pygame import Color
 
 from RSVPSpeller.util.error import RSVPSpellerException
+import six
 
 class NoMatchingSymbolColor(RSVPSpellerException):
     """ The color for a symbol has been queried that does not exist
@@ -44,7 +45,7 @@ class Palette(object):
         """
         if isinstance(color, list):
             return map(self, color)
-        elif isinstance(color, basestring):
+        elif isinstance(color, six.string_types):
             return self.symbol_color(color) if len(color) == 1 else \
                    Color(color).normalize()
         elif isinstance(color, int):
