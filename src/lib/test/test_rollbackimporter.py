@@ -30,9 +30,9 @@ class RollbackImporterTestCase(unittest.TestCase):
         self._del_if_existent(modname)
         rbi = RollbackImporter()
         import lib.test.mod_wo_imports
-        self.assertTrue(sys.modules.has_key(modname))
+        self.assertTrue(modname in sys.modules)
         rbi.uninstall()
-        self.assertFalse(sys.modules.has_key(modname))
+        self.assertFalse(modname in sys.modules)
         
     def testComplexImport(self):
         """Should remove import and import(s) of import."""
@@ -42,9 +42,9 @@ class RollbackImporterTestCase(unittest.TestCase):
         self._del_if_existent(modname2)
         rbi = RollbackImporter()
         import lib.test.mod_w_imports
-        self.assertTrue(sys.modules.has_key(modname2))
+        self.assertTrue(modname2 in sys.modules)
         rbi.uninstall()
-        self.assertFalse(sys.modules.has_key(modname2))
+        self.assertFalse(modname2 in sys.modules)
         
     def testRelativeImport(self):
         """Should remove relative import."""
@@ -52,9 +52,9 @@ class RollbackImporterTestCase(unittest.TestCase):
         self._del_if_existent(modname)
         rbi = RollbackImporter()
         import mod_wo_imports
-        self.assertTrue(sys.modules.has_key(modname))
+        self.assertTrue(modname in sys.modules)
         rbi.uninstall()
-        self.assertFalse(sys.modules.has_key(modname))
+        self.assertFalse(modname in sys.modules)
         
     def testSysModulesEqualBeforeAndAfter(self):
         """Modules before and after usage of RBI should be equal."""
@@ -65,7 +65,7 @@ class RollbackImporterTestCase(unittest.TestCase):
         self.assertEqual(before, sys.modules)
         
     def _del_if_existent(self, modname):
-        if sys.modules.has_key(modname):
+        if modname in sys.modules:
             del(sys.modules[modname])
 
         

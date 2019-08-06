@@ -157,7 +157,7 @@ class VisionEggView(object):
         self._standard_viewport.set(stimuli=list(stimuli))
 
     def add_text_stimulus(self, text, font_size=None, **kw):
-        if not kw.has_key('anchor'):
+        if 'anchor' not in kw:
             kw['anchor'] = 'center'
         font_size = font_size or self._font_size
         txt = VisionEgg.Text.Text(text=text, font_size=font_size, **kw)
@@ -171,7 +171,7 @@ class VisionEggView(object):
         return txt
 
     def add_image_stimulus(self, **kw):
-        if not kw.has_key('anchor'):
+        if 'anchor' not in kw:
             kw['anchor'] = 'center'
         img = TextureStimulus(**kw)
         self.add_stimuli(img)

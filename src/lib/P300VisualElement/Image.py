@@ -59,13 +59,13 @@ class Image(VisualElement):
     def refresh(self):
         # For each state, generate image and rect
         for i in range(self.nr_states):
-            if self.states[i].has_key("file"):    file = self.states[i]["file"]
+            if "file" in self.states[i]:    file = self.states[i]["file"]
             else: file = self.file            # Take standard value
-            if self.states[i].has_key("fliplr"):    fliplr = self.states[i]["fliplr"]
+            if "fliplr" in self.states[i]:    fliplr = self.states[i]["fliplr"]
             else: fliplr = self.fliplr          # Take standard value
-            if self.states[i].has_key("flipud"):    flipud = self.states[i]["flipud"]
+            if "flipud" in self.states[i]:    flipud = self.states[i]["flipud"]
             else: flipud = self.flipud            # Take standard value
-            if self.states[i].has_key("scale"):    scale = self.states[i]["scale"]
+            if "scale" in self.states[i]:    scale = self.states[i]["scale"]
             else: scale = self.scale            # Take standard value
             image = self.load_image(file)
             if fliplr or flipud:

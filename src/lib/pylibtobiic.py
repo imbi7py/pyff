@@ -59,7 +59,7 @@ class ICSetClass:
 		self.map = {}
 
 	def Add(self, pclass):
-		if self.map.has_key(pclass.GetLabel()):
+		if pclass.GetLabel() in self.map:
 			return None
 
 		self.map[pclass.GetLabel()] = pclass
@@ -69,7 +69,7 @@ class ICSetClass:
 		if not isinstance(lclass, six.string_types):
 			lclass = lclass.GetLabel()
 
-		if not self.map.has_key(lclass):
+		if lclass not in self.map:
 			return None
 
 		r = self.map[lclass]
@@ -80,7 +80,7 @@ class ICSetClass:
 		if not isinstance(lclass, six.string_types):
 			lclass = lclass.GetLabel()
 
-		if not self.map.has_key(lclass):
+		if lclass not in self.map:
 			return None
 
 		return self.map[lclass]
@@ -89,7 +89,7 @@ class ICSetClass:
 		if not isinstance(lclass, six.string_types):
 			lclass = lclass.GetLabel()
 
-		return self.map.has_key(lclass)
+		return lclass in self.map
 
 	def Empty(self):
 		return (len(self.map) == 0)
@@ -108,7 +108,7 @@ class ICSetClassifier:
 		self.map = {}
 
 	def Add(self, pclr):
-		if self.map.has_key(pclr.GetName()):
+		if pclr.GetName() in self.map:
 			return None
 
 		self.map[pclr.GetName()] = pclr
@@ -118,7 +118,7 @@ class ICSetClassifier:
 		if not isinstance(nclr, six.string_types):
 			nclr = nclr.GetName()
 
-		if not self.map.has_key(nclr):
+		if nclr not in self.map:
 			return None
 
 		r = self.map[nclr]
@@ -129,7 +129,7 @@ class ICSetClassifier:
 		if not isinstance(nclr, six.string_types):
 			nclr = nclr.GetName()
 
-		if not self.map.has_key(nclr):
+		if nclr not in self.map:
 			return None
 
 		return self.map[nclr]
@@ -138,7 +138,7 @@ class ICSetClassifier:
 		if not isinstance(nclr, six.string_types):
 			nclr = nclr.GetName()
 
-		return self.map.has_key(nclr)
+		return nclr in self.map
 
 	def Empty(self):
 		return (len(self.map) == 0)

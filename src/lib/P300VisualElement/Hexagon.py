@@ -91,19 +91,19 @@ class Hexagon(VisualElement):
     def refresh(self):
         # For each state, generate image and rect
         for i in range(self.nr_states):
-            if self.states[i].has_key("text"):    text = self.states[i]["text"]
+            if "text" in self.states[i]:    text = self.states[i]["text"]
             else: text = self.text            # Take standard value
-            if self.states[i].has_key("textcolor"):    textcolor = self.states[i]["textcolor"]
+            if "textcolor" in self.states[i]:    textcolor = self.states[i]["textcolor"]
             else: textcolor = self.textcolor          # Take standard value
-            if self.states[i].has_key("textsize"):    textsize = self.states[i]["textsize"]
+            if "textsize" in self.states[i]:    textsize = self.states[i]["textsize"]
             else: textsize = self.textsize            # Take standard value
-            if self.states[i].has_key("color"):    color = self.states[i]["color"]
+            if "color" in self.states[i]:    color = self.states[i]["color"]
             else: color = self.color          # Take standard value
-            if self.states[i].has_key("edgecolor"):    edgecolor = self.states[i]["edgecolor"]
+            if "edgecolor" in self.states[i]:    edgecolor = self.states[i]["edgecolor"]
             else: edgecolor = self.edgecolor          # Take standard value
-            if self.states[i].has_key("radius"):    radius = self.states[i]["radius"]
+            if "radius" in self.states[i]:    radius = self.states[i]["radius"]
             else: radius = self.radius         # Take standard value
-            if self.states[i].has_key("circular_offset"): circular_offset = self.states[i]["circular_offset"]
+            if "circular_offset" in self.states[i]: circular_offset = self.states[i]["circular_offset"]
             else: circular_offset = self.circular_offset # Take standard value
             
             # Get the text image

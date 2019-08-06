@@ -60,17 +60,17 @@ class Rectangle(VisualElement):
     def refresh(self):
         # For each state, generate image and rect
         for i in range(self.nr_states):
-            if self.states[i].has_key("text"):    text = self.states[i]["text"]
+            if "text" in self.states[i]:    text = self.states[i]["text"]
             else: text = self.text            # Take standard value
-            if self.states[i].has_key("textcolor"):    textcolor = self.states[i]["textcolor"]
+            if "textcolor" in self.states[i]:    textcolor = self.states[i]["textcolor"]
             else: textcolor = self.textcolor          # Take standard value
-            if self.states[i].has_key("textsize"):    textsize = self.states[i]["textsize"]
+            if "textsize" in self.states[i]:    textsize = self.states[i]["textsize"]
             else: textsize = self.textsize            # Take standard value
-            if self.states[i].has_key("color"):    color = self.states[i]["color"]
+            if "color" in self.states[i]:    color = self.states[i]["color"]
             else: color = self.color          # Take standard value
-            if self.states[i].has_key("rotate"):    rotate = self.states[i]["rotate"]
+            if "rotate" in self.states[i]:    rotate = self.states[i]["rotate"]
             else: rotate = self.rotate         # Take standard value
-            if self.states[i].has_key("size"):    size = self.states[i]["size"]
+            if "size" in self.states[i]:    size = self.states[i]["size"]
             else: size = self.size         # Take standard value
 
             width, height = size

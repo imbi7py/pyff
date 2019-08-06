@@ -138,7 +138,7 @@ class BcixmlTestCase(unittest.TestCase):
         signal2 = self.decoder.decode_packet(xml)
         if value2 == None:
             value2 = value
-        self.assertTrue(signal2.data.has_key(name))
+        self.assertTrue(name in signal2.data)
         self.assertEqual(signal2.data[name], value2)
         self.assertEqual(type(signal2.data[name]), type(value2))
 

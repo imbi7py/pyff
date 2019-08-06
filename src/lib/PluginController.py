@@ -107,7 +107,7 @@ class PluginController(object):
         """Unload currently loaded plugin."""
         if self.oldModules:
             for mod in sys.modules.keys():
-                if not self.oldModules.has_key(mod):
+                if mod not in self.oldModules:
                     del sys.modules[mod]
             self.oldModules = None
 

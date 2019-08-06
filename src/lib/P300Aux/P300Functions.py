@@ -139,11 +139,11 @@ def fadeout_message(self, text, box=False, opts=None):
     textsize = self.textsize
     textcolor = self.textcolor
     if opts is not None:
-        if opts.has_key("show_time"): show_time = opts["show_time"]
-        if opts.has_key("fadeout_time"): fadeout_time = opts["fadeout_time"]
-        if opts.has_key("wait_for_key"): wait_for_key = opts["wait_for_key"]
-        if opts.has_key("textsize"): textsize = opts["textsize"]
-        if opts.has_key("textcolor"): textcolor = opts["textcolor"]
+        if "show_time" in opts: show_time = opts["show_time"]
+        if "fadeout_time" in opts: fadeout_time = opts["fadeout_time"]
+        if "wait_for_key" in opts: wait_for_key = opts["wait_for_key"]
+        if "textsize" in opts: textsize = opts["textsize"]
+        if "textcolor" in opts: textcolor = opts["textcolor"]
     textimage, textrect = None, None
     if not box:
         font = pygame.font.Font(None, textsize)

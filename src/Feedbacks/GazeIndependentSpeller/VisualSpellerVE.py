@@ -869,7 +869,7 @@ class VisualSpellerVE(MainloopFeedback):
 
     def on_control_event(self, data):
         self.logger.info("[CONTROL_EVENT] %s" % str(data))
-        if data.has_key(u'cl_output'):
+        if u'cl_output' in data:
             # classification output was sent:
             score_data = data[u'cl_output']
             cl_out = score_data[0]
@@ -878,13 +878,13 @@ class VisualSpellerVE(MainloopFeedback):
                 self._classifier_output[iSubstim-1].append(cl_out)
             elif self.use_ErrP_detection:
                 self._ErrP_classifier = cl_out
-        elif data.has_key('new_letter'):
+        elif 'new_letter' in data:
             # get new letter to spell:
             self._desired_letters += data['new_letter']
             self._ve_current_letter.set(text=(len(self._desired_letters[:1])==0 and " " or self._desired_letters[:1]))
             self._ve_desired_letters.set(text=(len(self._desired_letters[1:])==0 and " " or self._desired_letters[1:]))
 
-        elif data.has_key(u'print'):
+        elif u'print' in data:
             if data[u'print']==0:
                 self.logger.info("[DESIRED_PHRASE] %s" % self.desired_phrase)
             elif data[u'print']==1:
