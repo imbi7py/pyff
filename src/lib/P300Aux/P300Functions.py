@@ -32,6 +32,7 @@ Many of these functions use pygame
 
 
 from __future__ import division
+from __future__ import absolute_import
 import pygame
 
 from lib.P300VisualElement.Textbox import Textbox

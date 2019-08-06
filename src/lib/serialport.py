@@ -27,6 +27,7 @@
 # functionality
 
 
+from __future__ import absolute_import
 import serial
 from threading import Timer
 

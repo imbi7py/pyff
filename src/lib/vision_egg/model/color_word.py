@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -17,7 +18,7 @@ from itertools import izip
 from random import uniform
 import logging
 
-from text_list import TextList
+from .text_list import TextList
 import six
 
 class ColorWord(TextList):

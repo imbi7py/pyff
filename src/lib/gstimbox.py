@@ -148,6 +148,7 @@ Example code::
 
 """
 
+from __future__ import absolute_import
 from ctypes import cdll, CFUNCTYPE, POINTER, c_void_p, c_int, c_double, c_char
 
 class GStimbox:

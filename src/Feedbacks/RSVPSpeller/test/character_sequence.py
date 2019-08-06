@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under

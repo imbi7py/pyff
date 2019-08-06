@@ -16,13 +16,14 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 from __future__ import division
-import Utils
+from __future__ import absolute_import
+from . import Utils
 import sys
 from math import sqrt
-from GraphicComponents.Hexagon import Hexagon
-from GraphicComponents.Arrow import Arrow
-from GraphicComponents.ControlSignalBar import ControlSignalBar
-from GraphicComponents.TextBoard import TextBoard
+from .GraphicComponents.Hexagon import Hexagon
+from .GraphicComponents.Arrow import Arrow
+from .GraphicComponents.ControlSignalBar import ControlSignalBar
+from .GraphicComponents.TextBoard import TextBoard
 
 # PANDA imports
 from direct.showbase.DirectObject import DirectObject

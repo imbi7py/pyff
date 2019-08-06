@@ -35,9 +35,10 @@ its features manually and calling refresh.
   
 """
     
+from __future__ import absolute_import
 import pygame
 
-from VisualElement import VisualElement
+from .VisualElement import VisualElement
 
 
 class Textbox(VisualElement):

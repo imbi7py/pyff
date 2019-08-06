@@ -16,6 +16,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import absolute_import
 import unittest
 import sys
 
@@ -51,7 +52,7 @@ class RollbackImporterTestCase(unittest.TestCase):
         modname = "lib.test.mod_wo_imports"
         self._del_if_existent(modname)
         rbi = RollbackImporter()
-        import mod_wo_imports
+        from . import mod_wo_imports
         self.assertTrue(modname in sys.modules)
         rbi.uninstall()
         self.assertFalse(modname in sys.modules)
@@ -60,7 +61,7 @@ class RollbackImporterTestCase(unittest.TestCase):
         """Modules before and after usage of RBI should be equal."""
         before = sys.modules.copy()
         rbi = RollbackImporter()
-        import mod_w_imports
+        from . import mod_w_imports
         rbi.uninstall()
         self.assertEqual(before, sys.modules)
         

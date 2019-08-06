@@ -26,8 +26,9 @@ Requires VisionEgg and Pygame.
 
 '''
 from __future__ import division
-from VisualSpellerVE import VisualSpellerVE, animate, animate_sigmoid #,animate_sinusoid
-from VEShapes import FilledTriangle
+from __future__ import absolute_import
+from .VisualSpellerVE import VisualSpellerVE, animate, animate_sigmoid #,animate_sinusoid
+from .VEShapes import FilledTriangle
 from VisionEgg.MoreStimuli import Target2D, FilledCircle
 from VisionEgg.Text import Text
 from lib.P300Layout.CircularLayout import CircularLayout

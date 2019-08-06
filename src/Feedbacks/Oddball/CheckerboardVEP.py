@@ -20,6 +20,7 @@
 """Checkerboard-flipping used to generate a visual evoked potential (VEP)."""
 
 from __future__ import division
+from __future__ import absolute_import
 import pygame
 import math
 

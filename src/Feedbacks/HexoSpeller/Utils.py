@@ -19,6 +19,7 @@
 Utility methods for the classes involved in the Hexospeller feedback. 
 """
 from __future__ import division
+from __future__ import absolute_import
 from math import sin, cos, pi
 
 def rotate_phi_degrees_clockwise(phi, x_y):

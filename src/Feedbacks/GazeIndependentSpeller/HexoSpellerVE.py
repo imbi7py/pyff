@@ -25,7 +25,8 @@ Treder MS, Schmidt NS, Blankertz B (2011). Gaze-independent brain-computer inter
 Requires VisionEgg and Pygame.
 '''
 from __future__ import division
-from VisualSpellerVE import VisualSpellerVE, animate, animate_sigmoid 
+from __future__ import absolute_import
+from .VisualSpellerVE import VisualSpellerVE, animate, animate_sigmoid 
 from VisionEgg.MoreStimuli import Target2D, FilledCircle
 from VisionEgg.Text import Text
 from VisionEgg.Core import Screen

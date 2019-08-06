@@ -17,11 +17,12 @@
 
 """This module contains the PygameFeedback baseclass."""
 
+from __future__ import absolute_import
 import os
 
 import pygame
 
-from MainloopFeedback import MainloopFeedback
+from .MainloopFeedback import MainloopFeedback
 
 
 class PygameFeedback(MainloopFeedback):

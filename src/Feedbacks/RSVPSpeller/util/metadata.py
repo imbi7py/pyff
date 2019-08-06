@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This file is part of the pyff framework. pyff is free software;

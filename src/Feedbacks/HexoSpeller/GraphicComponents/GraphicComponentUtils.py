@@ -18,6 +18,7 @@
 
 #import Feedbacks.HexoSpeller.Utils as Utils
 from __future__ import division
+from __future__ import absolute_import
 from Feedbacks.HexoSpeller.Utils import rotate_phi_degrees_counter_clockwise
 from pandac.PandaModules import Geom, GeomNode, GeomTrifans, GeomTristrips, \
     GeomLines, GeomVertexFormat, GeomVertexData, GeomVertexReader, GeomVertexWriter, \

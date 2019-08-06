@@ -1,4 +1,5 @@
 from __future__ import division
+from __future__ import absolute_import
 import six
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
@@ -27,10 +28,10 @@ from pygame import Color
 
 from lib import marker
 
-from model.color_word import ColorWord
-from model.color_word import TextList
-from model.stimulus import TextureStimulus
-from util.switcherator import Switcherator
+from .model.color_word import ColorWord
+from .model.color_word import TextList
+from .model.stimulus import TextureStimulus
+from .util.switcherator import Switcherator
 
 class VisionEggView(object):
     """ This class handles VisionEgg internals and the creation of

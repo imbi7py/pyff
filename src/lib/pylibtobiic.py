@@ -19,6 +19,7 @@
 # 	Initially based on v0.0.1
 # 	Updated to 0.0.3 (25/10/2010)
 
+from __future__ import absolute_import
 from xml.dom.minidom import Document
 from xml.dom.minidom import parseString
 import six

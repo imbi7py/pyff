@@ -1,9 +1,10 @@
 from __future__ import division
+from __future__ import absolute_import
 import sys
 import time
 
 
-from RecorderRemoteControl import *
+from .RecorderRemoteControl import *
                     
 if (len(sys.argv) > 1):    
     fcn = sys.argv[1]

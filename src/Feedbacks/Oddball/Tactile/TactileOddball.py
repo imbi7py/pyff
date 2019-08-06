@@ -20,6 +20,7 @@
 
 """Class for Tactile Oddball Experiments."""
 
+from __future__ import absolute_import
 import audiere
 
 from Feedbacks.Oddball import Oddball

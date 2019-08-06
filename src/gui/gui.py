@@ -7,6 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+from __future__ import absolute_import
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -164,4 +165,4 @@ class Ui_MainWindow(object):
         self.actionSendModified.setText(QtGui.QApplication.translate("MainWindow", "Send Modified", None, QtGui.QApplication.UnicodeUTF8))
         self.actionStop.setText(QtGui.QApplication.translate("MainWindow", "Stop", None, QtGui.QApplication.UnicodeUTF8))
 
-import icons_rc
+from . import icons_rc

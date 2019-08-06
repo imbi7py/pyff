@@ -28,6 +28,7 @@
 """Class for Visual Oddball Experiments using Vision Egg for Stimulus Presentation."""
 
 from __future__ import division
+from __future__ import absolute_import
 import pygame
 #import random
 import os

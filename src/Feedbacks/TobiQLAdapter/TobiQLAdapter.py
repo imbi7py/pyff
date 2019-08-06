@@ -1,4 +1,5 @@
 
+from __future__ import absolute_import
 from xml.dom.minidom import Document
 import socket
 import time

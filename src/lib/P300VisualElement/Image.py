@@ -32,11 +32,12 @@ instantiate a P300Text.
 
 """
 
+from __future__ import absolute_import
 import os.path
 
 import pygame
 
-from VisualElement import VisualElement
+from .VisualElement import VisualElement
 
 
 class Image(VisualElement):

@@ -17,8 +17,9 @@
 
 
 from __future__ import division
+from __future__ import absolute_import
 from Feedbacks.HexoSpeller.Utils import degrees_to_radians, rotate_phi_degrees_clockwise
-from GraphicComponentUtils import center_node, center_node_on_xyz, get_center_point, create_hexagon, create_side
+from .GraphicComponentUtils import center_node, center_node_on_xyz, get_center_point, create_hexagon, create_side
 from math import cos
 
 from direct.showbase.DirectObject import DirectObject

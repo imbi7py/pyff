@@ -21,6 +21,7 @@ An oddball paradigm. The count is entered via the keyboard at the end
 of the sequence and its sent as a trigger (incremented by 100).
 """
 from __future__ import division
+from __future__ import absolute_import
 import pygame
 import math
 import sys

@@ -16,7 +16,8 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 from __future__ import division
-from GraphicComponentUtils import create_line, create_side, get_bounding_width_height
+from __future__ import absolute_import
+from .GraphicComponentUtils import create_line, create_side, get_bounding_width_height
 
 from direct.showbase.DirectObject import DirectObject
 import direct.gui.OnscreenText as ost

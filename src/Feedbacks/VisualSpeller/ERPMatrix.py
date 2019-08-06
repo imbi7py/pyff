@@ -39,6 +39,7 @@ design in an ERP-based brain-computer interface. submitted
 
 
 from __future__ import division
+from __future__ import absolute_import
 import sys, math
 
 import pygame

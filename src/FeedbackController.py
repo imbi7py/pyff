@@ -21,13 +21,14 @@
 """Main Module for Feedback Controller executable."""
 
 
+from __future__ import absolute_import
 import logging
 import logging.handlers
 from optparse import OptionParser
 from multiprocessing import Process
 
-import GUI
-from lib.feedbackcontroller import FeedbackController
+from . import GUI
+from .lib.feedbackcontroller import FeedbackController
 
 
 def main():

@@ -1,5 +1,6 @@
 # 2009 Matthias Sebastian Treder
 
+from __future__ import absolute_import
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.eyetracker import EyeTracker
 

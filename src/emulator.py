@@ -21,15 +21,16 @@
 
 
 from __future__ import division
+from __future__ import absolute_import
 import cmd
 import threading
 import math
 import time
 
-from lib import bcinetwork
-from lib.bcinetwork import BciNetwork
-from lib import bcixml
-from lib.bcixml import BciSignal
+from .lib import bcinetwork
+from .lib.bcinetwork import BciNetwork
+from .lib import bcixml
+from .lib.bcixml import BciSignal
 import six
 
 

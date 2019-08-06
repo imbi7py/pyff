@@ -23,6 +23,7 @@
 
 """Class for visual oddball experiments with multiple possible stimuli per class."""
 
+from __future__ import absolute_import
 import pygame
 import os,random,time
 import glob

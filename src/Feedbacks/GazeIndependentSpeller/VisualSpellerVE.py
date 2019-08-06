@@ -26,6 +26,7 @@ Serves as base class for spellers such as CakeSpeller and CenterSpeller.
 
 
 from __future__ import division
+from __future__ import absolute_import
 from time import time, clock
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.P300Aux.P300Functions import random_flash_sequence
@@ -34,7 +35,7 @@ from VisionEgg.Core import Screen
 from VisionEgg.Core import Viewport
 from VisionEgg.FlowControl import Presentation
 from VisionEgg.MoreStimuli import Target2D, FilledCircle
-from VEShapes import  FilledHexagon
+from .VEShapes import  FilledHexagon
 from VisionEgg.Text import Text
 from VisionEgg.WrappedText import WrappedText
 from VisionEgg import logger
@@ -996,7 +997,7 @@ def animate_sigmoid2D(pos_start, pos_end, t, T, accel=10.):
             pos_start[1] + (pos_end[1]-pos_start[1])//(1. + NP.exp(-accel*(t//T) + 0.5*accel)))
 
 if __name__ == '__main__':
-    import CenterSpellerVE
+    from . import CenterSpellerVE
     fb = CenterSpellerVE.CenterSpellerVE()
     fb.on_init()
     fb.on_play()

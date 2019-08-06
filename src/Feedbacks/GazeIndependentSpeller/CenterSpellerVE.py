@@ -25,8 +25,9 @@ Treder MS, Schmidt NS, Blankertz B (2011). Gaze-independent brain-computer inter
 Requires VisionEgg
 '''
 from __future__ import division
-from VisualSpellerVE import VisualSpellerVE, animate_sigmoid, animate
-from VEShapes import FilledTriangle, FilledHexagon,FilledHourglass,FilledCross
+from __future__ import absolute_import
+from .VisualSpellerVE import VisualSpellerVE, animate_sigmoid, animate
+from .VEShapes import FilledTriangle, FilledHexagon,FilledHourglass,FilledCross
 from VisionEgg.MoreStimuli import FilledCircle, Target2D
 from VisionEgg.Text import Text
 from lib.P300Layout.CircularLayout import CircularLayout

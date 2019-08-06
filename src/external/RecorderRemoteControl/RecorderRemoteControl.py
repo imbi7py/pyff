@@ -20,6 +20,7 @@
 #               - File created
 
 
+from __future__ import absolute_import
 import time
 
 import win32com.client

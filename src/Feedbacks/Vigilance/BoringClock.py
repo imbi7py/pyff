@@ -33,6 +33,7 @@ Button press: 9
 """
 
 from __future__ import division
+from __future__ import absolute_import
 import sys,os,random,time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback

@@ -16,7 +16,8 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-from Feedback import Feedback
+from __future__ import absolute_import
+from .Feedback import Feedback
 
 
 class MainloopFeedback(Feedback):

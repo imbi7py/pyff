@@ -23,13 +23,14 @@ between the Feedback Controller and the Feedbacks
 """
 
 
+from __future__ import absolute_import
 import asyncore
 import asynchat
 import socket
 import cPickle as pickle
 import logging
 
-import bcixml
+from . import bcixml
 
 
 # delimiter for IPC messages.

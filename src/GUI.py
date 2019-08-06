@@ -18,14 +18,15 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import absolute_import
 import sys
 import logging
 
 from PyQt4 import QtCore, QtGui
-from gui.gui import Ui_MainWindow
+from .gui.gui import Ui_MainWindow
 
-from lib import bcinetwork
-from lib import bcixml
+from .lib import bcinetwork
+from .lib import bcixml
 import six
 
 

@@ -18,8 +18,9 @@
 
 #import Feedbacks.HexoSpeller.Utils as Utils
 from __future__ import division
+from __future__ import absolute_import
 from math import sqrt, acos
-from GraphicComponentUtils import create_side, create_triangle
+from .GraphicComponentUtils import create_side, create_triangle
 
 
 from direct.showbase.DirectObject import DirectObject

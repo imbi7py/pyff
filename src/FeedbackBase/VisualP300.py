@@ -21,9 +21,10 @@ VisualP300 provides a framework for running P300 experiments within pyff.
 
 
 from __future__ import division
+from __future__ import absolute_import
 import sys,os,random
 import pygame
-from MainloopFeedback import MainloopFeedback
+from .MainloopFeedback import MainloopFeedback
 from lib.P300VisualElement.Textbox import Textbox
 from lib.P300Aux.P300Functions import wait_for_key,show_message
 

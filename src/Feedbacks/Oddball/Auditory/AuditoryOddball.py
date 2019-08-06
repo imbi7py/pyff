@@ -20,6 +20,7 @@
 
 """Class for Auditory Oddball Experiments."""
 
+from __future__ import absolute_import
 import audiere
 
 from Feedbacks.Oddball import Oddball

@@ -32,9 +32,10 @@ t = P300Text(text="A",size=30)
 """
 
     
+from __future__ import absolute_import
 import pygame
 
-from VisualElement import VisualElement
+from .VisualElement import VisualElement
 
 
 class Text(VisualElement):

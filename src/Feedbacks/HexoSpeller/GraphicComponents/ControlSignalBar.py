@@ -17,6 +17,7 @@
 
 
 from __future__ import division
+from __future__ import absolute_import
 from direct.showbase.DirectObject import DirectObject
 import direct.gui.OnscreenText as ost
 from direct.task import Task
@@ -27,7 +28,7 @@ from pandac.PandaModules import Geom, GeomNode, GeomTrifans, GeomTristrips, Geom
 from direct.directbase import DirectStart
 global render, loader, base, taskMgr
 
-from GraphicComponentUtils import create_line, create_side
+from .GraphicComponentUtils import create_line, create_side
 
 class ControlSignalBar():
     

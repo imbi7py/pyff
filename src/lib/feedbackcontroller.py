@@ -16,6 +16,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import absolute_import
 import socket
 import logging
 import sys
@@ -25,7 +26,7 @@ from lib import bcinetwork
 from lib import bcixml
 from FeedbackBase.Feedback import Feedback
 from lib.feedbackprocesscontroller import FeedbackProcessController
-import ipc
+from . import ipc
 
 
 class FeedbackController(object):

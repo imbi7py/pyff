@@ -23,11 +23,12 @@ its states.
 
     
 from __future__ import division
+from __future__ import absolute_import
 import sys
 
 import pygame
 
-import Textrow
+from . import Textrow
 
 
 bgcolor = 0, 0, 0

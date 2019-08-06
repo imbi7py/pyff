@@ -16,6 +16,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+from __future__ import absolute_import
 from threading import Thread
 import logging
 import asyncore
@@ -23,7 +24,7 @@ from multiprocessing import Process, Event
 
 from lib.PluginController import PluginController
 import lib.PluginController
-import ipc
+from . import ipc
 
 
 class FeedbackProcess(Process):

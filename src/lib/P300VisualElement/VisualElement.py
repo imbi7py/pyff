@@ -22,6 +22,7 @@ Copyright (c) 2009  Matthias Sebastian Treder
 The base class for elements in a P300 speller 
 """
 
+from __future__ import absolute_import
 import random
 
 import pygame

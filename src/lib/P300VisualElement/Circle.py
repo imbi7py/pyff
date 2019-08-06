@@ -40,9 +40,10 @@ Circle objects have the following features:
     if true and circular layout is used, each letter is assigned a unique color provided in textcolor
 """
 from __future__ import division
+from __future__ import absolute_import
 import math
 import pygame
-from VisualElement import VisualElement
+from .VisualElement import VisualElement
 
 class Circle(VisualElement):
 

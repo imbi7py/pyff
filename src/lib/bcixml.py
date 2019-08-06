@@ -18,6 +18,7 @@
 """Encoding and decoding of bci-xml packages."""
 
 
+from __future__ import absolute_import
 import logging
 import sys
 from xml.dom import minidom, Node

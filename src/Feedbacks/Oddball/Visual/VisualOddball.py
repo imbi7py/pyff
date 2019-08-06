@@ -27,6 +27,7 @@
 """Class for Visual Oddball Experiments."""
 
 from __future__ import division
+from __future__ import absolute_import
 import pygame
 
 from Feedbacks.Oddball import Oddball
