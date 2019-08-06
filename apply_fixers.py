@@ -63,9 +63,11 @@ if __name__ == "__main__":
                 continue
             last_attempted_fixer = fixer_name
             apply_fixer(fixer_name)
+            last_completed_fixer = fixer_name
         # Apply the explicitly delayed fixers
         for fixer_name in fixer_names:
             last_attempted_fixer = fixer_name
             apply_fixer(fixer_name)
+            last_completed_fixer = fixer_name
     finally:
 
