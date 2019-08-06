@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from six.moves import map
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -68,13 +69,13 @@ class View(VisionEggView):
 
     def alphabet(self, alphabet):
         if self._show_alphabet:
-            colors = map(self._symbol_color, alphabet)
+            colors = list(map(self._symbol_color, alphabet))
             self._alphabet.set(text=alphabet, colors=colors)
 
     def word(self, word):
         """ Introduce a new word, optionally with colored symbols. """
         self._word.set_all(on=False)
-        colors = map(self._symbol_color, word)
+        colors = list(map(self._symbol_color, word))
         self.center_word(word, colors)
         self.present(self._present_word_time)
         self._word.set(text=word, colors=colors)
@@ -91,7 +92,7 @@ class View(VisionEggView):
 
     def eeg_letter(self, text, symbol, update_word=True):
         self._trigger(marker.FEEDBACK_START, wait=True)
-        colors = map(self._symbol_color, text)
+        colors = list(map(self._symbol_color, text))
         self.symbol(symbol, self._symbol_color(symbol))
         self.present(self._present_eeg_input_time)
         self._center_text.set_all(on=False)

@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from six.moves import map
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -36,7 +37,7 @@ class Frame(Stimulus):
     def __init__(self, position, size, line_width=2, **kw):
         Stimulus.__init__(self, **kw)
         ul = (position[0] - size[0] // 2., position[1])
-        add = lambda a, b: map(operator.add, a, b)
+        add = lambda a, b: list(map(operator.add, a, b))
         self._vertices = [[ul[0], ul[1], 0],
                           [ul[0] + size[0], ul[1], 0],
                           [ul[0] + size[0], ul[1] + size[1], 0],

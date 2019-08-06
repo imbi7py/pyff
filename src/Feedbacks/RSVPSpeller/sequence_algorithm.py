@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from six.moves import map
 __copyright__ = """ Copyright (c) 2010 Laura Acqualagna
 
 This program is free software; you can redistribute it and/or modify it under
@@ -20,7 +21,7 @@ import random
 
 class RSVP(object):
     def __init__(self, groups):
-        self.groups = map(list, groups)
+        self.groups = list(map(list, groups))
         self.alphabet = sum(self.groups, [])
     
     def color_algorithm(self,n_seq):

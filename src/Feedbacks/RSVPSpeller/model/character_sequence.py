@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from six.moves import map
 __copyright__ = """ Copyright (c) 2010 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -46,7 +47,7 @@ class CharacterSequence(list):
     def _create_burst_sequence(self):
         """ Insert redundant symbols into the character sequence. """
         make_burst = lambda b: self._new_redundance + b
-        bursts = map(make_burst, slices(self._sequence, self._burst_signi_len))
+        bursts = list(map(make_burst, slices(self._sequence, self._burst_signi_len)))
         self.burst_sequence = list(chain(*bursts))
 
     def _zip_colors(self):
@@ -54,7 +55,7 @@ class CharacterSequence(list):
         burst sequence, keep as a list of burst lists.
         """
         nsym = len(self.burst_sequence)
-        self._colors = map(self._positional_color, xrange(nsym))
+        self._colors = list(map(self._positional_color, xrange(nsym)))
         zipped = zip(self.burst_sequence, self._colors)
         self[:] = zipped
         self.bursts = slices(zipped, self._burst_len)
@@ -114,8 +115,8 @@ class CharacterSequenceFactory(object):
         main_seqs = [sum(main_bursts[i:i + 3], []) for i in
                      xrange(0, len(main_bursts), 3)]
         extra = self.extra_sequence
-        sequences = map(extra, pre) + map(self.sequence, main_seqs) + map(extra,
-                                                                         post)
+        sequences = list(map(extra, pre)) + list(map(self.sequence, main_seqs)) + list(map(extra,
+                                                                         post))
         return Sequences(sequences)
 
 class Sequences(list):

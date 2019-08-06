@@ -1,5 +1,6 @@
 from __future__ import division
 from __future__ import absolute_import
+from six.moves import map
 __copyright__ = """ Copyright (c) 2010-2012 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -154,7 +155,7 @@ class CircleSector(DisplayListStimulus):
         start, end = p.start, p.end
         if end < start:
             start -= 360.
-        start, end = map(numpy.deg2rad, (start, end))
+        start, end = list(map(numpy.deg2rad, (start, end)))
         frac = (end - start) // (2 * numpy.pi)
         num_triangles = float(p.num_triangles) * frac
         angles = numpy.linspace(start, end, num_triangles)

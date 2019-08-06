@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from six.moves import map
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -45,7 +46,7 @@ class Palette(object):
         alternating the specified colors.
         """
         if isinstance(color, list):
-            return map(self, color)
+            return list(map(self, color))
         elif isinstance(color, six.string_types):
             return self.symbol_color(color) if len(color) == 1 else \
                    Color(color).normalize()

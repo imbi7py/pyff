@@ -21,6 +21,7 @@ import sys
 import os
 import logging
 import six
+from six.moves import map
 
 
 def import_module_and_get_class(modname, classname):
@@ -42,7 +43,7 @@ class PluginController(object):
 
     def __init__(self, plugindirs, baseclass):
         self.logger = logging.getLogger("PluginController")
-        self.plugindirs = map(os.path.normpath, map(os.path.abspath, plugindirs))
+        self.plugindirs = list(map(os.path.normpath, list(map(os.path.abspath, plugindirs))))
         self.baseclass = baseclass
         self.availablePlugins = dict()
         self.oldModules = None
