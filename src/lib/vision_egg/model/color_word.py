@@ -45,7 +45,7 @@ class ColorWord(TextList):
         sizes = [self._symbol_size] * len(self.text)
         if self._target_index is not None:
             sizes[self._target_index] = self._target_size
-        for letter, size in izip(self.text, sizes):
+        for letter, size in zip(self.text, sizes):
             self.add(letter, size)
         self._set_colors()
 
@@ -73,5 +73,5 @@ class ColorWord(TextList):
         self.set_colors(colors)
 
     def _set_colors(self):
-        for color, symbol in izip(self._colors, self):
+        for color, symbol in zip(self._colors, self):
             symbol.set(color=color)
