@@ -449,7 +449,7 @@ class Feedback(object):
         Do not overwrite in derived classes unless you know what you're doing.
         """
         self._shouldQuit = False
-        while 1:
+        while True:
             self._playEvent.wait()
             if self._shouldQuit:
                 break

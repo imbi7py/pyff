@@ -546,7 +546,7 @@ class LibetClock(PygameFeedback):
         if not superimpose:
             self.draw_all()
 
-        if type(text) is list:
+        if isinstance(text, list):
             height = pygame.font.Font.get_linesize(font)
             top = -(2*len(text)-1)*height//2
             for t in range(len(text)):

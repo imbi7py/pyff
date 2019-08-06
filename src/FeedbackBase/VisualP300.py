@@ -438,7 +438,7 @@ class VisualP300(MainloopFeedback):
         adds them as one group
         """
         new_group = pygame.sprite.RenderUpdates()
-        if type(group) == int:
+        if isinstance(group, int):
             new_group.add(self.elements[group])
         else:
             for g in group:

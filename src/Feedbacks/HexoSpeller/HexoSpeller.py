@@ -176,7 +176,7 @@ class HexoSpeller(MainloopFeedback):
         
     def on_interaction_event(self, data):
         self.logger.debug("on_interaction_event") 
-        if type(data)==type({}):   
+        if isinstance(data, type({})):   
             # try to set the modified attributes
             for name in data.keys():
                 # if we have the attribute and the respective setter

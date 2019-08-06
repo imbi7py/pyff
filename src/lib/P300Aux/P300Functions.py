@@ -56,7 +56,7 @@ def wait_for_key():
     function waits for key input
     """   
     pygame.event.clear()            # Clear the old events
-    while 1:
+    while True:
         pygame.time.delay(100)
         for event in pygame.event.get():
             if event.type is (pygame.KEYDOWN):

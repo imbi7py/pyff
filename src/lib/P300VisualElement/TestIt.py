@@ -55,7 +55,7 @@ e.pos = (width // 2, height // 2)
 e.refresh()
 e.update(0)
 pos = 0
-while 1:
+while True:
     screen.blit(background, [0, 0])
     screen.blit(e.image, e.rect)
     pygame.display.flip()

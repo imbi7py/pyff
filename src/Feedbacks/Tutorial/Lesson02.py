@@ -53,7 +53,7 @@ class Lesson02(Feedback):
         
     def main_loop(self):
         i = 0
-        while 1:
+        while True:
             time.sleep(0.5)
             if self.pause:
                 print "Feedback Paused."

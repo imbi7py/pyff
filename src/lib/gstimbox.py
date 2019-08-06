@@ -211,9 +211,9 @@ class GStimbox:
 
         """
         num = len(port)
-        if type(port) != list:
+        if not isinstance(port, list):
             raise TypeError("Argument port must be a list.")
-        if type(mode) != list:
+        if not isinstance(mode, list):
             raise TypeError("Argument mode must be a list.")
         if num != len(mode):
             raise ValueError(
@@ -238,7 +238,7 @@ class GStimbox:
         eg. ``state = [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]``
 
         """
-        if type(state) != list:
+        if not isinstance(state, list):
             raise TypeError("Argument state must be a list.")
         if len(state) != 16:
             raise TypeError("Argument state must be of length 16.")
@@ -263,9 +263,9 @@ class GStimbox:
 
         """
         num = len(port)
-        if type(port) != list:
+        if not isinstance(port, list):
             raise TypeError("Argument port must be a list.")
-        if type(freq) != list:
+        if not isinstance(freq, list):
             raise TypeError("Argument freq must be a list.")
         if num != len(freq):
             raise ValueError(

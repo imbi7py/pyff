@@ -57,7 +57,7 @@ def copy_list(orig_list):
     """ Creates a shallow copy of the given list and all its sublists. """
     c_list = []
     for elem in orig_list:
-        if type(elem) == type([]):
+        if isinstance(elem, type([])):
             c_list.append(copy_list(elem))
         else:
             c_list.append(elem)

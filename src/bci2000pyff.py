@@ -168,7 +168,7 @@ def feedback_process_loop(fbmodule, classname, con):
 
 
 def feedback_ipc_loop(fb, con):
-    while 1:
+    while True:
         data = con.recv()
         logger.debug('Received %s message' % data)
         if data == 'quit':

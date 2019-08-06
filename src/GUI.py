@@ -341,7 +341,7 @@ class Entry(object):
         oldValue = self.value
         try:
             newValue = eval(value)
-            if self.type == type(newValue):
+            if isinstance(newValue, self.type):
                 self.value = newValue
         except:
             self.value = oldValue
