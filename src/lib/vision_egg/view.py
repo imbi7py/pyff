@@ -1,4 +1,5 @@
 from __future__ import division
+import six
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it
@@ -65,7 +66,7 @@ class VisionEggView(object):
 
     def update_parameters(self, **kwargs):
         """ Apply new parameters set from pyff. """
-        for k, v in kwargs.iteritems():
+        for k, v in six.iteritems(kwargs):
             setattr(self, '_' + k, v)
         if self._screen_acquired:
             self.reinit()

@@ -30,6 +30,7 @@ from lib import bcinetwork
 from lib.bcinetwork import BciNetwork
 from lib import bcixml
 from lib.bcixml import BciSignal
+import six
 
 
 class Emulator(cmd.Cmd):
@@ -114,7 +115,7 @@ class Emulator(cmd.Cmd):
 
     def do_status(self, line):
         """Get the status of the emulator."""
-        for var, val in self.__dict__.iteritems():
+        for var, val in six.iteritems(self.__dict__):
             print str(var), str(val)
 
 

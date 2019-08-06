@@ -24,6 +24,7 @@ from xml.dom import minidom, Node
 import json
 
 from lib import pylibtobiic
+import six
 
 
 XML_ROOT = "bci-signal"
@@ -451,7 +452,7 @@ class JsonEncoder(object):
 
         """
         d2 = dict()
-        for k, v in bcisignal.data.iteritems():
+        for k, v in six.iteritems(bcisignal.data):
             try:
                 json.dumps((k, v))
             except:

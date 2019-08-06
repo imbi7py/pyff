@@ -19,6 +19,7 @@
 import sys
 import os
 import logging
+import six
 
 
 def import_module_and_get_class(modname, classname):
@@ -64,7 +65,7 @@ class PluginController(object):
                     self.logger.info("Found feedbacks.list in %s" % root)
                     del dirs[:]
                     fbdict = self.load_feedback_list(root+os.path.sep+'feedbacks.list', plugindir)
-                    for fb, module in fbdict.iteritems():
+                    for fb, module in six.iteritems(fbdict):
                         self.availablePlugins[fb] = module
                     continue
 

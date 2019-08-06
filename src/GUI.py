@@ -26,6 +26,7 @@ from gui.gui import Ui_MainWindow
 
 from lib import bcinetwork
 from lib import bcixml
+import six
 
 
 NORMAL_COLOR = QtCore.Qt.black
@@ -107,7 +108,7 @@ class BciGui(QtGui.QMainWindow, Ui_MainWindow):
     def get(self):
         d = self.fc.get_variables()
         entries = []
-        for name, value in d.iteritems():
+        for name, value in six.iteritems(d):
             e = Entry(name, value)
             entries.append(e)
         # FIXME: this will clear the whole table and just put in the new
@@ -120,7 +121,7 @@ class BciGui(QtGui.QMainWindow, Ui_MainWindow):
         self.fc.send_init(feedback)
         d = self.fc.get_variables()
         entries = []
-        for name, value in d.iteritems():
+        for name, value in six.iteritems(d):
             e = Entry(name, value)
             entries.append(e)
         self.model.setElements(entries)

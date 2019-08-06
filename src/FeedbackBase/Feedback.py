@@ -29,6 +29,7 @@ import cPickle as pickle
 from threading import Event, Timer
 import socket
 import json
+import six
 
 
 class Feedback(object):
@@ -392,7 +393,7 @@ class Feedback(object):
         # must be pickable
         self.logger.debug("Preparing variables.")
         d = {}
-        for key, val in self.__dict__.iteritems():
+        for key, val in six.iteritems(self.__dict__):
             if key.startswith("_"):
                 continue
             try:
@@ -415,7 +416,7 @@ class Feedback(object):
         # the json pickler cannot pickle everything the python pickler can,
         # prune away the variables which are not pickable, to avoid exception
         var_clean = dict()
-        for k, v in self.__dict__.iteritems():
+        for k, v in six.iteritems(self.__dict__):
             if k.startswith("_"):
                 continue
             try:

@@ -25,6 +25,7 @@ The base class for elements in a P300 speller
 import random
 
 import pygame
+import six
 
 
 class VisualElement(pygame.sprite.Sprite):
@@ -93,5 +94,5 @@ class VisualElement(pygame.sprite.Sprite):
         features are allowed for each subclass are given in the description of the 
         subclass. 
         """
-        for key, value in features.iteritems():
+        for key, value in six.iteritems(features):
             self.states[nr][key] = value

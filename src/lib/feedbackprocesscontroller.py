@@ -143,5 +143,5 @@ class FeedbackProcessController(object):
         :returns: List of available feedbacks
 
         """
-        return self.pluginController.availablePlugins.keys()
+        return list(self.pluginController.availablePlugins.keys())
 
