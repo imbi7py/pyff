@@ -49,18 +49,23 @@ if __name__ == "__main__":
     fixer_names = sorted(all_fixer_names - set(_APPLY_LAST) - _DO_NOT_APPLY)
     applied = set()
     last_attempted_fixer = None
-    last_applied_fixer = None
+    last_completed_fixer = None
     try:
         # First apply all the fixers that don't need six
         for fixer_name in fixer_names:
+            last_attempted_fixer = fixer_name
             if apply_fixer(fixer_name, no_six=True):
                 applied.add(fixer_name)
+            last_completed_fixer = None
         # On the second pass, allow fixers that need six
         for fixer_name in fixer_names:
             if fixer_name in applied:
                 continue
+            last_attempted_fixer = fixer_name
             apply_fixer(fixer_name)
         # Apply the explicitly delayed fixers
         for fixer_name in fixer_names:
+            last_attempted_fixer = fixer_name
             apply_fixer(fixer_name)
     finally:
+
