@@ -34,7 +34,7 @@ class StroopFeedback(PygameFeedback.PygameFeedback):
 
         self.si = stroop_iterator(classes)
         self.timer = 0
-        self.current = self.si.next()
+        self.current = next(self.si)
 
 
     def play_tick(self):
@@ -42,7 +42,7 @@ class StroopFeedback(PygameFeedback.PygameFeedback):
         self.timer += self.elapsed
         if self.timer > 1000:
             self.timer = 0
-            self.current = self.si.next()
+            self.current = next(self.si)
 
 
     def pause_tick(self):

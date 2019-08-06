@@ -61,7 +61,7 @@ class Palette(object):
 
     def symbol_color(self, symbol):
         try:
-            index = (i for i, g in enumerate(self.groups) if symbol in g).next()
+            index = next((i for i, g in enumerate(self.groups) if symbol in g))
         except StopIteration:
             raise NoMatchingSymbolColor(symbol)
         return self(index)

@@ -168,7 +168,7 @@ class StimulusPainter(object):
     @property
     def _next_duration(self):
         try:
-            nxt = self._online_times.pop(0) or self._wait_times.next()
+            nxt = self._online_times.pop(0) or next(self._wait_times)
         except StopIteration:
             raise Exception('No specified stimulus times available!')
         return nxt(self._frame_transition) + self._suspended
@@ -191,7 +191,7 @@ class StimulusIterator(StimulusPainter):
 
     def _do_prepare(self):
         try:
-            nxt = self._prepare_func.next()
+            nxt = next(self._prepare_func)
             self._online_times.append(_stimulus_time(nxt, self._vsync))
             return True
         except StopIteration:

@@ -52,4 +52,4 @@ class Switcherator(object):
             self._flag.wait()
         if not self._flag:
             raise StopIteration()
-        return self._iter.next()
+        return next(self._iter)

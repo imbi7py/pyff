@@ -75,8 +75,8 @@ class CharacterSequenceFactory(object):
         self._target = target
         self._palette = palette
         try:
-            self._color_offset = (i for i, g in enumerate(self._palette.groups)
-                                  if self._target in g).next()
+            self._color_offset = next((i for i, g in enumerate(self._palette.groups)
+                                  if self._target in g))
         except StopIteration as e:
             self._color_offset = -1
         self._rsvp = RSVP(self._palette.groups)
