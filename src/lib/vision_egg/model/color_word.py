@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from six.moves import zip
 __copyright__ = """ Copyright (c) 2010-2011 Torsten Schmits
 
 This program is free software; you can redistribute it and/or modify it under
@@ -14,7 +15,7 @@ program; if not, see <http://www.gnu.org/licenses/>.
 
 """
 
-from itertools import izip
+
 from random import uniform
 import logging
 
