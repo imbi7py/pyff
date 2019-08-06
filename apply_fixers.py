@@ -48,6 +48,7 @@ if __name__ == "__main__":
     all_fixer_names = set(iter_available_fixers())
     fixer_names = sorted(all_fixer_names - set(_APPLY_LAST) - _DO_NOT_APPLY)
     applied = set()
+    last_fixer = None
     # First apply all the fixers that don't need six
     for fixer_name in fixer_names:
         if apply_fixer(fixer_name, no_six=True):
