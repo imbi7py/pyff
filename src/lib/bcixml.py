@@ -560,17 +560,17 @@ def main():
          "complex" : 1+0j,
          "string" : "foo",
          "list" : [1, 2, 3, 4, 5, 6],
-         "llist" : [[1], [[1],2], [[[1],[2]],[3]]],
+         "llist" : [[1], [[1], 2], [[[1], [2]], [3]]],
          "tuple" : (1, 2, 3, 4, 5, 6),
-         "ttuple" : ((1), ((1),2), (((1),(2)),(3))),
-         "set" : {1,2,3},
-         "frozenset" : frozenset([1,2,3,4,5]),
+         "ttuple" : ((1), ((1), 2), (((1), (2)), (3))),
+         "set" : {1, 2, 3},
+         "frozenset" : frozenset([1, 2, 3, 4, 5]),
          "dict" : {"foo" : 1, "bar" : 2, "baz" : 3},
          "ddict" : {"key" : "value", "d-in-" : {"foo" : 1, "bar" : 2, "baz" : 3}}
          }
     #d = dict()
     t = "interaction-signal"
-    c = [("start", {"foo" : 1}), ("stop", {1 : 2, "l" : [1,2,3]}), ("init", dict())]
+    c = [("start", {"foo" : 1}), ("stop", {1 : 2, "l" : [1, 2, 3]}), ("init", dict())]
 
     signal = BciSignal(d, c, t)
 

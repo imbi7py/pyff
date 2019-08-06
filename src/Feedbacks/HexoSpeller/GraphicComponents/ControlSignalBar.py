@@ -57,18 +57,18 @@ class ControlSignalBar():
         self.get_node_path().setScale(scale)
     
     def set_pos(self, x, y, z):
-        self.get_node_path().setPos(x,y,z)
+        self.get_node_path().setPos(x, y, z)
     
     def set_frame_color(self, r, g, b, alpha=1):
         """ Sets the color of the frame and the thresholds. """
-        self.frame_node_path.setColor(r,g,b,alpha)
+        self.frame_node_path.setColor(r, g, b, alpha)
     
     def set_frame_line_width(self, width):
         self.frame_node_path.setRenderModeThickness(width) 
         
     
     def set_bar_color(self, r, g, b, alpha=1):
-        self.bar_node_path.setColor(r,g,b,alpha)
+        self.bar_node_path.setColor(r, g, b, alpha)
         
     def set_bar_height(self, height):
         """ Sets the height of the bar to the given value. The given height should be between 0 and 1. """
@@ -77,7 +77,7 @@ class ControlSignalBar():
         while not reader.isAtEnd():
             v = reader.getData3f()
             if v[2] > 0:
-                writer.setData3f(v[0],v[1],height)
+                writer.setData3f(v[0], v[1], height)
             else:
                 writer.setData3f(v) # I have to call the writer setData method in any case 
                                         # so that its counter stays in sync with the reader's
@@ -93,7 +93,7 @@ class ControlSignalBar():
         writer = GeomVertexWriter(vdata, 'vertex')
         while not reader.isAtEnd():
             v = reader.getData3f()
-            writer.setData3f(v[0],v[1],t_value+self.padding)
+            writer.setData3f(v[0], v[1], t_value+self.padding)
                 
     def get_node_path(self):
         return self.root_node_path
@@ -136,12 +136,12 @@ def rotate(node_path, rotation_per_second, start_angle, task):
 
 if __name__ == "__main__":
     bar = ControlSignalBar()
-    bar.get_node_path().setPos(0,0,-0.5)
+    bar.get_node_path().setPos(0, 0, -0.5)
     #taskMgr.add(rotate, 'rotate', extraArgs=[bar.get_node_path(),0.1,0], appendTask=True)
 #    taskMgr.add(rotate, 'rotate', extraArgs=[hex_2.root_node_path,0.5,0], appendTask=True)
 
     base.disableMouse()
-    base.camera.setPos(0,-3,0)
+    base.camera.setPos(0, -3, 0)
 
 #    plight = PointLight('plight')
 #    plight.setColor(VBase4(1, 1, 1, 1))

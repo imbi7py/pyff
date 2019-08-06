@@ -28,7 +28,7 @@ from Feedbacks.Oddball import Oddball
 class AuditoryOddball(Oddball.Oddball):
     
     def init(self):        
-        super(AuditoryOddball,self).init()
+        super(AuditoryOddball, self).init()
         self.DIR_DEV = 'C:/stim_test/dev'    
         self.DIR_STD = 'C:/stim_test/std'
         self.stimuli = 'predefined'
@@ -36,7 +36,7 @@ class AuditoryOddball(Oddball.Oddball):
         self.au = audiere.open_device()  
         self.dev_perc = 0.3  
         
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file and returns it.
         """

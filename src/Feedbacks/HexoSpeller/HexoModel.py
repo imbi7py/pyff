@@ -33,7 +33,7 @@ class HexoModel():
     # constants
     # dictionary that contains IDs for each _state
     states = {
-              "do_nothing":0,
+              "do_nothing": 0,
               "arrow_rotation": 10,
               "arrow_growth": 20,
               "arrow_shrinkage": 30,
@@ -142,7 +142,7 @@ class HexoModel():
             phi = self.get_phi_degrees()
         if not self.is_in_range(phi, 0, 361):
             raise Exception("Value of phi is not between 0 and 360!")
-        for hex_idx, hex_angle in enumerate(range(0,360,60)):
+        for hex_idx, hex_angle in enumerate(range(0, 360, 60)):
             left = (hex_angle - 30)%360
             right = hex_angle + 30
             if self.is_in_range(phi, left, right):

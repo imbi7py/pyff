@@ -31,21 +31,21 @@ Triggers: 10,11,12... for the symbols
 from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
-import sys,os,random,time
+import sys, os, random, time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 
 class nback_verbal(MainloopFeedback):
     
     # Triggers
-    RUN_START, RUN_END = 252,253
-    COUNTDOWN_START, COUNTDOWN_END = 200,201
-    FALSCH , RICHTIG = 7,8      # Response markers
+    RUN_START, RUN_END = 252, 253
+    COUNTDOWN_START, COUNTDOWN_END = 200, 201
+    FALSCH, RICHTIG = 7, 8      # Response markers
     
     # States during running
     # First stimulus is shown, and after pre-response time
     # response is to be entered
-    COUNTDOWN, STIM, PRE_RESPONSE, RESPONSE = 1,2,3,4
+    COUNTDOWN, STIM, PRE_RESPONSE, RESPONSE = 1, 2, 3, 4
     
     # Antialising with the text
     ANTIALIAS = 1
@@ -65,15 +65,15 @@ class nback_verbal(MainloopFeedback):
         self.nCountdown = 1             # N of secs to count down
         self.auditoryFeedback = True       # Auditory feedback provided
         # Triggers
-        self.triggers = range(10,10+len(self.symbols)) # 10,11,12,...
+        self.triggers = range(10, 10+len(self.symbols)) # 10,11,12,...
         self.triggerAdd = 20            # If current symbol matches the nth back symbol, this number is added to the trigger
         # Auditory settings
         #self.auditoryFeedback = False   # If yes, gives a beep when a wrong response is given
         # Graphical settings
         self.bgcolor = 0, 0, 0
-        self.screenPos = [200,200,400,400]
+        self.screenPos = [200, 200, 400, 400]
         self.fullscreen = False
-        self.color = 255,255,255        # Color of symbol
+        self.color = 255, 255, 255        # Color of symbol
         self.size = 80                  # Size of symbol 
 
     def _init_pygame(self):
@@ -85,13 +85,13 @@ class nback_verbal(MainloopFeedback):
         if self.fullscreen: 
             #use opts = pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.FULLSCREEN to use doublebuffer and vertical sync
             opts = pygame.FULLSCREEN
-            self.screen = pygame.display.set_mode((self.screenPos[2],self.screenPos[3]),opts)
+            self.screen = pygame.display.set_mode((self.screenPos[2], self.screenPos[3]), opts)
         else: 
-            self.screen = pygame.display.set_mode((self.screenPos[2],self.screenPos[3]))
-        self.background = pygame.Surface((self.screenPos[2],self.screenPos[3])) 
+            self.screen = pygame.display.set_mode((self.screenPos[2], self.screenPos[3]))
+        self.background = pygame.Surface((self.screenPos[2], self.screenPos[3])) 
         self.background.fill(self.bgcolor)
-        self.background_rect = self.background.get_rect(center = (self.screenPos[2]//2,self.screenPos[3]//2) )
-        self.screen.blit(self.background,self.background_rect)
+        self.background_rect = self.background.get_rect(center = (self.screenPos[2]//2, self.screenPos[3]//2) )
+        self.screen.blit(self.background, self.background_rect)
         self.clock = pygame.time.Clock()
         #pygame.mouse.set_visible(False)
         self.font = pygame.font.Font(None, self.size)
@@ -108,7 +108,7 @@ class nback_verbal(MainloopFeedback):
         self.nSym = len(self.symbols)   # Number of symbols
         self.nStim = int(self.nSym*self.nOccur)  # Total number of stimuli
         self.sequence = [None]*self.nStim    # Sequence of presented symbols
-        self.screenCenter = (self.screenPos[2]//2,self.screenPos[3]//2)
+        self.screenCenter = (self.screenPos[2]//2, self.screenPos[3]//2)
         # States
         self.state = self.COUNTDOWN
         self.state_finished = False
@@ -152,9 +152,9 @@ class nback_verbal(MainloopFeedback):
             self.clock.tick(self.fps)
 
     def pause_tick(self):
-            txt = self.font.render("PAUSE",self.ANTIALIAS,self.color)
+            txt = self.font.render("PAUSE", self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.clock.tick(self.fps)
@@ -164,25 +164,25 @@ class nback_verbal(MainloopFeedback):
             self.send_parallel(self.COUNTDOWN_END)
             # Finished counting, draw background
             self.state_finished = True
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
         elif self.currentTick % self.fps == 0:
             if self.currentTick == 0:        # the very first tick
                 self.send_parallel(self.COUNTDOWN_START)
             # New number
             count = self.nCountdown - (self.currentTick+1)//self.fps
-            txt = self.font.render(str(count),self.ANTIALIAS,self.color)
+            txt = self.font.render(str(count), self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.currentTick += 1
         else:
             # Keep drawing the same number
             count = self.nCountdown - self.currentTick//self.fps
-            txt = self.font.render(str(count),self.ANTIALIAS,self.color)
+            txt = self.font.render(str(count), self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.currentTick += 1
@@ -202,23 +202,23 @@ class nback_verbal(MainloopFeedback):
             self.send_parallel(trigger)
             # Draw symbol
             symbol = self.sequence[self.currentStim] 
-            txt = self.font.render(symbol,self.ANTIALIAS,self.color)
+            txt = self.font.render(symbol, self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.currentTick += 1
         elif self.currentTick == self.stimTime:
             # Finished
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
             self.state_finished = True
         else:
             # Draw symbol
             symbol = self.sequence[self.currentStim] 
-            txt = self.font.render(symbol,self.ANTIALIAS,self.color)
+            txt = self.font.render(symbol, self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.currentTick += 1
@@ -226,12 +226,12 @@ class nback_verbal(MainloopFeedback):
     def pre_response(self):
         if self.currentTick == self.preResponseTime:
             # Finished
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
             self.state_finished = True
         else:
             # Draw background
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
             self.currentTick += 1
     
@@ -239,7 +239,7 @@ class nback_verbal(MainloopFeedback):
         """ Time window within which response is to be given """
         if self.currentTick == self.responseTime:
             # Finished
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
             self.state_finished = True
             self.currentStim += 1
@@ -251,7 +251,7 @@ class nback_verbal(MainloopFeedback):
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.on_stop()
-                    elif event.key in (pygame.K_KP1,pygame.K_KP2) and not self.responseGiven:
+                    elif event.key in (pygame.K_KP1, pygame.K_KP2) and not self.responseGiven:
                         if self.currentStim >= self.n:   # After the first n stimuli: Waiting for responses
                             # Process button press                    
                             c = self.currentStim
@@ -278,7 +278,7 @@ class nback_verbal(MainloopFeedback):
                     self.responseGiven = 1
                         
             # Draw background
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
             self.currentTick += 1
 
@@ -304,7 +304,7 @@ class nback_verbal(MainloopFeedback):
                     print("Error: Could not place all n-back pairs")
                     return
                 # Pick a random element out of the indices
-                ii = idx[random.randint(0,len(idx)-1)]
+                ii = idx[random.randint(0, len(idx)-1)]
                 # Set pair
                 self.sequence[ii] = sym
                 self.sequence[ii+self.n] = sym
@@ -326,9 +326,9 @@ class nback_verbal(MainloopFeedback):
         """
         pygame.event.get()
         if not pygame.key.get_focused():
-            txt = self.font.render("Click to start",self.ANTIALIAS,self.color)
+            txt = self.font.render("Click to start", self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             return False

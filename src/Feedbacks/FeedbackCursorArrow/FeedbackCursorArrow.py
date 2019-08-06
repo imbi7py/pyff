@@ -123,18 +123,18 @@ class FeedbackCursorArrow(PygameFeedback):
         self.showsPause, self.showsShortPause = False, False
         self.showsHitMiss, self.showsGameover = False, False
 
-        self.elapsed, self.trialElapsed, self.countdownElapsed = 0,0,0
-        self.hitMissElapsed, self.shortPauseElapsed, self.indicateGoalElapsed = 0,0,0
+        self.elapsed, self.trialElapsed, self.countdownElapsed = 0, 0, 0
+        self.hitMissElapsed, self.shortPauseElapsed, self.indicateGoalElapsed = 0, 0, 0
 
         self.completedTrials = 0
 
         self.f = 0
-        self.hitMiss = [0,0]
+        self.hitMiss = [0, 0]
         self.resized = False
         self.pos = 0
         self.targetDirection = 0
 
-        self.arrowPointlist = [(.5,0), (.5,.33), (1,.33), (1,.66), (.5,.66), (.5,1), (0,.5)]
+        self.arrowPointlist = [(.5, 0), (.5, .33), (1, .33), (1, .66), (.5, .66), (.5, 1), (0, .5)]
         self.arrowColor = (127, 127, 127)
         self.borderColor = self.arrowColor
         self.backgroundColor = (64, 64, 64)
@@ -142,11 +142,11 @@ class FeedbackCursorArrow(PygameFeedback):
         self.fontColor = self.cursorColor
         self.countdownColor = (237, 100, 148)
         self.punchLineColor = self.cursorColor
-        self.punchLineColorImpr = (100, 200 , 100)  # if punchline is improved
+        self.punchLineColorImpr = (100, 200, 100)  # if punchline is improved
 
         self.punchlineThickness = 5   # in pixels
         self.borderWidthRatio = 0.4     # in pixels
-        self.punchlinePos1, self.punchlinePos2 = 0,0
+        self.punchlinePos1, self.punchlinePos2 = 0, 0
 
         #=============
         # NOTE: only one of the following variables should be True
@@ -440,9 +440,9 @@ class FeedbackCursorArrow(PygameFeedback):
         elif direction==self.RIGHT:
             return punchline.get_rect(midtop=(self.screenWidth//2+newpos, 0))
         elif direction==self.UP:
-            return punchline.get_rect(midleft=(self.borderRect.left,self.screenHeight//2-newpos))
+            return punchline.get_rect(midleft=(self.borderRect.left, self.screenHeight//2-newpos))
         elif direction==self.DOWN:
-            return punchline.get_rect(midleft=(self.borderRect.left,self.screenHeight//2+newpos))
+            return punchline.get_rect(midleft=(self.borderRect.left, self.screenHeight//2+newpos))
 
     def reset_punchline_color(self):
         self.punchline1.fill(self.punchLineColor)
@@ -458,10 +458,10 @@ class FeedbackCursorArrow(PygameFeedback):
             self.direction = self.availableDirections[1]
         border = self.borderRect.width//2
         self.pos = min(border, max(-border, self.pos));
-        arrowPos = { self.LEFT  : (-abs(self.pos),0),
-                     self.RIGHT : (abs(self.pos),0),
-                     self.DOWN  : (0,abs(self.pos)),
-                     self.UP    : (0,-abs(self.pos))
+        arrowPos = { self.LEFT  : (-abs(self.pos), 0),
+                     self.RIGHT : (abs(self.pos), 0),
+                     self.DOWN  : (0, abs(self.pos)),
+                     self.UP    : (0, -abs(self.pos))
                    }[self.direction]
         self.cursorRect.move_ip(arrowPos)
 
@@ -524,14 +524,14 @@ class FeedbackCursorArrow(PygameFeedback):
         scale = self.size // 5
         self.cursor = pygame.Surface((scale, scale))
         self.cursorRect = self.cursor.get_rect(center=self.screen.get_rect().center)
-        self.cursor.set_colorkey((0,0,0))
-        pygame.draw.line(self.cursor, self.cursorColor, (0,scale//2),(scale,scale//2), 10)
-        pygame.draw.line(self.cursor, self.cursorColor, (scale//2,0),(scale//2,scale), 10)
+        self.cursor.set_colorkey((0, 0, 0))
+        pygame.draw.line(self.cursor, self.cursorColor, (0, scale//2), (scale, scale//2), 10)
+        pygame.draw.line(self.cursor, self.cursorColor, (scale//2, 0), (scale//2, scale), 10)
 
         # background + border
         self.background = pygame.Surface((self.screen.get_width(), self.screen.get_height()))
         self.backgroundRect = self.background.get_rect(center=self.screen.get_rect().center)
-        self.background.fill((0,0,0))
+        self.background.fill((0, 0, 0))
         self.border = pygame.Surface((self.size, self.size))
         self.border.fill(self.borderColor)
         self.borderRect = self.border.get_rect(center=self.screen.get_rect().center)

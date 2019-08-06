@@ -29,7 +29,7 @@ class Config(object):
         self.symbol_colors = ['red', 'white', 'blue', 'green', 'black']
         self.words = ['LUXUS', 'WINKT', 'FJORD', 'HYBRID', 'SPHINX', 'QUARZ',
                       'VODKA', 'YACHT', 'GEBOT', 'MEMME']
-        self.color_groups = ['fRyGk&lt;', 'pJUX!E', 'iSwc-N','TBMqAH','LdvOz.']
+        self.color_groups = ['fRyGk&lt;', 'pJUX!E', 'iSwc-N', 'TBMqAH', 'LdvOz.']
         self.nonalpha_trigger = [['-', 57], ['.', 58], ['!', 59], ['<', 60]]
         #self.meaningless = '*+&%?;'
         self.meaningless = ''

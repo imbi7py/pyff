@@ -33,23 +33,23 @@ from lib.P300VisualElement.Textrow import Textrow
 class P300_Rectangle(VisualOddball.VisualOddball):
     
     def init(self):
-        super(P300_Rectangle,self).init()
+        super(P300_Rectangle, self).init()
         self.dev_perc = 0.2
         self.nStim = 5
         self.dd_dist = 2
         self.response = 'none'
         self.promptCount = False                # If yes, asks to type in a count in the end
         self.give_feedback = False
-        self.feedback_duration, self.beforestim_ival = 0, [0,0]
+        self.feedback_duration, self.beforestim_ival = 0, [0, 0]
         self.stim_duration = 1500
         self.responsetime_duration = 0     
-        self.backgroundColor = (50,50,50)
-        self.within_dev_perc = [0.5,0.5]#[0.5, 0.5]  # sum must be 1
-        self.within_std_perc = [1//3,1//3,1//3]  # sum must be 1
+        self.backgroundColor = (50, 50, 50)
+        self.within_dev_perc = [0.5, 0.5]#[0.5, 0.5]  # sum must be 1
+        self.within_std_perc = [1//3, 1//3, 1//3]  # sum must be 1
         self.userresp = ''
-        self.size = (self.screen_pos[-1]*2//3,self.screen_pos[-1]//10) #moved here
+        self.size = (self.screen_pos[-1]*2//3, self.screen_pos[-1]//10) #moved here
         
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file.
         """
@@ -65,7 +65,7 @@ class P300_Rectangle(VisualOddball.VisualOddball):
         std1 = pygame.Surface(self.size)
         std2 = pygame.Surface(self.size)
         std3 = pygame.Surface(self.size)
-        red, orange, blue, yellow, grey, green = (255,0,0), (255,100,0), (0,0,255), (255,255,0) , (150,150,150), (0,255,0)
+        red, orange, blue, yellow, grey, green = (255, 0, 0), (255, 100, 0), (0, 0, 255), (255, 255, 0), (150, 150, 150), (0, 255, 0)
         dev1.fill(red)
         dev2.fill(yellow)
         std1.fill(blue)
@@ -74,7 +74,7 @@ class P300_Rectangle(VisualOddball.VisualOddball):
         #std4.fill(green)
         #self.STANDARD = [10,11]
         #self.DEVIANT = [30, 31]
-        return [std1,std2,std3], [dev1,dev2]
+        return [std1, std2, std3], [dev1, dev2]
 
         
     def start_stimulus(self, stim):
@@ -131,7 +131,7 @@ class P300_Rectangle(VisualOddball.VisualOddball):
         pygame.quit()   
 
     def prompt_count(self):
-        self.countrow = Textrow(text="", pos=self.screen.get_rect().center,textsize=60, color=(150, 150, 255), size=(100, 60), edgecolor=(255, 255, 255), antialias=True, colorkey=(0, 0, 0))
+        self.countrow = Textrow(text="", pos=self.screen.get_rect().center, textsize=60, color=(150, 150, 255), size=(100, 60), edgecolor=(255, 255, 255), antialias=True, colorkey=(0, 0, 0))
         pygame.event.clear()
         text, ready = "", False
         while not ready:
@@ -141,16 +141,16 @@ class P300_Rectangle(VisualOddball.VisualOddball):
                     if k == pygame.K_BACKSPACE:
                         if len(text) > 0: text = text[0: - 1]   # Delete last number
                     elif len(text) < 2:
-                        if k in (pygame.K_0,pygame.K_KP0): text = text + "0"
-                        elif k in (pygame.K_1,pygame.K_KP1): text = text + "1"
-                        elif k in (pygame.K_2,pygame.K_KP2): text = text + "2"
-                        elif k in (pygame.K_3,pygame.K_KP3): text = text + "3"
-                        elif k in (pygame.K_4,pygame.K_KP4): text = text + "4"
-                        elif k in (pygame.K_5,pygame.K_KP5): text = text + "5"
-                        elif k in (pygame.K_6,pygame.K_KP6): text = text + "6"
-                        elif k in (pygame.K_7,pygame.K_KP7): text = text + "7"
-                        elif k in (pygame.K_8,pygame.K_KP8): text = text + "8"
-                        elif k in (pygame.K_9,pygame.K_KP9): text = text + "9"
+                        if k in (pygame.K_0, pygame.K_KP0): text = text + "0"
+                        elif k in (pygame.K_1, pygame.K_KP1): text = text + "1"
+                        elif k in (pygame.K_2, pygame.K_KP2): text = text + "2"
+                        elif k in (pygame.K_3, pygame.K_KP3): text = text + "3"
+                        elif k in (pygame.K_4, pygame.K_KP4): text = text + "4"
+                        elif k in (pygame.K_5, pygame.K_KP5): text = text + "5"
+                        elif k in (pygame.K_6, pygame.K_KP6): text = text + "6"
+                        elif k in (pygame.K_7, pygame.K_KP7): text = text + "7"
+                        elif k in (pygame.K_8, pygame.K_KP8): text = text + "8"
+                        elif k in (pygame.K_9, pygame.K_KP9): text = text + "9"
                     elif k == pygame.K_RETURN: ready = True
             self.countrow.text = text
             self.countrow.refresh()

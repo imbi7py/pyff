@@ -37,12 +37,12 @@ class MovingRhombGL(Feedback):
         self.rhomb_right_size = 0.7
         self.rhomb_radius = 1.0
         self.rhomb_n = 16
-        self.rhomb_color1 = (1,0,0,1)
-        self.rhomb_color2 = (1,1,1,1)
-        self.rhomb_speed_xyz = (0.05, 0.1,0)
+        self.rhomb_color1 = (1, 0, 0, 1)
+        self.rhomb_color2 = (1, 1, 1, 1)
+        self.rhomb_speed_xyz = (0.05, 0.1, 0)
         
         # camera and light
-        self.light_xyz = (0,0,50)
+        self.light_xyz = (0, 0, 50)
         self.camera_z = 15
         self.camera_fov = 100
 
@@ -83,15 +83,15 @@ class MovingRhombGL(Feedback):
         centerVerticesLeft = []
         centerVerticesRight = []
         for i in range(self.rhomb_n):
-            l = soya.Vertex(rhomb_world,self.rhomb_radius * math.sin(2.0 * math.pi * i // self.rhomb_n),0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i // self.rhomb_n))
-            r = soya.Vertex(rhomb_world,self.rhomb_radius * math.sin(2.0 * math.pi * i // self.rhomb_n),0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i // self.rhomb_n))
+            l = soya.Vertex(rhomb_world, self.rhomb_radius * math.sin(2.0 * math.pi * i // self.rhomb_n), 0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i // self.rhomb_n))
+            r = soya.Vertex(rhomb_world, self.rhomb_radius * math.sin(2.0 * math.pi * i // self.rhomb_n), 0.0, self.rhomb_radius * math.cos(2.0 * math.pi * i // self.rhomb_n))
             l.diffuse = self.rhomb_color1
             r.diffuse = self.rhomb_color2
             centerVerticesLeft.append(l)
             centerVerticesRight.append(r)
         for i in range(self.rhomb_n):
-            leftVertex = soya.Vertex(rhomb_world, 0.0,-self.rhomb_left_size, 0.0)
-            rightVertex = soya.Vertex(rhomb_world, 0.0,self.rhomb_right_size, 0.0)
+            leftVertex = soya.Vertex(rhomb_world, 0.0, -self.rhomb_left_size, 0.0)
+            rightVertex = soya.Vertex(rhomb_world, 0.0, self.rhomb_right_size, 0.0)
             leftVertex.diffuse = self.rhomb_color1
             rightVertex.diffuse = self.rhomb_color2
             f = soya.Face(rhomb_world, [leftVertex, centerVerticesLeft[(i+1)%self.rhomb_n], centerVerticesLeft[i]])
@@ -222,7 +222,7 @@ class MovingRotatingBody(soya.Body):
         current = self.current
         proposed = direction
         
-        xyz = [0,0,0]    
+        xyz = [0, 0, 0]    
         if current == NEUTRAL:
             if proposed == NEUTRAL:
                 xyz = [0.0, 0.0, 0.0]

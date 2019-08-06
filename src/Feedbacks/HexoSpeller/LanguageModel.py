@@ -43,7 +43,7 @@ class LanguageModel():
         
         
     def load_mat_file(self):
-        f = open(self.file_name,'r')
+        f = open(self.file_name, 'r')
         self.file_content = pickle.load(f)
     
     def create_symbol_list(self):
@@ -95,9 +95,9 @@ class LanguageModel():
         tables = squeeze(tables)
         vec = squeeze(array(tables[0]))
         n_tables.append(vec // float(vec.sum()))
-        for i in range(1,len(tables)):
+        for i in range(1, len(tables)):
             M = tables[i]
-            M = M // outer(ones(self.nr_chars), sum(M,0))
+            M = M // outer(ones(self.nr_chars), sum(M, 0))
             n_tables.append(M)
         return n_tables
         
@@ -120,7 +120,7 @@ class LanguageModel():
             # then we can't make a prediction based on it, hence we use the priors only
             hp = self.head_prob[0]
         else:
-            hp = self.head_prob[word_length][:,index]
+            hp = self.head_prob[word_length][:, index]
         self.hp = hp
         # partial predictive match based on the k previous letters, with k being either self.n_pred or less if the word is too short
         k = min(word_length, self.n_pred)
@@ -135,7 +135,7 @@ class LanguageModel():
             # the k_prev_letter combination could not be found in the table
             pp = self.pred_prob[0]
         else:
-            pp = self.pred_prob[k+1][:,index]
+            pp = self.pred_prob[k+1][:, index]
         self.pp = pp
         hf = self.head_factors[min(word_length, len(self.head_factors)-1)]
         prob = hp*hf + pp*(1-hf)
@@ -172,7 +172,7 @@ class LanguageModel():
         next letter. """
         idx = 0
         max_prob_value = -1
-        for i,prob_sub_list in enumerate(self.probs_list):
+        for i, prob_sub_list in enumerate(self.probs_list):
             sub_list_max = Utils.max_with_idx(prob_sub_list)[0]
             if sub_list_max > max_prob_value:
                 max_prob_value = sub_list_max
@@ -214,10 +214,10 @@ if __name__ == "__main__":
     to_be_spelled = 'ICH_BIN'
     to_be_spelled = 'BERLIN'
     word = ''
-    for i,letter in enumerate(to_be_spelled):
+    for i, letter in enumerate(to_be_spelled):
         probs = lm.get_probabilities(word)
         print(lm.update_symbol_list_sorting(word))
-        p.subplot(len(to_be_spelled),1, i+1)
+        p.subplot(len(to_be_spelled), 1, i+1)
         p.plot(probs)
         p.plot(lm.hp)
         p.plot(lm.pp)

@@ -114,16 +114,16 @@ class LibetClock(PygameFeedback):
         self.showsPause, self.showsShortPause = False, False
         self.showsHitMiss, self.showsGameover = False, False
 
-        self.elapsed, self.trialElapsed, self.countdownElapsed, self.redClockElapsed = 0,0,0,0
-        self.shortPauseElapsed, self.trialSAElapsed, self.endOfTrialElapsed = 0,0,0
+        self.elapsed, self.trialElapsed, self.countdownElapsed, self.redClockElapsed = 0, 0, 0, 0
+        self.shortPauseElapsed, self.trialSAElapsed, self.endOfTrialElapsed = 0, 0, 0
 
         self.f = 0
-        self.hitMiss = [0,0]
+        self.hitMiss = [0, 0]
         self.it = 0
 
-        self.backgroundColor = (64,64,100)
-        self.clockColor = (50,50,200)
-        self.redClockColor = (200,0,0)
+        self.backgroundColor = (64, 64, 100)
+        self.clockColor = (50, 50, 200)
+        self.redClockColor = (200, 0, 0)
         self.fontColor = (237, 100, 148)
         self.fb_color_good = (0, 180, 0)
         self.fb_color_bad = (200, 0, 0)
@@ -188,7 +188,7 @@ class LibetClock(PygameFeedback):
             self.start_animation = False
             self.trialSAElapsed = 0
         else:
-            angle = max(90,90+(self.arcAngle-90) * (1.0*(self.SADuration-self.trialSAElapsed)//self.SADuration))
+            angle = max(90, 90+(self.arcAngle-90) * (1.0*(self.SADuration-self.trialSAElapsed)//self.SADuration))
             self.arc.fill(self.backgroundColor)
             self.arcRect.topleft = self.screen.get_rect().topleft
             pygame.draw.arc(self.arc, self.arcColor, self.arcRect, math.radians(90), math.radians(angle), self.arcWidth)
@@ -214,7 +214,7 @@ class LibetClock(PygameFeedback):
             self.classifier_log.append(list())
             self.cls_evolution_log.append(list())
             self.mrk_log = True
-            pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
+            pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2, self.diameter//2), self.diameter//2)
             self.firstTickOfTrial = False
             self.redClock = False
             self.redClockElapsed = 0
@@ -244,7 +244,7 @@ class LibetClock(PygameFeedback):
         # Teste ob zeit fuer alten Trial abgelaufen ist
         if self.trialElapsed >= self.durationPerTrial:
                 self.trialElapsed = 0
-                pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
+                pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2, self.diameter//2), self.diameter//2)
                 self.arcRect.topleft = self.screen.get_rect().topleft
                 pygame.draw.arc(self.arc, self.arcColor, self.arcRect, math.radians(90), math.radians(self.arcAngle), self.arcWidth)
                 self.arcRect.center = self.screencenter
@@ -255,7 +255,7 @@ class LibetClock(PygameFeedback):
         if self.redClock:
             self.redClockElapsed += self.elapsed
             if self.redClockDuration<self.redClockElapsed:
-                pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
+                pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2, self.diameter//2), self.diameter//2)
                 self.redClockElapsed = 0
                 self.redClock = False
 
@@ -296,7 +296,7 @@ class LibetClock(PygameFeedback):
                         raise Exception('String option given by ''self.showClassifier'' unknown.')
 
                     if f <= self.threshold:
-                        pygame.draw.circle(self.clock, self.redClockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
+                        pygame.draw.circle(self.clock, self.redClockColor, (self.diameter//2, self.diameter//2), self.diameter//2)
                         self.redClock = True
                         self.send_parallel(self.CLASSIFIER_MOVE)
                         self.classifierTime = self.trialElapsed
@@ -323,7 +323,7 @@ class LibetClock(PygameFeedback):
                 self.target = 0
         self.draw_all_rotating()
 
-    def is_within_cls_interval(self,t):
+    def is_within_cls_interval(self, t):
         lastRevolution = self.trialElapsed>self.revolutionTime*(self.nRev-1)-self.quarterTime
         return t>self.cls_time and self.durationPerTrial-self.quarterTime>self.trialElapsed and lastRevolution
 
@@ -585,25 +585,25 @@ class LibetClock(PygameFeedback):
         #self.clock = pygame.Surface((self.diameter,self.diameter))
         #self.clock = pygame.transform.scale(img, (self.diameter,self.diameter))
 
-        self.clock = pygame.Surface((self.diameter,self.diameter))
-        self.clock.set_colorkey((0,0,0))
-        pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2,self.diameter//2), self.diameter//2)
+        self.clock = pygame.Surface((self.diameter, self.diameter))
+        self.clock.set_colorkey((0, 0, 0))
+        pygame.draw.circle(self.clock, self.clockColor, (self.diameter//2, self.diameter//2), self.diameter//2)
         self.clockRect = self.clock.get_rect(center=self.screencenter, size=(self.diameter, self.diameter))
 
         # fixation points
         fp_dia = int(self.diameter//40)*2
-        fp_color = (1,1,1)
-        self.fixpoint_pos = [self.clockRect.midtop,self.clockRect.midleft,self.clockRect.midbottom,self.clockRect.midright]
+        fp_color = (1, 1, 1)
+        self.fixpoint_pos = [self.clockRect.midtop, self.clockRect.midleft, self.clockRect.midbottom, self.clockRect.midright]
         self.fixpoints = []
         self.fpRect = []
         for fp in range(len(self.fixpoint_pos)):
-            self.fixpoints.append(pygame.Surface((fp_dia,fp_dia)))
-            self.fixpoints[fp].set_colorkey((0,0,0))
-            pygame.draw.circle(self.fixpoints[fp], fp_color, (fp_dia//2,fp_dia//2), fp_dia//2)
+            self.fixpoints.append(pygame.Surface((fp_dia, fp_dia)))
+            self.fixpoints[fp].set_colorkey((0, 0, 0))
+            pygame.draw.circle(self.fixpoints[fp], fp_color, (fp_dia//2, fp_dia//2), fp_dia//2)
             self.fpRect.append(self.fixpoints[fp].get_rect(center=self.fixpoint_pos[fp], size=(fp_dia, fp_dia)))
 
         # init clock dial
-        dialColor = (0,0,0)
+        dialColor = (0, 0, 0)
         dialThickness = 2
         self.dialVertical = pygame.Surface((dialThickness, self.diameter))
         self.dialVertical.fill(dialColor)
@@ -619,10 +619,10 @@ class LibetClock(PygameFeedback):
         self.clockhand =  pygame.Surface((self.diameter, self.diameter))
         self.clockhand.fill(self.backgroundColor)
         self.clockhand.set_colorkey(self.backgroundColor)
-        pygame.draw.line(self.clockhand, (200,200,200), (self.diameter//2,0), (self.diameter//2, self.diameter//2), dialThickness*2)
+        pygame.draw.line(self.clockhand, (200, 200, 200), (self.diameter//2, 0), (self.diameter//2, self.diameter//2), dialThickness*2)
         self.clockhandRect = self.clockhand.get_rect(center=self.screencenter)
         #self.hideRect = pygame.Rect(self.clockhandRect.midleft,(self.clockhandRect.width, self.clockhandRect.height/2))
-        self.drawRect = pygame.Rect(self.clockhandRect.topleft,(self.clockhandRect.width,self.clockhandRect.height//2))
+        self.drawRect = pygame.Rect(self.clockhandRect.topleft, (self.clockhandRect.width, self.clockhandRect.height//2))
 
         #self.hideRect = pygame.Rect(0,0,self.clockhandRect.width, self.clockhandRect.height/2)
         #self.hideRect.midtop = self.screencenter
@@ -630,12 +630,12 @@ class LibetClock(PygameFeedback):
         # init start animation arc
         self.arcAngle = 451
         self.arcWidth = 5
-        self.arcColor = (200,200,250)
+        self.arcColor = (200, 200, 250)
         self.diarc = self.diameter+self.arcWidth*2
         self.arc = pygame.Surface((self.diarc, self.diarc))
-        self.arc.set_colorkey((0,0,0))
+        self.arc.set_colorkey((0, 0, 0))
         p = self.screen.get_rect().topleft
-        self.arcRect = self.arc.get_rect(center=(p[0]+self.diarc//2,p[1]+self.diarc//2))
+        self.arcRect = self.arc.get_rect(center=(p[0]+self.diarc//2, p[1]+self.diarc//2))
         pygame.draw.arc(self.arc, self.arcColor, self.arcRect, math.radians(90), math.radians(self.arcAngle), self.arcWidth)
         self.arcRect.center = self.screencenter
         self.draw_all()

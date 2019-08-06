@@ -112,8 +112,8 @@ class VisualOddballVE_CNV(VisualOddballVE.VisualOddballVE):
                 self.create_stim_seq()
                 
             # Init image and text object            
-            self.image = self.add_image_stimulus(position=tuple(self.center),on=False)            
-            self.text = self.add_text_stimulus(position=tuple(self.center),font_size=self.font_size,on=False) 
+            self.image = self.add_image_stimulus(position=tuple(self.center), on=False)            
+            self.text = self.add_text_stimulus(position=tuple(self.center), font_size=self.font_size, on=False) 
     
             # This feedback uses a generator function for controlling the stimulus
             # transition. Note that the function has to be called before passing
@@ -131,10 +131,10 @@ class VisualOddballVE_CNV(VisualOddballVE.VisualOddballVE):
             
             # User Input
             self.eob_responded = False
-            self.text.set(text='Type in #Deviants',on=True)
+            self.text.set(text='Type in #Deviants', on=True)
             while not self.eob_responded:
                 self._view.update()           
-            self.text.set(text='',on=False)
+            self.text.set(text='', on=False)
             self.write_log(self.user_input+'\n')
             
             # Break or End of Session
@@ -157,7 +157,7 @@ class VisualOddballVE_CNV(VisualOddballVE.VisualOddballVE):
         is needed, as we only want to prepare the next stimulus and use
         yield to signal that we are finished.
         """      
-        for n in range(0,len(self.stim_pres_seq),2):                      
+        for n in range(0, len(self.stim_pres_seq), 2):                      
             # s1-stimulus presentation                          
             self.image.set_file(self.stim_pres_seq[n])#, texture=VisionEgg.Textures.Texture(stim))
             self._trigger(self.S1, wait=True)
@@ -186,9 +186,9 @@ class VisualOddballVE_CNV(VisualOddballVE.VisualOddballVE):
         self.stim_pres_seq = list()        
         for n in range(nTrials):
             if n%2==0: # alternate
-                self.stim_pres_seq.append(self.std[random.randint(0,len(self.std)-1)])
+                self.stim_pres_seq.append(self.std[random.randint(0, len(self.std)-1)])
             else:  
-                self.stim_pres_seq.append(self.dev[random.randint(0,len(self.std)-1)])  
+                self.stim_pres_seq.append(self.dev[random.randint(0, len(self.std)-1)])  
                         
                     
         

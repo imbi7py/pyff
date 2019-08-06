@@ -113,7 +113,7 @@ class HexoSpellerVE(VisualSpellerVE):
                                        radius=self.circle_radius*0.65,
                                        start=NP.pi//6.*5)
         self._letter_layout.positions.reverse()
-        self._shape_positions = [(x+self.geometry[2]//2, y+self._spellerHeight//2) for (x,y) in circle_layout.positions]
+        self._shape_positions = [(x+self.geometry[2]//2, y+self._spellerHeight//2) for (x, y) in circle_layout.positions]
         # add the standard elements:
         for i in xrange(self._nr_elements):
             self._ve_edges.append(FilledCircle(radius=self._edge_radius,
@@ -302,11 +302,11 @@ class HexoSpellerVE(VisualSpellerVE):
                                                  text=self.letter_set[self._classified_element][i],
                                                  anchor="center"))
                 self._viewport.parameters.stimuli.extend(feedback_letters)
-            self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+            self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
             
             # send to screen:
             self._presentation.go()
-            self._presentation.remove_controller(None,None,None)
+            self._presentation.remove_controller(None, None, None)
             self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 
             ## turn on level 2 letters:
@@ -362,11 +362,11 @@ class HexoSpellerVE(VisualSpellerVE):
                                                                   font_size=font_size,
                                                                   text=text,
                                                                   anchor='center'))
-                self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+                self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
                 
                 # send to screen:
                 self._presentation.go()
-                self._presentation.remove_controller(None,None,None)
+                self._presentation.remove_controller(None, None, None)
 
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-1]
             else:

@@ -27,7 +27,7 @@ Requires VisionEgg
 from __future__ import division
 from __future__ import absolute_import
 from .VisualSpellerVE import VisualSpellerVE, animate_sigmoid, animate
-from .VEShapes import FilledTriangle, FilledHexagon,FilledHourglass,FilledCross
+from .VEShapes import FilledTriangle, FilledHexagon, FilledHourglass, FilledCross
 from VisionEgg.MoreStimuli import FilledCircle, Target2D
 from VisionEgg.Text import Text
 from lib.P300Layout.CircularLayout import CircularLayout
@@ -77,12 +77,12 @@ class CenterSpellerVE(VisualSpellerVE):
         ## colors:
         self.shape_color = (1.0, 1.0, 1.0)
 
-        self.stimuli_colors = [[0.0,0.0,1.0],
-                                [0.0,0.53,0.006],
-                                [1.0,0.0,0.0],
-                                [1.0,1.0,0.0],
-                                [0.86,0.0,0.86],
-                                [0.95,0.95,0.95]]
+        self.stimuli_colors = [[0.0, 0.0, 1.0],
+                                [0.0, 0.53, 0.006],
+                                [1.0, 0.0, 0.0],
+                                [1.0, 1.0, 0.0],
+                                [0.86, 0.0, 0.86],
+                                [0.95, 0.95, 0.95]]
         self.letter_color = (.5, .5, .5)
         self.feedback_color = (0.9, 0.9, 0.9)
         self.fixationpoint_color = (1.0, 1.0, 1.0)
@@ -102,10 +102,10 @@ class CenterSpellerVE(VisualSpellerVE):
         self.shapes = [
             [ "triangle", {"innerColor":self.bg_color, "innerSize": 60, "size": 200}],
             [ "hourglass", {"size": 100 }],
-            [ "cross", {"orientation": 45, "size": [30,180], "innerColor":self.bg_color}],
+            [ "cross", {"orientation": 45, "size": [30, 180], "innerColor":self.bg_color}],
             [ "triangle", {"innerColor":self.bg_color, "innerSize": 60, "orientation": 180, "size": 200}],
             [ "hourglass", {"orientation": 90, "size": 100}],
-            [ "cross", {"size": [30,180], "innerColor":self.bg_color }]
+            [ "cross", {"size": [30, 180], "innerColor":self.bg_color }]
         ]
     # If False only shapes are shown in that level but not group symbols(Letters)
         self.level_1_symbols=True
@@ -402,15 +402,15 @@ class CenterSpellerVE(VisualSpellerVE):
 
         if self.do_animation:
             self._presentation.set(go_duration=(self.animation_time, 'seconds'))
-            self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+            self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
         else:
-            self._presentation.set(go_duration=(0,'seconds'))
-            self._presentation.add_controller(None,None,FunctionController(during_go_func=update2))
+            self._presentation.set(go_duration=(0, 'seconds'))
+            self._presentation.add_controller(None, None, FunctionController(during_go_func=update2))
 
 
         # send to screen:
         self._presentation.go()
-        self._presentation.remove_controller(None,None,None)
+        self._presentation.remove_controller(None, None, None)
 
         for i in xrange(self._nr_elements):
             self._ve_shapes[i].set(position=self._countdown_shape_positions[i])
@@ -449,13 +449,13 @@ class CenterSpellerVE(VisualSpellerVE):
 
         if self.do_animation:
             self._presentation.set(go_duration=(self.animation_time, 'seconds'))
-            self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+            self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
         else:
-            self._presentation.set(go_duration=(0,'seconds'))
+            self._presentation.set(go_duration=(0, 'seconds'))
 
         # send to screen:
         self._presentation.go()
-        self._presentation.remove_controller(None,None,None)
+        self._presentation.remove_controller(None, None, None)
 
         for i in xrange(self._nr_elements):
             self._ve_shapes[i].set(position=self._centerPos, on=False)
@@ -598,9 +598,9 @@ class CenterSpellerVE(VisualSpellerVE):
                 # send to screen:
                 self._viewport.parameters.stimuli.extend([None]*(self._nr_elements))
                 self._presentation.set(go_duration=(self.animation_time, 'seconds'))
-                self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+                self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
                 self._presentation.go()
-                self._presentation.remove_controller(None,None,None)
+                self._presentation.remove_controller(None, None, None)
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements)]
 
                 ## turn on level 2 letters:
@@ -643,9 +643,9 @@ class CenterSpellerVE(VisualSpellerVE):
                 # send to screen:
                 self._viewport.parameters.stimuli.append(None)
                 self._presentation.set(go_duration=(self.animation_time, 'seconds'))
-                self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+                self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
                 self._presentation.go()
-                self._presentation.remove_controller(None,None,None)
+                self._presentation.remove_controller(None, None, None)
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-1]
             else:
                 self._presentation.set(go_duration=(self.animation_time, 'seconds'))

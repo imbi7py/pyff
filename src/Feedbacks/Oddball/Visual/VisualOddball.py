@@ -36,13 +36,13 @@ from Feedbacks.Oddball import Oddball
 class VisualOddball(Oddball.Oddball):
     
     def init(self):
-        super(VisualOddball,self).init()
+        super(VisualOddball, self).init()
         self.dev_perc = 0.25
         self.nStim = 21
         self.dd_dist = 3
         
     
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file.
         """
@@ -53,15 +53,15 @@ class VisualOddball(Oddball.Oddball):
         """
         Creates standard and deviant stimuli.          
         """        
-        size = (self.screen_pos[-1]//3,self.screen_pos[-1]//3)
+        size = (self.screen_pos[-1]//3, self.screen_pos[-1]//3)
         # create deviant stimulus
         dev1 = pygame.Surface(size)
-        dev1.fill((255,0,0))
+        dev1.fill((255, 0, 0))
         # create standard stimulus
         std1 = pygame.Surface(size)
-        std1Rect = std1.get_rect(center=(320,240))
+        std1Rect = std1.get_rect(center=(320, 240))
         hs = int(size[0]//2)
-        pygame.draw.circle(std1, (0,255,0), (hs,hs), hs)
+        pygame.draw.circle(std1, (0, 255, 0), (hs, hs), hs)
         return [std1], [dev1]
 
     def start_stimulus(self, stim):
@@ -69,7 +69,7 @@ class VisualOddball(Oddball.Oddball):
         Draw the stimulus onto the screen.
         """           
         stimRect = stim.get_rect(center=self.screen.get_rect().center)     
-        stim.set_colorkey((0,0,0))
+        stim.set_colorkey((0, 0, 0))
         self.screen.blit(stim, stimRect)
         pygame.display.update()
 

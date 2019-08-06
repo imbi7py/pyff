@@ -22,15 +22,15 @@ class StroopFeedback(PygameFeedback.PygameFeedback):
 
         # all possible colors
         colors = ["red", "blue", "green", "brown", "purple"]
-        self.colors = {"red" : [255,0,0],
+        self.colors = {"red" : [255, 0, 0],
                        "green" : [0, 191, 0],
-                       "blue" : [0,0,255],
+                       "blue" : [0, 0, 255],
                        "brown" : [150, 75, 0],
                        "purple" : [128, 0, 128]}
 
         # all possible combinations of [color1, color2] where color1 != color2
         # color1 is the printed word, color2 the actual color
-        classes = [[i,j] for i in colors for j in colors if i != j]
+        classes = [[i, j] for i in colors for j in colors if i != j]
 
         self.si = stroop_iterator(classes)
         self.timer = 0
@@ -46,7 +46,7 @@ class StroopFeedback(PygameFeedback.PygameFeedback):
 
 
     def pause_tick(self):
-        self.do_print("pause", (128,128,128), 100)
+        self.do_print("pause", (128, 128, 128), 100)
 
 
 if __name__ == "__main__":

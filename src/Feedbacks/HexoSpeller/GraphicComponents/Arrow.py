@@ -79,7 +79,7 @@ class Arrow():
         
     def set_color(self, r, g, b, alpha=1):
         """ Sets the color of the arrow. """
-        self.root_node_path.setColor(r,g,b,alpha)
+        self.root_node_path.setColor(r, g, b, alpha)
     
     def set_scale(self, s):
         self.root_node_path.setScale(s)
@@ -128,16 +128,16 @@ class Arrow():
         
     def _create_tip(self, length, width, depth, root_node_path):
         # front 
-        front_node = create_triangle((-width//2.0,0), (0,length), (width//2.0,0))
+        front_node = create_triangle((-width//2.0, 0), (0, length), (width//2.0, 0))
         front_path = root_node_path.attachNewNode(front_node)
         front_path.setY(-depth//2.0)
         # back
-        back_node = create_triangle((-width//2.0,0), (0,length), (width//2.0,0))
+        back_node = create_triangle((-width//2.0, 0), (0, length), (width//2.0, 0))
         back_path = root_node_path.attachNewNode(back_node)
         back_path.setH(180)
         back_path.setY(depth//2.0)
         # bottom
-        bottom_node, _vdata = create_side((-width//2.0,depth//2.0), (width//2.0,-depth//2.0))
+        bottom_node, _vdata = create_side((-width//2.0, depth//2.0), (width//2.0, -depth//2.0))
         bottom_path = root_node_path.attachNewNode(bottom_node)
         bottom_path.setP(90)
 #        # top right
@@ -163,7 +163,7 @@ class Arrow():
             while not reader.isAtEnd():
                 v = reader.getData3f()
                 if v[2] > 0:
-                    writer.setData3f(v[0],v[1],z)
+                    writer.setData3f(v[0], v[1], z)
                 else:
                     writer.setData3f(v) # I have to call the writer setData method in any case 
                                                 # so that its counter stays in sync with the reader's
@@ -194,7 +194,7 @@ if __name__ == "__main__":
     arrow.set_angle_x_z_plane(45)
     #arrow.set_length(0.5)
     base.disableMouse()
-    base.camera.setPos(0,-5,.5)
+    base.camera.setPos(0, -5, .5)
     
     #taskMgr.add(rotate, 'rotate', extraArgs=[arrow.root_node_path,0.05,0], appendTask=True)
     #taskMgr.add(scale, 'scale', extraArgs=[arrow,1.0,0.5,1.0], appendTask=True)

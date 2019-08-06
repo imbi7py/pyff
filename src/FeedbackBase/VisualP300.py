@@ -22,11 +22,11 @@ VisualP300 provides a framework for running P300 experiments within pyff.
 
 from __future__ import division
 from __future__ import absolute_import
-import sys,os,random
+import sys, os, random
 import pygame
 from .MainloopFeedback import MainloopFeedback
 from lib.P300VisualElement.Textbox import Textbox
-from lib.P300Aux.P300Functions import wait_for_key,show_message
+from lib.P300Aux.P300Functions import wait_for_key, show_message
 
 class VisualP300(MainloopFeedback):
     """
@@ -110,9 +110,9 @@ class VisualP300(MainloopFeedback):
     """
 
 
-    DEFAULT_SCREEN_WIDTH,DEFAULT_SCREEN_HEIGHT = 800,800
+    DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT = 800, 800
     DEFAULT_FULLSCREEN = False
-    DEFAULT_BGCOLOR = 0,0,0                 # Default background color
+    DEFAULT_BGCOLOR = 0, 0, 0                 # Default background color
 
     # Give durations as number of frames
     DEFAULT_FLASH_DURATION = 5
@@ -126,7 +126,7 @@ class VisualP300(MainloopFeedback):
 
     # Settings for textmessages via the function show_message()
     DEFAULT_TEXTSIZE = 40
-    DEFAULT_TEXTCOLOR = 255,255,255
+    DEFAULT_TEXTCOLOR = 255, 255, 255
 
     # Settings for pygame
     DEFAULT_PYGAME_INFO = True                # If true, gives a screen with information about pygame settings
@@ -149,11 +149,11 @@ class VisualP300(MainloopFeedback):
         """Define your variables here."""
         # Visual settings
         self.window_title = "Visual P300"
-        self.screenWidth,self.screenHeight = self.DEFAULT_SCREEN_WIDTH,self.DEFAULT_SCREEN_HEIGHT
+        self.screenWidth, self.screenHeight = self.DEFAULT_SCREEN_WIDTH, self.DEFAULT_SCREEN_HEIGHT
         """ Canvas: The part of the screen which is used for painting!
         That's more efficient than repainting the whole of the screen
         """
-        self.canvasWidth,self.canvasHeight = 600,600
+        self.canvasWidth, self.canvasHeight = 600, 600
         self.fullscreen = self.DEFAULT_FULLSCREEN
         self.bgcolor = self.DEFAULT_BGCOLOR
         self.textsize = self.DEFAULT_TEXTSIZE
@@ -220,19 +220,19 @@ class VisualP300(MainloopFeedback):
         if self.fullscreen:
             #use opts = pygame.HWSURFACE|pygame.DOUBLEBUF|pygame.FULLSCREEN to use doublebuffer and vertical sync
             opts = pygame.FULLSCREEN
-            self.screen = pygame.display.set_mode((self.screenWidth,self.screenHeight),opts)
+            self.screen = pygame.display.set_mode((self.screenWidth, self.screenHeight), opts)
         else:
-            self.screen = pygame.display.set_mode((self.screenWidth,self.screenHeight))
-        self.background = pygame.Surface( (self.canvasWidth,self.canvasHeight) )
+            self.screen = pygame.display.set_mode((self.screenWidth, self.screenHeight))
+        self.background = pygame.Surface( (self.canvasWidth, self.canvasHeight) )
         self.background.fill(self.bgcolor)
-        self.background_rect = self.background.get_rect(center = (self.screenWidth//2,self.screenHeight//2) )
+        self.background_rect = self.background.get_rect(center = (self.screenWidth//2, self.screenHeight//2) )
         # Background for whole screen (needs lots of time to paint, use self.background in most cases)
-        self.all_background = pygame.Surface( (self.screenWidth,self.screenHeight) )
+        self.all_background = pygame.Surface( (self.screenWidth, self.screenHeight) )
         self.all_background.fill(self.bgcolor)
-        self.all_background_rect = self.all_background.get_rect(center = (self.screenWidth//2,self.screenHeight//2) )
-        self.screen.blit(self.all_background,self.all_background_rect)
+        self.all_background_rect = self.all_background.get_rect(center = (self.screenWidth//2, self.screenHeight//2) )
+        self.screen.blit(self.all_background, self.all_background_rect)
         pygame.display.flip()
-        self.screen.blit(self.all_background,self.all_background_rect)
+        self.screen.blit(self.all_background, self.all_background_rect)
         self.clock = pygame.time.Clock()
         pygame.mouse.set_visible(False)
         # init sound engine
@@ -246,7 +246,7 @@ class VisualP300(MainloopFeedback):
             text += "\nvideo_mem: "+str(inf.video_mem) +"\nbytesize: "+str(inf.bytesize)
             text += "\nblit_hw: "+str(inf.blit_hw) +"\nblit_hw_CC: "+str(inf.blit_hw_CC)+"\nblit_hw_A: "+str(inf.blit_hw_A)
             text += "\nblit_sw: "+str(inf.blit_sw) +"\nblit_sw_CC: "+str(inf.blit_sw_CC)+"\nblit_sw_A: "+str(inf.blit_sw_A)
-            show_message(self,text,box=True)
+            show_message(self, text, box=True)
             wait_for_key()
 
 
@@ -368,7 +368,7 @@ class VisualP300(MainloopFeedback):
                 self.stim_state = self.STIM_IN_FLASH
             else: self.stim_state = self.STIM_END_FLASH
             # We only need to paint if smth changes
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.all_elements_group.draw(self.screen)
             if len(self.deco)>0: self.deco_group.draw(self.screen)
             pygame.display.flip()
@@ -384,7 +384,7 @@ class VisualP300(MainloopFeedback):
             if self.current_flash == self.nr_flashes:
                 self.state_finished = True      # All flashes have been shown
                 self.current_tick = 0           # Reset current tick
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.all_elements_group.draw(self.screen)
             if len(self.deco)>0: self.deco_group.draw(self.screen)
             pygame.display.flip()
@@ -419,7 +419,7 @@ class VisualP300(MainloopFeedback):
         """
         self.state_finished = True
 
-    def add_element(self,element):
+    def add_element(self, element):
         """
         Adds a visual element to the list of elements and set
         it on the position specified by the layout
@@ -429,11 +429,11 @@ class VisualP300(MainloopFeedback):
             self.logger.warn("Cannot add element: no layout specified")
         else:
             # Position element so that it's centered on the screen
-            (x,y) = self.layout.positions[nr_elements]
-            element.pos = (x+self.screenWidth//2,y+self.screenHeight//2)
+            (x, y) = self.layout.positions[nr_elements]
+            element.pos = (x+self.screenWidth//2, y+self.screenHeight//2)
             self.elements.append(element)
 
-    def add_group(self,group):
+    def add_group(self, group):
         """
         Takes the indices of the elements in the elements list and
         adds them as one group

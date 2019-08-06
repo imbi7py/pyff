@@ -57,11 +57,11 @@ from lib import serialport
 
 class Oddball(MainloopFeedback):
     
-    STANDARD, DEVIANT = list(),list()    
+    STANDARD, DEVIANT = list(), list()    
     # standards have markers 10,11,12,... ; deviants 30,31,32,... (cf. get_stimuli())
     # if self.group_stim_markers==True, then there exist only two markers, one for
     # group standard (10), and one for group deviant (20)
-    RESP_STD, RESP_DEV = 1,2
+    RESP_STD, RESP_DEV = 1, 2
     
     def init(self):        
         self.screen_pos = [100, 100, 640, 480]
@@ -113,7 +113,7 @@ class Oddball(MainloopFeedback):
         self.countdownColor = (200, 80, 118)
         self.fontColor = self.feedbackColor        
                 
-        self.responses = [0,0,0]
+        self.responses = [0, 0, 0]
         self.last_response = ''
         self.stimuliShown = 0
         self.hitstr, self.missstr, self.falsestr = 'H: ', '  M: ', '  F: '
@@ -156,7 +156,7 @@ class Oddball(MainloopFeedback):
         return stds, devs
 
     
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file.
         """
@@ -276,14 +276,14 @@ class Oddball(MainloopFeedback):
             self.timeAfterStim = 0
             if self.stim_sequence[self.stimuliShown%self.nStim_per_block]==1:
                 self.stim, idx = self.get_deviant()                
-                self.send_stim_marker(self.DEVIANT,idx)
+                self.send_stim_marker(self.DEVIANT, idx)
                 self.isdeviant = True
                 self.start_stimulus(self.stim)        
             else:                
                 self.isdeviant = False
                 if self.show_standards:
                     self.stim, idx = self.get_standard()
-                    self.send_stim_marker(self.STANDARD,idx)
+                    self.send_stim_marker(self.STANDARD, idx)
                     self.start_stimulus(self.stim)  
                 else:
                     self.stim = None
@@ -318,7 +318,7 @@ class Oddball(MainloopFeedback):
 
     def get_deviant(self):        
         if len(self.devs)>1:
-            idx = random.randint(0,len(self.devs)-1)
+            idx = random.randint(0, len(self.devs)-1)
         else:
             idx = 0                        
         return self.devs[idx], idx
@@ -326,7 +326,7 @@ class Oddball(MainloopFeedback):
         
     def get_standard(self):
         if len(self.stds)>1:
-            idx = random.randint(0,len(self.stds)-1)
+            idx = random.randint(0, len(self.stds)-1)
         else:
             idx = 0
         return self.stds[idx], idx        
@@ -415,8 +415,8 @@ class Oddball(MainloopFeedback):
             self.send_parallel(marker.COUNTDOWN_START)
             self.draw_initial()
             # initialize stimulus sequence for the next block according to the deviant probability
-            n = min(self.nStim_per_block,self.nStim)
-            self.stim_sequence = self.contrained_oddball_sequence(n,self.dev_perc,self.dd_dist)
+            n = min(self.nStim_per_block, self.nStim)
+            self.stim_sequence = self.contrained_oddball_sequence(n, self.dev_perc, self.dd_dist)
         
         self.countdownElapsed += self.elapsed 
                
@@ -477,7 +477,7 @@ class Oddball(MainloopFeedback):
         font = pygame.font.Font(None, size)
         if not superimpose:
             self.screen.blit(self.background, self.backgroundRect)            
-        surface = font.render(text, 1, color,self.backgroundColor)    
+        surface = font.render(text, 1, color, self.backgroundColor)    
         self.screen.blit(surface, surface.get_rect(center=center))
         pygame.display.update()
                 
@@ -552,7 +552,7 @@ class Oddball(MainloopFeedback):
     
         devs = -1
         while round(N*dev_perc) != devs:
-            sequence= zeros((N,1));
+            sequence= zeros((N, 1));
             devs_to_be_placed= round(N*dev_perc)
             ptr = 0
             while ptr < N:        

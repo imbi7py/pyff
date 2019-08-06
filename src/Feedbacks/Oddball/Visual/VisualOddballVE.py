@@ -138,7 +138,7 @@ class VisualOddballVE(VisionEggFeedback):
                 
             # Init image and text object            
             self.image = self.add_image_stimulus(position=[self.geometry[2]//2, self.geometry[3]//2])
-            self.text = self.add_text_stimulus(position=(self.geometry[2]//2,self.geometry[3]//2),on=False) #[self.geometry[2]/2, self.geometry[3]/2])
+            self.text = self.add_text_stimulus(position=(self.geometry[2]//2, self.geometry[3]//2), on=False) #[self.geometry[2]/2, self.geometry[3]/2])
     
             # This feedback uses a generator function for controlling the stimulus
             # transition. Note that the function has to be called before passing
@@ -158,10 +158,10 @@ class VisualOddballVE(VisionEggFeedback):
             
             # User Input
             self.eob_responded = False  
-            self.text.set(text='Type in #Deviants',on=True)
+            self.text.set(text='Type in #Deviants', on=True)
             while not self.eob_responded:   # while no end_of_block response
                 self._view.update()           
-            self.text.set(text='',on=False)
+            self.text.set(text='', on=False)
             self.write_log(self.user_input+'\n')
             
             self.image.set(on=False)
@@ -194,10 +194,10 @@ class VisualOddballVE(VisionEggFeedback):
             # Prestimulus interval           
             if self.show_fixation_cross:
                 self._trigger(marker.FIXATION_START, wait=True)
-                self.text.set(text='+',on=True)            
+                self.text.set(text='+', on=True)            
             yield
             if self.show_fixation_cross:
-                self.text.set(text='',on=False)  
+                self.text.set(text='', on=False)  
                 self._view.update()          
 
             # Present Stimulus            
@@ -227,7 +227,7 @@ class VisualOddballVE(VisionEggFeedback):
             # Give Feedback about Response            
             if self.give_feedback:
                 if not self.responded:
-                    self.text.set(text=self.norespstr,on=True)
+                    self.text.set(text=self.norespstr, on=True)
                 else:
                     self.text.set(on=True)
                 yield
@@ -239,14 +239,14 @@ class VisualOddballVE(VisionEggFeedback):
         if nTrials == None:
             nTrials = self.nTrials_per_block
             
-        self.stim_seq = self.constrained_stim_sequence(nTrials,self.dev_perc,self.dd_dist)
+        self.stim_seq = self.constrained_stim_sequence(nTrials, self.dev_perc, self.dd_dist)
         # convert stimuls sequence to a stimulus sequence of image filenames
         self.stim_pres_seq = list()        
         for n in range(nTrials):
             if self.stim_seq[n]==0:
-                self.stim_pres_seq.append(self.std[random.randint(0,len(self.std)-1)])
+                self.stim_pres_seq.append(self.std[random.randint(0, len(self.std)-1)])
             else:  
-                self.stim_pres_seq.append(self.dev[random.randint(0,len(self.dev)-1)])  
+                self.stim_pres_seq.append(self.dev[random.randint(0, len(self.dev)-1)])  
     
     
     def keyboard_input(self, event):
@@ -261,10 +261,10 @@ class VisualOddballVE(VisionEggFeedback):
         if self.eob_response:
             if event.key in number_keys:            
                 self.user_input += str(event.unicode)
-                self.text.set(text=self.user_input,on=True)
+                self.text.set(text=self.user_input, on=True)
             elif event.key == pygame.K_BACKSPACE:
                 self.user_input = self.user_input[0:-1]
-                self.text.set(text=self.user_input,on=True)
+                self.text.set(text=self.user_input, on=True)
             elif event.key == pygame.K_RETURN:
                 self.eob_responded = True
         #############################
@@ -275,16 +275,16 @@ class VisualOddballVE(VisionEggFeedback):
                     #self.send_parallel(self.RESP_DEV)
                     self.responded = True
                     if self.isdeviant:
-                        self.text.set(text=self.hitstr,on=False)
+                        self.text.set(text=self.hitstr, on=False)
                     else:
-                        self.text.set(text=self.falsestr,on=False)
+                        self.text.set(text=self.falsestr, on=False)
                 elif event.unicode == unicode(self.rsp_key_std) and self.response=='both':
                     #self.send_parallel(self.RESP_STD)
                     self.responded = True
                     if self.isdeviant:
-                        self.text.set(text=self.falsestr,on=False)
+                        self.text.set(text=self.falsestr, on=False)
                     else:
-                        self.text.set(text=self.hitstr,on=False)
+                        self.text.set(text=self.hitstr, on=False)
         ############################################
                     
     def load_stimuli(self):
@@ -315,9 +315,9 @@ class VisualOddballVE(VisionEggFeedback):
         Creates standard and deviant stimuli.          
         """        
         # The stimului. This can be anything compatible with VisionEgg
-        dev = FilledCircle(color=(0,1.0,0), position=[self.geometry[2]//2, self.geometry[3]//2], radius=100)
-        std1 = Target2D(color=(0,0,1.0), position=[self.geometry[2]//2, self.geometry[3]//2], size=(200,200))
-        std2= Target2D(color=(1.0,0,0), position=[self.geometry[2]//2, self.geometry[3]//2], size=(200,200))
+        dev = FilledCircle(color=(0, 1.0, 0), position=[self.geometry[2]//2, self.geometry[3]//2], radius=100)
+        std1 = Target2D(color=(0, 0, 1.0), position=[self.geometry[2]//2, self.geometry[3]//2], size=(200, 200))
+        std2= Target2D(color=(1.0, 0, 0), position=[self.geometry[2]//2, self.geometry[3]//2], size=(200, 200))
         #dev = Text(text='Deviant', font_size=72, position=(300, 200), anchor='center')
         #std1 = Text(text='Standard I', font_size=72, position=(300, 200), anchor='center')
         #std2 = Text(text='Standard II', font_size=72, position=(300, 200), anchor='center')        
@@ -338,7 +338,7 @@ class VisualOddballVE(VisionEggFeedback):
         
         devs = -1
         while round(N*dev_perc) != devs:
-            sequence= zeros((N,1));
+            sequence= zeros((N, 1));
             devs_to_be_placed= round(N*dev_perc)
             ptr = 0
             while ptr < N:        
@@ -383,7 +383,7 @@ class VisualOddballVE(VisionEggFeedback):
         Creates a logfile for the userinputs.
         """
         if not self.logfilename=='': 
-            self.logfile = open(self.logfilename,'w')
+            self.logfile = open(self.logfilename, 'w')
         
     def write_log(self, logstr):
         """

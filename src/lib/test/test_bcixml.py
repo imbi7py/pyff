@@ -65,23 +65,23 @@ class BcixmlTestCase(unittest.TestCase):
 
     def testList(self):
         """Should correctly en/decode List."""
-        self.__convert_and_compare("somename", [1,2,3,4,5])
+        self.__convert_and_compare("somename", [1, 2, 3, 4, 5])
         self.__convert_and_compare("somename", [])
         self.__convert_and_compare("somename", [1])
 
     def testTuple(self):
         """Should correctly en/decode Tuple."""
-        self.__convert_and_compare("somename", (1,2,3,4,5))
+        self.__convert_and_compare("somename", (1, 2, 3, 4, 5))
         self.__convert_and_compare("somename", ())
         self.__convert_and_compare("somename", (1,))
 
     def testSet(self):
         """Should correctly en/decode Set."""
-        self.__convert_and_compare("somename", {1,2,3})
+        self.__convert_and_compare("somename", {1, 2, 3})
 
     def testFrozenset(self):
         """Should correctly en/decode Frozenset."""
-        self.__convert_and_compare("somename", frozenset([1,2,3]))
+        self.__convert_and_compare("somename", frozenset([1, 2, 3]))
 
     def testDict(self):
         """Should correctly en/decode Dict."""
@@ -89,11 +89,11 @@ class BcixmlTestCase(unittest.TestCase):
 
     def testNestedLists(self):
         """Should correctly en/decode nested Lists."""
-        self.__convert_and_compare("somename", [[], [1], [1, [1,2]]])
+        self.__convert_and_compare("somename", [[], [1], [1, [1, 2]]])
 
     def testNestedTuples(self):
         """Should correctly en/decode nested Tuples."""
-        self.__convert_and_compare("somename", ((), (1), (1, (1,2))))
+        self.__convert_and_compare("somename", ((), (1), (1, (1, 2))))
 
     def testNestedDicts(self):
         """Should correctly en/decode nested Dicts."""

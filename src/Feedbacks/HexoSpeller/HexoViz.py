@@ -58,7 +58,7 @@ class HexoViz(DirectObject):
         self._create_manual_control_elements()
         self._set_light_sources()
         base.disableMouse()
-        base.camera.setPos(0,-5,0)
+        base.camera.setPos(0, -5, 0)
         
     def _reinit_base(self):
         
@@ -107,18 +107,18 @@ class HexoViz(DirectObject):
         self.arrow.set_angle_x_z_plane(phi)
         self.arrow.set_length(length)
         if self.hexo_controler.is_arrow_locked():
-            r,g,b = self.params["arrow_locked_color"]
+            r, g, b = self.params["arrow_locked_color"]
         else:
-            r,g,b = self.params["arrow_color"]
+            r, g, b = self.params["arrow_color"]
         self.arrow.set_color(r, g, b)
         #self.arrow_text.setText("Arrow: angle = "+str(self.hexo_controler.get_phi_degrees())+", length = "+str(self.hexo_controler.get_arrow_length()))
     
     def set_arrow_color(self, r, g, b):
         self.arrow.set_color(r, g, b)
-        self.params["arrow_color"] = (r,g,b)
+        self.params["arrow_color"] = (r, g, b)
         
     def set_arrow_locked_color(self, r, g, b):
-        self.params["arrow_locked_color"] = (r,g,b)
+        self.params["arrow_locked_color"] = (r, g, b)
     
     def set_arrow_rotation_threshold(self, t):
         t = self.normalize_control_signal(t)
@@ -133,13 +133,13 @@ class HexoViz(DirectObject):
         if not index==None:
             for i in range(6):
                 if i==index:
-                    r,g,b = self.params["hexagon_highlight_color"]
+                    r, g, b = self.params["hexagon_highlight_color"]
                     #self.hexagons[int(index)].setBg((r,g,b,1))
-                    self.hexagons[int(index)].set_color(r,g,b)
+                    self.hexagons[int(index)].set_color(r, g, b)
                 else:
-                    r,g,b = self.params["hexagon_default_color"]
+                    r, g, b = self.params["hexagon_default_color"]
                     #self.hexagons[i].setBg((r,g,b,1))
-                    self.hexagons[i].set_color(r,g,b)
+                    self.hexagons[i].set_color(r, g, b)
             
     def set_symbol_lists(self, symbol_lists):
         """ The given list of symbol lists will be displayed by the hexagons. """
@@ -169,34 +169,34 @@ class HexoViz(DirectObject):
         """ Sets self.hexo_controler to the given hexo_controler. """
         self.hexo_controler = hexo_controler
     
-    def set_hexagon_color(self, r,g,b):
-        self.params['hexagon_default_color'] = (r,g,b)
+    def set_hexagon_color(self, r, g, b):
+        self.params['hexagon_default_color'] = (r, g, b)
         for hex in self.hexagons:
-            hex.set_color(r,g,b)
+            hex.set_color(r, g, b)
     
-    def set_hexagon_highlight_color(self, r,g,b):
-        self.params['hexagon_highlight_color'] = (r,g,b)
+    def set_hexagon_highlight_color(self, r, g, b):
+        self.params['hexagon_highlight_color'] = (r, g, b)
         
     def set_hexagon_text_color(self, r,g,b,alpha=1):
         for hex in self.hexagons:
-            hex.set_text_color(r,g,b,alpha)
+            hex.set_text_color(r, g, b, alpha)
         
-    def set_textboard_background_color(self, r,g,b):
+    def set_textboard_background_color(self, r, g, b):
         self.spelled_text_viz.set_background_color(r, g, b, 1)
         
-    def set_textboard_frame_color(self, r,g,b):
+    def set_textboard_frame_color(self, r, g, b):
         self.spelled_text_viz.set_frame_color(r, g, b, alpha=1)
     
-    def set_textboard_text_color(self, r,g,b):
+    def set_textboard_text_color(self, r, g, b):
         self.spelled_text_viz.set_text_color(r, g, b, alpha=1)
         
-    def set_background_color(self, r,g,b):
-        base.setBackgroundColor((r,g,b))
+    def set_background_color(self, r, g, b):
+        base.setBackgroundColor((r, g, b))
         
-    def set_control_signal_bar_frame_color(self, r,g,b):
+    def set_control_signal_bar_frame_color(self, r, g, b):
         self.control_signal_viz.set_frame_color(r, g, b, alpha=1)
     
-    def set_control_signal_bar_color(self, r,g,b):
+    def set_control_signal_bar_color(self, r, g, b):
         self.control_signal_viz.set_bar_color(r, g, b, alpha=1)
     
     def start_state_change_animation(self, rot_arrow=False, phi_start=0, phi_end=0):
@@ -229,11 +229,11 @@ class HexoViz(DirectObject):
                                                    (0.3, 0.7), # dummy thresholds, will be replaced by real ones via the set_tresholds method 
                                                    self.params["control_signal_bar_padding"])
         self.control_signal_viz.set_scale(self.params["control_signal_bar_scaling"])
-        (x,z) = self.params["control_signal_bar_position"]
+        (x, z) = self.params["control_signal_bar_position"]
         self.control_signal_viz.set_pos(x, 0, z)
-        (r,g,b) = self.params["control_signal_bar_color"]
+        (r, g, b) = self.params["control_signal_bar_color"]
         self.control_signal_viz.set_bar_color(r, g, b)
-        (r,g,b) = self.params["control_signal_bar_frame_color"]
+        (r, g, b) = self.params["control_signal_bar_frame_color"]
         self.control_signal_viz.set_frame_color(r, g, b)
         #self.control_signal_viz = OnscreenText(text="Control Signal = 0", pos=(0.9, -0.9), mayChange=True, scale=0.05)
         
@@ -259,12 +259,12 @@ class HexoViz(DirectObject):
             #self.hexagons.append(OnscreenText(text="Hex Nr "+str(i+1), pos=(0,0), scale=0.05, mayChange=True, align=TextNode.ACenter, style=ost.BlackOnWhite))
         # the first set of coordinates is (0,r) + center point
         # the next coordinates are rotated clockwise 60 degrees
-        x, y = 0,r
+        x, y = 0, r
         phi = 60 # angle in degrees
         for i in range(6):
             #self.hexagons[i].setPos(x+self.params["center_position"][0], y+self.params["center_position"][1])
             self.hexagons[i].set_pos(x+self.params["center_position"][0], 0, y+self.params["center_position"][1])
-            x,y = Utils.rotate_phi_degrees_clockwise(phi, (x,y))
+            x, y = Utils.rotate_phi_degrees_clockwise(phi, (x, y))
     
     def _create_arrow_viz(self):
         """ Creates the rotating arrow. """
@@ -272,7 +272,7 @@ class HexoViz(DirectObject):
         self.arrow.get_node_path().setX(self.params['center_position'][0])
         self.arrow.get_node_path().setZ(self.params['center_position'][1])
         self.arrow.set_scale(self.params['arrow_scale'])
-        r,g,b = self.params["arrow_color"]
+        r, g, b = self.params["arrow_color"]
         self.arrow.set_color(r, g, b)
 #        self.arrow_text = OnscreenText(text="Arrow: angle = ?, length = ?", pos=self.params["center_position"], 
 #                                       scale=0.05, mayChange=True, align=TextNode.ACenter)
@@ -304,7 +304,7 @@ class HexoViz(DirectObject):
             self.control_signal_viz.get_node_path().hide()
                     
     def _set_light_sources(self):
-        light_positions = [(1,-1,1),(-1,-5,1)]
+        light_positions = [(1, -1, 1), (-1, -5, 1)]
         intensity = 0.8
         for l_pos in light_positions:
             plight = PointLight('plight')
@@ -313,9 +313,9 @@ class HexoViz(DirectObject):
             plnp.setPos(l_pos[0], l_pos[1], l_pos[2])
             render.setLight(plnp)
         light = AmbientLight('')
-        light.setColor(VBase4(0.4,0.4,0.4,1))
+        light.setColor(VBase4(0.4, 0.4, 0.4, 1))
         light_np = render.attachNewNode(light)
-        light_np.setPos(0,0,0)
+        light_np.setPos(0, 0, 0)
         render.setLight(light_np)
         
         

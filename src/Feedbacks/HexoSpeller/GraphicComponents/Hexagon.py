@@ -36,7 +36,7 @@ class Hexagon():
     
     text_distance = 0.01
     
-    def __init__(self, radius=1, width=0.4, color=(1,1,0), hex_index=0):
+    def __init__(self, radius=1, width=0.4, color=(1, 1, 0), hex_index=0):
         """ Creates a hexagon, centered around the origin with radius being the distance to the vertices. """
         #print "Hexagon::init"
         self._create_index_and_pos_lists(hex_index)
@@ -45,7 +45,7 @@ class Hexagon():
         self.root_node_path = render.attachNewNode(PandaNode(''))
         # create the geometry node which is the hexagon surface
         self.hex_node_path = self._create_hexagon(self.root_node_path, radius, width)
-        r,g,b = color
+        r, g, b = color
         self.set_color(r, g, b)
         # create the text fields
         self.back_side_text = None
@@ -93,7 +93,7 @@ class Hexagon():
         node_path.setY(width//2.0)
         node_path.setR(30)
         side_dist = cos(degrees_to_radians(30))*radius
-        for phi in range(0,360,60):
+        for phi in range(0, 360, 60):
             rot_path = hex_path.attachNewNode(PandaNode(''))
             side = create_side((-radius//2.0, width//2.0), (radius//2.0, -width//2.0))[0]
             side_path = rot_path.attachNewNode(side)
@@ -106,13 +106,13 @@ class Hexagon():
     def _create_text_fields(self, radius, width):
         test_letter = 'W'
         # the larger back side text field
-        x,z = 0,0
+        x, z = 0, 0
         y = (width//2.0+Hexagon.text_distance)
         text = TextNode('')
         #font = loader.loadFont("cmss12.egg")
         #text.setFont(font)
         text.setGlyphScale(1.1*radius)
-        text.setTextColor(0,0,0,1)
+        text.setTextColor(0, 0, 0, 1)
         self.back_side_text = self.root_node_path.attachNewNode(text)
         self.back_side_text.node().setText(test_letter)
         self.back_side_text.setH(180)
@@ -120,17 +120,17 @@ class Hexagon():
         self.back_side_text_z = self.back_side_text.getZ()
         # the six front side text fields
         self.front_side_text_coordinates = []
-        for _i, phi in enumerate(range(0,360,60)):
+        for _i, phi in enumerate(range(0, 360, 60)):
             text = TextNode('')
             #text.setFont(font)
             text.setGlyphScale(0.45*radius)
-            text.setTextColor(0,0,0,1)
+            text.setTextColor(0, 0, 0, 1)
             text_path = self.root_node_path.attachNewNode(text)
             self.front_side_text.append(text_path)
-            x,z = rotate_phi_degrees_clockwise(phi, (0,radius//1.6))
+            x, z = rotate_phi_degrees_clockwise(phi, (0, radius//1.6))
             text_path.node().setText(test_letter)
             center_node_on_xyz(text_path, x, -y, z)
-            self.front_side_text_coordinates.append((x,-y,z))
+            self.front_side_text_coordinates.append((x, -y, z))
             
     
     def set_front_side_symbols(self, symbols):
@@ -148,7 +148,7 @@ class Hexagon():
             return
         pos = self.idx_to_pos[idx]
         self.front_side_text[pos].node().setText(str(symbol))
-        x,y,z = self.front_side_text_coordinates[pos]
+        x, y, z = self.front_side_text_coordinates[pos]
         center_node_on_xyz(self.front_side_text[pos], x, y, z)
     
     def get_symbol(self, selected_pos):
@@ -171,7 +171,7 @@ class Hexagon():
     
     def set_pos(self, x, y, z):
         """ Set the position of the hexagon. """
-        self.root_node_path.setPos(x,y,z)
+        self.root_node_path.setPos(x, y, z)
     
     def set_scale(self, val):
         """ Set the scale of this hexagon. """
@@ -185,18 +185,18 @@ class Hexagon():
         self.back_side_text.node().setGlyphScale(val)
             
     def set_color(self, r, g, b, alpha=1):
-        self.root_node_path.setColor(r,g,b,alpha)
+        self.root_node_path.setColor(r, g, b, alpha)
         
     def set_text_color(self, r, g, b, alpha=1):
         self.set_back_side_text_color(r, g, b, alpha)
         self.set_front_side_text_color(r, g, b, alpha)
         
     def set_back_side_text_color(self, r, g, b, alpha=1):
-        self.back_side_text.setColor(r,g,b,alpha)
+        self.back_side_text.setColor(r, g, b, alpha)
     
     def set_front_side_text_color(self, r, g, b, alpha=1):
         for text_path in self.front_side_text:
-            text_path.setColor(r,g,b,alpha)
+            text_path.setColor(r, g, b, alpha)
     
     def get_node_path(self):
         """ Returns the node path to the top node of the hexagon sub-tree. """
@@ -214,7 +214,7 @@ def rotate(node_path, rotation_per_second, start_angle, task):
 if __name__ == "__main__":
     from direct.directbase import DirectStart
     hex_1 = Hexagon(radius=1, hex_index=1)
-    hex_1.set_front_side_symbols(["A","B","C","D","E"])
+    hex_1.set_front_side_symbols(["A", "B", "C", "D", "E"])
     hex_1.set_back_side_symbol("I")
     #hex_1.get_node_path().showTightBounds()
     #print hex_1.get_node_path().getTightBounds()
@@ -230,7 +230,7 @@ if __name__ == "__main__":
 #    taskMgr.add(rotate, 'rotate', extraArgs=[hex_2.root_node_path,0.1,0], appendTask=True)
 
     base.disableMouse()
-    base.camera.setPos(0,-5,0)
+    base.camera.setPos(0, -5, 0)
 
     plight = PointLight('plight')
     plight.setColor(VBase4(1, 1, 1, 1))

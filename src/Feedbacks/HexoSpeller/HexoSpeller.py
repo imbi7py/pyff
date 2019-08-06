@@ -25,7 +25,7 @@ from .LanguageModel import LanguageModel
 from .GraphicComponents import ColorSchemes
 
 PARAMS = {
-          "initial_arraw_angle" : 0, # initial orientation of the arrow, in degrees
+          "initial_arraw_angle": 0, # initial orientation of the arrow, in degrees
           "initial_arrow_length": 0.35, # the starting length of the arrow. The maximum length is 1, so this value must be smaller than 1!
           "arrow_rotation_time": 5, # time it takes for a full 360 degree rotation of the arrow, given in seconds
           "arrow_growth_time": 2, # time it takes to grow from length zero to full length (1), given in seconds
@@ -36,18 +36,18 @@ PARAMS = {
           "arrow_locked_duration": 0.7, # length of time period (in seconds) after hexagon selection during which the arrow is locked, i.e. cannot be moved.
                                     # This "locking period" is useful to prevent interaction during hex rotation animation
           # language model params
-          "language_model_file" : None,# "lm1to8.pckl", # one of 'lm1to8.pckl' or 'german.pckl', must lie in the folder LanguageModels
-          "lm_head_factors" : [1.0, 0.9, 0.8, 0.7, 0.6, 0.5],
-          "lm_letter_factor" : 0.01,
-          "lm_n_pred" : 2,
+          "language_model_file": None,# "lm1to8.pckl", # one of 'lm1to8.pckl' or 'german.pckl', must lie in the folder LanguageModels
+          "lm_head_factors": [1.0, 0.9, 0.8, 0.7, 0.6, 0.5],
+          "lm_letter_factor": 0.01,
+          "lm_n_pred": 2,
           }
 
 VIZ_PARAMS = {
-              "manual_control_signal_increment" : 0.1, # how the control signal gets changed per manual control (keyboard) interaction
-              "center_position": (0,-0.2), # position of the center point around which the arrow rotates and also the center reference point for the hexagons
+              "manual_control_signal_increment": 0.1, # how the control signal gets changed per manual control (keyboard) interaction
+              "center_position": (0, -0.2), # position of the center point around which the arrow rotates and also the center reference point for the hexagons
               "hex_distance_to_middle": 0.6, # distance of the center of each hexagon to the center position
               "hex_depth": 0.1, 
-              "gap_width_between_hexagons":0.01, # a little gap between adjacent hexagons
+              "gap_width_between_hexagons": 0.01, # a little gap between adjacent hexagons
               "arrow_scale": 0.28,
               "state_change_animation_duration": 0.5, # length of the _state change animation in seconds
               "control_signal_bar_position": (1.3, -1.05), # position of the lower end of the bar, not relative to center point (!)
@@ -57,17 +57,17 @@ VIZ_PARAMS = {
               
               "color_scheme": "TREE", # one of "", "ICE", "DESERT", "TREE"
               # if color_scheme is not None, then this values will be overwritten by the color scheme
-              "hexagon_default_color": (1,1,1), 
-              "hexagon_highlight_color": (1,0,0),
-              "hexagon_text_color": (1,1,1),
-              "arrow_color": (0,1,0),
-              "arrow_locked_color": (0.5,0.5,0.5),
-              "control_signal_bar_color": (1 ,1 ,0),
-              "control_signal_bar_frame_color": (0,0,0),
-              "textboard_background_color": (1,1,0),
-              "textboard_frame_color": (0,0,0),
-              "textboard_text_color": (0,0,0),
-              "background_color": (0.4,0.4,0.4), 
+              "hexagon_default_color": (1, 1, 1), 
+              "hexagon_highlight_color": (1, 0, 0),
+              "hexagon_text_color": (1, 1, 1),
+              "arrow_color": (0, 1, 0),
+              "arrow_locked_color": (0.5, 0.5, 0.5),
+              "control_signal_bar_color": (1, 1, 0),
+              "control_signal_bar_frame_color": (0, 0, 0),
+              "textboard_background_color": (1, 1, 0),
+              "textboard_frame_color": (0, 0, 0),
+              "textboard_text_color": (0, 0, 0),
+              "background_color": (0.4, 0.4, 0.4), 
               }
 
 # Markers written to the parallel port
@@ -81,9 +81,9 @@ class Marker():
     hex_selected_level_two = 40
     state_change_animation_level_two_to_one_start = 41
     state_change_animation_level_two_to_one_end = 42
-    selected_hex_level_one = [11,12,13,14,15,16] # hex 1-6 was selected at level 1
-    selected_hex_level_two = [21,22,23,24,25,26] # hex 1-6 was selected at level 2
-    selected_letter = range(61,61+30)   # code for the selected symbols, the list will be indexed according to the 
+    selected_hex_level_one = [11, 12, 13, 14, 15, 16] # hex 1-6 was selected at level 1
+    selected_hex_level_two = [21, 22, 23, 24, 25, 26] # hex 1-6 was selected at level 2
+    selected_letter = range(61, 61+30)   # code for the selected symbols, the list will be indexed according to the 
                                         # symbol list that comes with the language model
     feedback_init = 200
     status_change_to_play = 210
@@ -290,7 +290,7 @@ class HexoSpeller(MainloopFeedback):
         (_file_name, _sep, hexospeller_dir) = reversed_file_path.partition(os.path.sep)
         hexospeller_dir = hexospeller_dir[::-1] # reverse it, now in correct order
         # now complete the path to point to the language model directory
-        lm_path = os.path.join(hexospeller_dir,"LanguageModels")
+        lm_path = os.path.join(hexospeller_dir, "LanguageModels")
         return lm_path
        
     def load_language_model(self, file_name):
@@ -328,26 +328,26 @@ class HexoSpeller(MainloopFeedback):
     def set_hexagon_default_color(self, rgb):
         self.hexagon_default_color = rgb
         if not self._viz == None:
-            r,g,b, = rgb
-            self._viz.set_hexagon_color(r,g,b)
+            r, g, b, = rgb
+            self._viz.set_hexagon_color(r, g, b)
     
     def set_hexagon_highlight_color(self, rgb):
         self.hexagon_highlight_color = rgb
         if not self._viz == None:
-            r,g,b, = rgb
+            r, g, b, = rgb
             self._viz.set_hexagon_highlight_color(r, g, b)
         
     def set_hexagon_text_color(self, rgb):
         self.hexagon_text_color = rgb
         if not self._viz == None:
-            r,g,b, = rgb
+            r, g, b, = rgb
             self._viz.set_hexagon_text_color(r, g, b, alpha=1)
         
     def set_arrow_color(self, rgb):
         self.arrow_color = rgb
         if not self._viz == None:
-            r,g,b, = rgb
-            self._viz.set_arrow_color(r,g,b)
+            r, g, b, = rgb
+            self._viz.set_arrow_color(r, g, b)
     
     def set_state_change_animation_duration(self, dur):
         self.state_change_animation_duration = dur
@@ -389,14 +389,14 @@ class HexoSpeller(MainloopFeedback):
     def set_control_signal_bar_frame_color(self, rgb):
         self.control_signal_bar_frame_color = rgb
         if not self._viz == None:
-            r,g,b = rgb
-            self._viz.set_control_signal_bar_frame_color(r,g,b)
+            r, g, b = rgb
+            self._viz.set_control_signal_bar_frame_color(r, g, b)
 
     def set_control_signal_bar_color(self, rgb):
         self.control_signal_bar_color = rgb
         if not self._viz == None:
-            r,g,b = rgb
-            self._viz.set_control_signal_bar_color(r,g,b)
+            r, g, b = rgb
+            self._viz.set_control_signal_bar_color(r, g, b)
         
     def set_lm_head_factors(self, head_factors):
         self._language_model.head_factors = head_factors
@@ -413,26 +413,26 @@ class HexoSpeller(MainloopFeedback):
     def set_textboard_background_color(self, rgb):
         self.textboard_background_color = rgb
         if not self._viz == None:
-            r,g,b = rgb
+            r, g, b = rgb
             self._viz.set_textboard_background_color(r, g, b)
         
     def set_textboard_frame_color(self, rgb):
         self.textboard_frame_color = rgb
         if not self._viz == None:
-            r,g,b = rgb
+            r, g, b = rgb
             self._viz.set_textboard_frame_color(r, g, b)
     
     def set_textboard_text_color(self, rgb):
         self.textboard_text_color = rgb
         if not self._viz == None:
-            r,g,b = rgb
+            r, g, b = rgb
             self._viz.set_textboard_text_color(r, g, b)
         
     def set_background_color(self, rgb):
         self.backgroud_color = rgb
         if not self._viz == None:
-            r,g,b = rgb
-            self._viz.set_background_color(r,g,b)
+            r, g, b = rgb
+            self._viz.set_background_color(r, g, b)
         
     def set_hex_pre_select_bias(self, v):
         self.hex_pre_select_bias = v

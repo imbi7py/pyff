@@ -30,9 +30,9 @@ from pandac.PandaModules import Geom, GeomNode, GeomTrifans, GeomTristrips, Geom
 
 class TextBoard():
     
-    def __init__(self, text_color=(1,1,1), max_nr_rows=3, nr_char_per_row=20,
-                 frame_color=(0,0,0), frame_padding=0.4, frame_line_width=2,
-                 background_color=(1,1,0), background_padding=0.8):
+    def __init__(self, text_color=(1, 1, 1), max_nr_rows=3, nr_char_per_row=20,
+                 frame_color=(0, 0, 0), frame_padding=0.4, frame_line_width=2,
+                 background_color=(1, 1, 0), background_padding=0.8):
         #print "TextBoard::init"
         # everything that belongs to this TextBoard will be stored under the root node
         self.root_node_path = render.attachNewNode(PandaNode(''))
@@ -40,22 +40,22 @@ class TextBoard():
         self.text_node = TextNode('')
         self.text_node_path = self.root_node_path.attachNewNode(self.text_node)
         self.set_max_nr_rows(max_nr_rows)
-        r,g,b = text_color
+        r, g, b = text_color
         self.set_text_color(r, g, b)
         self.text_node.setAlign(TextNode.ALeft)  # TextNode.ALeft, TextNode.ACenterba
         letter_width, letter_height = self._compute_letter_size()
         self.max_row_length = nr_char_per_row * letter_width
         self.text_node.setWordwrap(self.max_row_length)
         width, height = self._compute_max_text_size()
-        self.text_node_path.setPos(0.5*background_padding,-0.01,-letter_height)
+        self.text_node_path.setPos(0.5*background_padding, -0.01, -letter_height)
         self.background_node_path = self.root_node_path.attachNewNode(PandaNode('background_node'))
         self._create_background(self.background_node_path, width+background_padding, height+background_padding+letter_height)
         self.frame_node_path = self.root_node_path.attachNewNode(PandaNode('frame_node'))
         self._create_frame(self.frame_node_path, width+background_padding, height+background_padding+letter_height)
-        r,g,b = frame_color
+        r, g, b = frame_color
         self.set_frame_color(r, g, b)
         self.set_frame_line_width(frame_line_width)
-        r,g,b = background_color
+        r, g, b = background_color
         self.set_background_color(r, g, b)
     
     def _compute_max_text_size(self):
@@ -73,7 +73,7 @@ class TextBoard():
         return self.text_node.getWidth(), self.text_node.getHeight()
         
     def _create_background(self, root_node_path, width, height):
-        node, _vdata = create_side((0,0), (width, -height))
+        node, _vdata = create_side((0, 0), (width, -height))
         root_node_path.attachNewNode(node)
         
     def _create_frame(self, root_node_path, width, height):
@@ -109,7 +109,7 @@ class TextBoard():
         self.text_node.setText(text)
             
     def set_text_color(self, r, g, b, alpha=1):
-        self.text_node.setTextColor(r,g,b,alpha)
+        self.text_node.setTextColor(r, g, b, alpha)
     
     def set_max_nr_rows(self, n):
         self.text_node.setMaxRows(n)
@@ -143,7 +143,7 @@ class TextBoard():
         self.background_node_path.setColor(r, g, b, alpha)
         
     def set_background_color(self, r, g, b, alpha=1):
-        self.background_node_path.setColor(r,g,b,alpha)
+        self.background_node_path.setColor(r, g, b, alpha)
         
         
 if __name__ == "__main__":
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     board.set_center_pos(0, 0, 0)
 
     base.disableMouse()
-    base.camera.setPos(0,-3,0)
+    base.camera.setPos(0, -3, 0)
 
 #    plight = PointLight('plight')
 #    plight.setColor(VBase4(1, 1, 1, 1))

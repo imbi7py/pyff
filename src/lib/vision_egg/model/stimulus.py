@@ -94,46 +94,46 @@ class CircleSector(DisplayListStimulus):
     """
 
     parameters_and_defaults = VisionEgg.ParameterDefinition({
-        'on':(True,
+        'on': (True,
               ve_types.Boolean,
               'draw?'),
-        'color':((1.0, 1.0, 1.0),
+        'color': ((1.0, 1.0, 1.0),
                  ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                 ve_types.Sequence4(ve_types.Real)),
                  'color'),
-        'color_edge':((1.0, 1.0, 1.0),
+        'color_edge': ((1.0, 1.0, 1.0),
                  ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                 ve_types.Sequence4(ve_types.Real)),
                  'color for the circle edge'),
-        'anti_aliasing':(True,
+        'anti_aliasing': (True,
                          ve_types.Boolean),
-        'position' : ( ( 320.0, 240.0 ), # in eye coordinates
+        'position': ( ( 320.0, 240.0 ), # in eye coordinates
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real),
                                       ve_types.Sequence3(ve_types.Real),
                                       ve_types.Sequence4(ve_types.Real)),
                        'position in eye coordinates'),
-        'anchor' : ('center',
+        'anchor': ('center',
                     ve_types.String,
                     'how position parameter is used'),
-        'radius':(2.0,
+        'radius': (2.0,
                   ve_types.Real,
                   'radius in eye coordinates'),
-        'num_triangles':(51,
+        'num_triangles': (51,
                          ve_types.Integer,
                          'number of triangles used to draw circle'),
-        'start':(0.,
+        'start': (0.,
                  ve_types.Real,
                  'start angle'),
-        'end':(360.,
+        'end': (360.,
                  ve_types.Real,
                  'end angle'),
-        'disk':(True,
+        'disk': (True,
               ve_types.Boolean,
               'draw the interior?'),
-        'circle':(True,
+        'circle': (True,
               ve_types.Boolean,
               'draw the edge?'),
-        'circle_width':(1.,
+        'circle_width': (1.,
                         ve_types.Real,
                         'line width of the circle edge'),
         })
@@ -160,8 +160,8 @@ class CircleSector(DisplayListStimulus):
         num_triangles = float(p.num_triangles) * frac
         angles = numpy.linspace(start, end, num_triangles)
         verts = numpy.zeros((num_triangles, 2))
-        verts[:,0] = center[0] + p.radius * numpy.cos(angles)
-        verts[:,1] = center[1] + p.radius * numpy.sin(angles)
+        verts[:, 0] = center[0] + p.radius * numpy.cos(angles)
+        verts[:, 1] = center[1] + p.radius * numpy.sin(angles)
         if p.disk:
             gl.glBegin(gl.GL_TRIANGLE_FAN)
             gl.glVertex(center)
@@ -209,26 +209,26 @@ class Line(DisplayListStimulus):
     """
 
     parameters_and_defaults = VisionEgg.ParameterDefinition({
-        'on':(True,
+        'on': (True,
               ve_types.Boolean,
               'draw?'),
-        'color':((1.0, 1.0, 1.0),
+        'color': ((1.0, 1.0, 1.0),
                  ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                 ve_types.Sequence4(ve_types.Real)),
                  'color'),
-        'anti_aliasing':(True,
+        'anti_aliasing': (True,
                          ve_types.Boolean),
-        'position' : ( ( 320.0, 240.0 ), # in eye coordinates
+        'position': ( ( 320.0, 240.0 ), # in eye coordinates
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real),
                                       ve_types.Sequence3(ve_types.Real),
                                       ve_types.Sequence4(ve_types.Real)),
                        'position in eye coordinates'),
-        'end' : ( ( 420.0, 240.0 ), # in eye coordinates
+        'end': ( ( 420.0, 240.0 ), # in eye coordinates
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real),
                                       ve_types.Sequence3(ve_types.Real),
                                       ve_types.Sequence4(ve_types.Real)),
                        'end point in eye coordinates'),
-        'width':(1.,
+        'width': (1.,
                         ve_types.Real,
                         'line width'),
         })
@@ -273,31 +273,31 @@ class Triangle(DisplayListStimulus):
     """
 
     parameters_and_defaults = VisionEgg.ParameterDefinition({
-        'anchor' : ('center',
+        'anchor': ('center',
                     ve_types.String,
                     'how position parameter is used'),
-        'on':(True,
+        'on': (True,
               ve_types.Boolean,
               'draw?'),
-        'color':((1.0, 1.0, 1.0),
+        'color': ((1.0, 1.0, 1.0),
                  ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                 ve_types.Sequence4(ve_types.Real)),
                  'color'),
-        'color_edge':((1.0, 1.0, 1.0),
+        'color_edge': ((1.0, 1.0, 1.0),
                  ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                 ve_types.Sequence4(ve_types.Real)),
                  'color for the edge'),
-        'anti_aliasing':(True,
+        'anti_aliasing': (True,
                          ve_types.Boolean),
-        'position' : ( ( 320.0, 240.0 ), # in eye coordinates
+        'position': ( ( 320.0, 240.0 ), # in eye coordinates
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real),
                                       ve_types.Sequence3(ve_types.Real),
                                       ve_types.Sequence4(ve_types.Real)),
                        'position in eye coordinates'),
-        'side':(10.,
+        'side': (10.,
                         ve_types.Real,
                         'side length'),
-        'width':(1.,
+        'width': (1.,
                         ve_types.Real,
                         'line width'),
         })

@@ -35,7 +35,7 @@ Button press: 9
 from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
-import sys,os,random,time
+import sys, os, random, time
 import pygame
 from FeedbackBase.MainloopFeedback import MainloopFeedback
 from lib.P300Layout import CircularLayout
@@ -43,12 +43,12 @@ from lib.P300Layout import CircularLayout
 class BoringClock(MainloopFeedback):
     
     # Triggers
-    RUN_START, RUN_END = 252,253
-    COUNTDOWN_START, COUNTDOWN_END = 200,201
-    JUMP,BUTTON = 8,9
+    RUN_START, RUN_END = 252, 253
+    COUNTDOWN_START, COUNTDOWN_END = 200, 201
+    JUMP, BUTTON = 8, 9
     
     # States during running
-    COUNTDOWN, STIM, FIN = 1,2,3
+    COUNTDOWN, STIM, FIN = 1, 2, 3
     
     def init(self):
         random.seed()
@@ -64,15 +64,15 @@ class BoringClock(MainloopFeedback):
         self.stimTime = 30               # How long the stimulus is displayed (in frames)
         self.nCountdown = 1             # N of secs to count down
         # Triggers
-        self.triggers = range(10,10+self.nEl) # 10,11,12,...
+        self.triggers = range(10, 10+self.nEl) # 10,11,12,...
         self.triggerAdd = 20            # If current symbol matches the nth back symbol, this number is added to the trigger
         # Auditory settings
         self.auditoryFeedback = False       # Auditory feedback provided
         # Graphical settings
         self.bgcolor = 0, 0, 0
-        self.colDot = 200,200,200       # Color of moving dot
-        self.colClock = 55,55,55     # Color of clock positions
-        self.screenPos = [200,200,600,600]
+        self.colDot = 200, 200, 200       # Color of moving dot
+        self.colClock = 55, 55, 55     # Color of clock positions
+        self.screenPos = [200, 200, 600, 600]
         self.fullscreen = False
         self.radiusDisplay = 200        # Radius of circular arrangement
         self.dotRadius = 10              # Radius of each element
@@ -87,13 +87,13 @@ class BoringClock(MainloopFeedback):
         pygame.display.set_caption('BoringClock')
         if self.fullscreen: 
             opts = pygame.FULLSCREEN
-            self.screen = pygame.display.set_mode((self.screenPos[2],self.screenPos[3]),opts)
+            self.screen = pygame.display.set_mode((self.screenPos[2], self.screenPos[3]), opts)
         else: 
-            self.screen = pygame.display.set_mode((self.screenPos[2],self.screenPos[3]))
-        self.background = pygame.Surface((self.screenPos[2],self.screenPos[3])) 
+            self.screen = pygame.display.set_mode((self.screenPos[2], self.screenPos[3]))
+        self.background = pygame.Surface((self.screenPos[2], self.screenPos[3])) 
         self.background.fill(self.bgcolor)
-        self.background_rect = self.background.get_rect(center = (self.screenPos[2]//2,self.screenPos[3]//2) )
-        self.screen.blit(self.background,self.background_rect)
+        self.background_rect = self.background.get_rect(center = (self.screenPos[2]//2, self.screenPos[3]//2) )
+        self.screen.blit(self.background, self.background_rect)
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font(None, self.size)
         # init sound engine
@@ -103,17 +103,17 @@ class BoringClock(MainloopFeedback):
         self.clockdot = pygame.Surface((4 * self.dotRadius, 4 * self.dotRadius))
         self.dot.fill(self.bgcolor)
         self.clockdot.fill(self.bgcolor)
-        pygame.draw.circle(self.dot,self.colDot, (2*self.dotRadius, 2*self.dotRadius), 2*self.dotRadius)
-        pygame.draw.circle(self.clockdot,self.colClock, (2*self.dotRadius, 2*self.dotRadius), 2*self.dotRadius)
-        self.dot = pygame.transform.smoothscale(self.dot, (2*self.dotRadius,2*self.dotRadius))
-        self.clockdot = pygame.transform.smoothscale(self.clockdot, (2*self.dotRadius,2*self.dotRadius))
+        pygame.draw.circle(self.dot, self.colDot, (2*self.dotRadius, 2*self.dotRadius), 2*self.dotRadius)
+        pygame.draw.circle(self.clockdot, self.colClock, (2*self.dotRadius, 2*self.dotRadius), 2*self.dotRadius)
+        self.dot = pygame.transform.smoothscale(self.dot, (2*self.dotRadius, 2*self.dotRadius))
+        self.clockdot = pygame.transform.smoothscale(self.clockdot, (2*self.dotRadius, 2*self.dotRadius))
         # Prepare coordinates of clock dots
-        cl = CircularLayout.CircularLayout(nr_elements=self.nEl,radius=self.radiusDisplay)
+        cl = CircularLayout.CircularLayout(nr_elements=self.nEl, radius=self.radiusDisplay)
         self.positions = []
         for i in range(self.nEl):
             x = cl.positions[i][0] + self.screenCenter[0]
             y = cl.positions[i][1] + self.screenCenter[1]
-            self.positions.append( (x,y) )
+            self.positions.append( (x, y) )
         
 
     def pre_mainloop(self):
@@ -124,7 +124,7 @@ class BoringClock(MainloopFeedback):
         self.clockPos = 0             # Current position of clock
         self.currentTick = 0            # Tick counter
         self.sequence = [0]*self.nClockTicks    # Sequence of presented symbols
-        self.screenCenter = (self.screenPos[2]//2,self.screenPos[3]//2)
+        self.screenCenter = (self.screenPos[2]//2, self.screenPos[3]//2)
         # States
         self.state = self.COUNTDOWN
         self.state_finished = False
@@ -161,9 +161,9 @@ class BoringClock(MainloopFeedback):
             self.clock.tick(self.fps)
 
     def pause_tick(self):
-            txt = self.font.render("PAUSE",self.ANTIALIAS,self.color)
+            txt = self.font.render("PAUSE", self.ANTIALIAS, self.color)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.clock.tick(self.fps)
@@ -173,25 +173,25 @@ class BoringClock(MainloopFeedback):
             self.send_parallel(self.COUNTDOWN_END)
             # Finished counting, draw background
             self.state_finished = True
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             pygame.display.update()
         elif self.currentTick % self.fps == 0:
             if self.currentTick == 0:        # the very first tick
                 self.send_parallel(self.COUNTDOWN_START)
             # New number
             count = self.nCountdown - (self.currentTick+1)//self.fps
-            txt = self.font.render(str(count),1,self.colDot)
+            txt = self.font.render(str(count), 1, self.colDot)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.currentTick += 1
         else:
             # Keep drawing the same number
             count = self.nCountdown - self.currentTick//self.fps
-            txt = self.font.render(str(count),1,self.colDot)
+            txt = self.font.render(str(count), 1, self.colDot)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             self.currentTick += 1
@@ -200,7 +200,7 @@ class BoringClock(MainloopFeedback):
         """
         Draws the clock and the dot
         """
-        self.screen.blit(self.background,self.background_rect)
+        self.screen.blit(self.background, self.background_rect)
         # Draw the clock
         if self.showClock:                  
             for ii in range(self.nEl):
@@ -245,7 +245,7 @@ class BoringClock(MainloopFeedback):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.on_stop()
-                elif event.key in (pygame.K_KP1,pygame.K_KP2) and not self.responseGiven:
+                elif event.key in (pygame.K_KP1, pygame.K_KP2) and not self.responseGiven:
                     if self.currentStim >= self.n:   # After the first n stimuli: Waiting for responses
                         # Process button press                    
                         c = self.currentStim
@@ -286,22 +286,22 @@ class BoringClock(MainloopFeedback):
         """
         nPartition = self.nClockTicks // self.nJumps     # size of each partition (containing one jump each)
         # First partition
-        idx = random.randint(self.minDist,nPartition-1)
+        idx = random.randint(self.minDist, nPartition-1)
         self.sequence[idx] = 1
         # Mid partitions
-        for ii in range(1,self.nJumps-1):
+        for ii in range(1, self.nJumps-1):
             dist = nPartition-1-idx       # distance to next partition
             if self.minDist>dist:
-                idx = random.randint(self.minDist-dist,nPartition-1)
+                idx = random.randint(self.minDist-dist, nPartition-1)
             else:
-                idx = random.randint(0,nPartition-1)
+                idx = random.randint(0, nPartition-1)
             self.sequence[nPartition*ii+idx] = 1
         # Last partition
         dist = nPartition-1-idx       # distance to next partition
         if self.minDist>dist:
-            idx = random.randint(self.minDist-dist,nPartition-1-self.minDist)
+            idx = random.randint(self.minDist-dist, nPartition-1-self.minDist)
         else:
-            idx = random.randint(0,nPartition-1-self.minDist)
+            idx = random.randint(0, nPartition-1-self.minDist)
         self.sequence[nPartition*(self.nJumps-1)+idx] = 1
             
     
@@ -312,9 +312,9 @@ class BoringClock(MainloopFeedback):
         """
         pygame.event.get()
         if not pygame.key.get_focused():
-            txt = self.font.render("Click to start",1,self.colDot)
+            txt = self.font.render("Click to start", 1, self.colDot)
             txt_rect = txt.get_rect(center=self.screenCenter)
-            self.screen.blit(self.background,self.background_rect)
+            self.screen.blit(self.background, self.background_rect)
             self.screen.blit(txt, txt_rect)
             pygame.display.update()
             return False

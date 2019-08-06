@@ -40,10 +40,10 @@ def orthogonalDesign(factors,nTrials,buildup=[],trials=[]):
         for ii in range(len(factors)):
             nSubconditions *= len(factors[ii])
         for ii in range(nTrials//nSubconditions):
-            orthogonalDesign(factors,None,[],trials)
+            orthogonalDesign(factors, None, [], trials)
         return trials
     else:
         ff = factors[0]
         for ii in range(len(ff)):
-            orthogonalDesign(factors[1:],None,buildup+[ff[ii]],trials)
+            orthogonalDesign(factors[1:], None, buildup+[ff[ii]], trials)
 

@@ -95,7 +95,7 @@ class ERPHex(VisualP300):
         # Timing
         self.animation_time = 20        # Length of animation in #frames
         # Triggers for Level 1 (letter groups) and Level 2 (individual letters)  
-        self.hex_group_triggers = [ [11, 12, 13, 14, 15, 16] , [21, 22, 23, 24, 25, 26] ]
+        self.hex_group_triggers = [ [11, 12, 13, 14, 15, 16], [21, 22, 23, 24, 25, 26] ]
         # If a certain group is a target, this value will be added to the trigger  
         self.trigger_target_add = 20
         
@@ -126,9 +126,9 @@ class ERPHex(VisualP300):
         # Get layout & elements
         self.layout = CircularLayout(nr_elements=self.nr_elements, radius=self.display_radius)
         colors = ((255, 255, 255), (255, 100, 255), (255, 255, 100), (255, 100, 100), (100, 100, 255), (100, 255, 255))
-        textcolors = ((255, 0, 0) , (0, 255, 0) , (0, 0, 255) , (0, 255, 255) , (255, 155, 0), (0, 20, 160), (0, 255, 0) , (0, 0, 255) , (0, 255, 255) , (255, 155, 0), (0, 100, 200))
+        textcolors = ((255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 255, 255), (255, 155, 0), (0, 20, 160), (0, 255, 0), (0, 0, 255), (0, 255, 255), (255, 155, 0), (0, 100, 200))
         self.hex_textcolor = (255, 0, 0)
-        color , radius = (255, 255, 255), 60
+        color, radius = (255, 255, 255), 60
         # Create the top-level display
         for i in range(self.nr_elements):
             e = Circle(nr_states=3, color=color, radius=radius, text=self.hex_letters[i], textcolor=self.hex_textcolor, colorkey=(0, 0, 0), circular_layout=True, circular_offset= - math.pi // 2)

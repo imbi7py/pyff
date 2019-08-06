@@ -28,10 +28,10 @@ from Feedbacks.Oddball import Oddball
 class TactileOddball(Oddball.Oddball):
     
     def init(self):        
-        super(TactileOddball,self).init()
+        super(TactileOddball, self).init()
         self.au = audiere.open_device()        
     
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file and returns it.
         """

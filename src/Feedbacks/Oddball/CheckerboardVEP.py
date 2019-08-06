@@ -30,7 +30,7 @@ from Feedbacks.Oddball.Visual import VisualOddball
 class CheckerboardVEP(VisualOddball.VisualOddball):
     
     def init(self):
-        super(CheckerboardVEP,self).init()
+        super(CheckerboardVEP, self).init()
         self.dev_perc = 0.5
         self.nStim = 40
         self.nStim_per_block = 20   # number of stimuli until a pause
@@ -40,13 +40,13 @@ class CheckerboardVEP(VisualOddball.VisualOddball):
         self.fixdotsize = 10
         self.response = 'none'
         self.give_feedback = False
-        self.feedback_duration, self.responsetime_duration = 0,0
+        self.feedback_duration, self.responsetime_duration = 0, 0
         self.stim_duration = 1500      
-        self.beforestim_ival = [0,0]
-        self.backgroundColor = (50,50,50)
-        self.offset = (50,-50)
+        self.beforestim_ival = [0, 0]
+        self.backgroundColor = (50, 50, 50)
+        self.offset = (50, -50)
 
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file.
         """
@@ -58,18 +58,18 @@ class CheckerboardVEP(VisualOddball.VisualOddball):
         Creates standard and deviant stimuli.
         """
         #size = (self.screen_pos[-1]*2/3,self.screen_pos[-1]*2/3)
-        size = (self.squaresPerSide*self.squaresize,self.squaresPerSide*self.squaresize)
+        size = (self.squaresPerSide*self.squaresize, self.squaresPerSide*self.squaresize)
         cb1 = pygame.Surface(size)
         cb2 = pygame.Surface(size)
-        white = (255,255,255)
-        black = (1,1,1)
-        red = (200,0,0)
-        colors = [white,black]
+        white = (255, 255, 255)
+        black = (1, 1, 1)
+        red = (200, 0, 0)
+        colors = [white, black]
         #squaresize = size[1]*1.0/self.squaresPerSide
         sign = 1
         for y in range(self.squaresPerSide):
             for x in range(self.squaresPerSide):
-                rect = (x*self.squaresize,y*self.squaresize,self.squaresize,self.squaresize)
+                rect = (x*self.squaresize, y*self.squaresize, self.squaresize, self.squaresize)
                 if not(self.squaresPerSide%2==0 and x==0):
                     sign = -sign
                 pygame.draw.rect(cb1, colors[(sign*1+1)//2], rect)
@@ -83,7 +83,7 @@ class CheckerboardVEP(VisualOddball.VisualOddball):
         Draw the stimulus onto the screen.
         """
         middle = self.screen.get_rect().center
-        c = (self.offset[0]+middle[0],self.offset[1]+middle[1])
+        c = (self.offset[0]+middle[0], self.offset[1]+middle[1])
         stimRect = stim.get_rect(center=c)
         self.screen.blit(stim, stimRect)
         pygame.display.update()

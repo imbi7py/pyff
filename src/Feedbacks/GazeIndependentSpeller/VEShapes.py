@@ -61,28 +61,28 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
     """ 
     
     parameters_and_defaults = { 
-        'on' : (True, 
+        'on': (True, 
                 ve_types.Boolean, 
                 "draw stimulus? (Boolean)"), 
-        'color' : ((1.0,1.0,1.0), 
+        'color': ((1.0, 1.0, 1.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-        'anti_aliasing' : (True, 
+        'anti_aliasing': (True, 
                           ve_types.Boolean), 
-        'orientation' : (0.0, 
+        'orientation': (0.0, 
                          ve_types.Real), 
-        'position' : ((320.0, 240.0), 
+        'position': ((320.0, 240.0), 
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real), 
                                       ve_types.Sequence3(ve_types.Real), 
                                       ve_types.Sequence4(ve_types.Real)), 
                        "units: eye coordinates"), 
-        'anchor' : ('center', 
+        'anchor': ('center', 
                     ve_types.String, 
                     "specifies how position parameter is interpreted"), 
-        'radius' : (30.0,
+        'radius': (30.0,
                    ve_types.Real, 
                    "units: eye coordinates"), 
-        'center' : (None, 
+        'center': (None, 
                     ve_types.Sequence2(ve_types.Real), 
                     "DEPRECATED: don't use"), 
         } 
@@ -92,13 +92,13 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
         ) 
    
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
     
     def draw(self):
         p = self.parameters # shorthand 
         if p.center is not None: 
-            if not hasattr(VisionEgg.config,"_GAVE_CENTER_DEPRECATION"): 
+            if not hasattr(VisionEgg.config, "_GAVE_CENTER_DEPRECATION"): 
                 logger = logging.getLogger('VisionEgg.MoreStimuli') 
                 logger.warning("Specifying FilledHexagon by deprecated " 
                                "'center' parameter deprecated.  Use " 
@@ -110,11 +110,11 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
             p.position = p.center[0], p.center[1] # copy values (don't copy ref to tuple) 
         if p.on: 
             # calculate center 
-            center = VisionEgg._get_center(p.position,p.anchor,(p.radius*2.0, p.radius*2.0)) 
+            center = VisionEgg._get_center(p.position, p.anchor, (p.radius*2.0, p.radius*2.0)) 
             gl.glMatrixMode(gl.GL_MODELVIEW) 
             gl.glPushMatrix() 
-            gl.glTranslate(center[0],center[1],0.0) 
-            gl.glRotate(p.orientation,0.0,0.0,1.0) 
+            gl.glTranslate(center[0], center[1], 0.0) 
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0) 
         
             if len(p.color)==3: 
                 gl.glColor3f(*p.color) 
@@ -122,7 +122,7 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.color) 
             gl.glDisable(gl.GL_DEPTH_TEST) 
             gl.glDisable(gl.GL_TEXTURE_2D) 
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
         
             a = p.radius//2.0
@@ -133,8 +133,8 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
             gl.glVertex3f(0.0, 0.0, 0.0)
             gl.glVertex3f( a, b, 0.0)
             gl.glVertex3f( p.radius, 0.0, 0.0)
-            gl.glVertex3f( a,-b, 0.0)
-            gl.glVertex3f(-a,-b, 0.0)
+            gl.glVertex3f( a, -b, 0.0)
+            gl.glVertex3f(-a, -b, 0.0)
             gl.glVertex3f(-p.radius, 0.0, 0.0)
             gl.glVertex3f(-a, b, 0.0)
             gl.glVertex3f( a, b, 0.0)
@@ -165,24 +165,24 @@ class FilledHexagon(VisionEgg.Core.Stimulus):
                 # and store as alpha 
                 gl.glEnable(gl.GL_LINE_SMOOTH) 
                 # Now specify how to use the alpha value 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND) 
         
                 # Draw a second polygon in line mode, so the edges are anti-aliased 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_LINE) 
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE) 
                 gl.glBegin(gl.GL_TRIANGLE_FAN) 
                 gl.glVertex3f(0.0, 0.0, 0.0)
                 gl.glVertex3f( a, b, 0.0)
                 gl.glVertex3f( p.radius, 0.0, 0.0)
-                gl.glVertex3f( a,-b, 0.0)
-                gl.glVertex3f(-a,-b, 0.0)
+                gl.glVertex3f( a, -b, 0.0)
+                gl.glVertex3f(-a, -b, 0.0)
                 gl.glVertex3f(-p.radius, 0.0, 0.0)
                 gl.glVertex3f(-a, b, 0.0)
                 gl.glVertex3f( a, b, 0.0)
                 gl.glEnd() # GL_TRIANGLE_FAN
         
                 # Set the polygon mode back to fill mode 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_FILL) 
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL) 
                 gl.glDisable(gl.GL_LINE_SMOOTH) 
             gl.glPopMatrix()
 
@@ -212,32 +212,32 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
     """ 
     
     parameters_and_defaults = { 
-        'on' : (True, 
+        'on': (True, 
                 ve_types.Boolean, 
                 "draw stimulus? (Boolean)"), 
-        'color' : ((1.0,1.0,1.0), 
+        'color': ((1.0, 1.0, 1.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-        'edge_color' : ((0.0,0.0,0.0), 
+        'edge_color': ((0.0, 0.0, 0.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-        'orientation' : (0.0, 
+        'orientation': (0.0, 
                          ve_types.Real), 
-        'position' : ((320.0, 240.0), 
+        'position': ((320.0, 240.0), 
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real), 
                                       ve_types.Sequence3(ve_types.Real), 
                                       ve_types.Sequence4(ve_types.Real)), 
                        "units: eye coordinates"), 
-        'anchor' : ('center', 
+        'anchor': ('center', 
                     ve_types.String, 
                     "specifies how position parameter is interpreted"), 
-        'radius' : (30.0,
+        'radius': (30.0,
                    ve_types.Real, 
                    "units: eye coordinates"), 
-        'opening_radius' : (10.0,
+        'opening_radius': (10.0,
                    ve_types.Real, 
                    "units: eye coordinates"), 
-        'center' : (None, 
+        'center': (None, 
                     ve_types.Sequence2(ve_types.Real), 
                     "DEPRECATED: don't use"), 
         } 
@@ -247,13 +247,13 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
         ) 
    
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
     
     def draw(self):
         p = self.parameters # shorthand 
         if p.center is not None: 
-            if not hasattr(VisionEgg.config,"_GAVE_CENTER_DEPRECATION"): 
+            if not hasattr(VisionEgg.config, "_GAVE_CENTER_DEPRECATION"): 
                 logger = logging.getLogger('VisionEgg.MoreStimuli') 
                 logger.warning("Specifying FilledHexagon by deprecated " 
                                "'center' parameter deprecated.  Use " 
@@ -265,11 +265,11 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
             p.position = p.center[0], p.center[1] # copy values (don't copy ref to tuple) 
         if p.on: 
             # calculate center 
-            center = VisionEgg._get_center(p.position,p.anchor,(p.radius*2.0, p.radius*2.0)) 
+            center = VisionEgg._get_center(p.position, p.anchor, (p.radius*2.0, p.radius*2.0)) 
             gl.glMatrixMode(gl.GL_MODELVIEW) 
             gl.glPushMatrix() 
-            gl.glTranslate(center[0],center[1],0.0) 
-            gl.glRotate(p.orientation,0.0,0.0,1.0) 
+            gl.glTranslate(center[0], center[1], 0.0) 
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0) 
         
             if len(p.color)==3: 
                 gl.glColor3f(*p.color) 
@@ -277,7 +277,7 @@ class HexagonOpening(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.color) 
             gl.glDisable(gl.GL_DEPTH_TEST) 
             gl.glDisable(gl.GL_TEXTURE_2D) 
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
             gl.glEnable(gl.GL_LINE_SMOOTH) 
         
@@ -369,39 +369,39 @@ class StripeField(VisionEgg.Core.Stimulus):
     """ 
     
     parameters_and_defaults = { 
-        'on' : (True, 
+        'on': (True, 
                 ve_types.Boolean, 
                 "draw stimulus? (Boolean)"), 
         'anti_aliasing': (True,
                 ve_types.Boolean,
                 "antialiasing (Boolean)"),
-        'color' : ((1.0,1.0,1.0), 
+        'color': ((1.0, 1.0, 1.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-        'edge_color' : ((0.0,0.0,0.0), 
+        'edge_color': ((0.0, 0.0, 0.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-        'orientation' : (0.0, 
+        'orientation': (0.0, 
                          ve_types.Real), 
-        'anchor' : ('center', 
+        'anchor': ('center', 
                     ve_types.String, 
                     "specifies how position parameter is interpreted"), 
-        'width' : (30.0,
+        'width': (30.0,
                    ve_types.Real, 
                    "units: eye coordinates"), 
-        'center' : (None, 
+        'center': (None, 
                     ve_types.Sequence2(ve_types.Real), 
                     "DEPRECATED: don't use"), 
-        'angle' : (.3,
+        'angle': (.3,
                     ve_types.Real,
                     "Arrow angle (0.5 -> 90 degree)"),
-        'dist_stripes' : (20.,
+        'dist_stripes': (20.,
                     ve_types.Real,
                     "Stripe distance"),
-        'num_stripes' : (12,
+        'num_stripes': (12,
                     ve_types.Integer,
                     "Number of stripes"),
-        'line_width'  : (1.0,
+        'line_width': (1.0,
                     ve_types.Real,
                     "Line width"),
         } 
@@ -411,7 +411,7 @@ class StripeField(VisionEgg.Core.Stimulus):
         ) 
    
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
     
     def draw(self):
@@ -419,8 +419,8 @@ class StripeField(VisionEgg.Core.Stimulus):
         if p.on: 
             gl.glMatrixMode(gl.GL_MODELVIEW) 
             gl.glPushMatrix() 
-            gl.glTranslate(p.center[0],p.center[1],0.0) 
-            gl.glRotate(p.orientation,0.0,0.0,1.0) 
+            gl.glTranslate(p.center[0], p.center[1], 0.0) 
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0) 
         
             if len(p.color)==3: 
                 gl.glColor3f(*p.color) 
@@ -428,7 +428,7 @@ class StripeField(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.color) 
             gl.glDisable(gl.GL_DEPTH_TEST)
             gl.glDisable(gl.GL_TEXTURE_2D)
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA)
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
             gl.glEnable(gl.GL_BLEND)
             if p.anti_aliasing:
                 gl.glEnable(gl.GL_LINE_SMOOTH)
@@ -485,42 +485,42 @@ class DotField(VisionEgg.Core.Stimulus):
     """
 
     parameters_and_defaults = {
-        'on' : (True,
+        'on': (True,
                 ve_types.Boolean,
                 "draw stimulus? (Boolean)"),
         'anti_aliasing': (True,
                 ve_types.Boolean,
                 "antialiasing (Boolean)"),
-        'color' : ((1.0,1.0,1.0),
+        'color': ((1.0, 1.0, 1.0),
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                   ve_types.Sequence4(ve_types.Real))),
-        'edge_color' : ((0.0,0.0,0.0),
+        'edge_color': ((0.0, 0.0, 0.0),
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real),
                                   ve_types.Sequence4(ve_types.Real))),
-        'orientation' : (0.0,
+        'orientation': (0.0,
                          ve_types.Real),
-        'anchor' : ('center',
+        'anchor': ('center',
                     ve_types.String,
                     "specifies how position parameter is interpreted"),
-        'width' : (30.0,
+        'width': (30.0,
                    ve_types.Real,
                    "units: eye coordinates"),
-        'height' : (30.0,
+        'height': (30.0,
                    ve_types.Real,
                    "units: eye coordinates"),
-        'center' : (None,
+        'center': (None,
                     ve_types.Sequence2(ve_types.Real),
                     "DEPRECATED: don't use"),
-        'dot_size' : (2.,
+        'dot_size': (2.,
                     ve_types.Real,
                     "Dot size"),
-        'dot_distance' : (10.,
+        'dot_distance': (10.,
                     ve_types.Real,
                     "Distance between dots"),
-        'line_width'  : (1.0,
+        'line_width': (1.0,
                     ve_types.Real,
                     "Line width"),
-        'circle_steps'  : (8,
+        'circle_steps': (8,
                     ve_types.Integer,
                     "Circle approximation precision"),
         }
@@ -530,7 +530,7 @@ class DotField(VisionEgg.Core.Stimulus):
         )
 
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
 
     def draw(self):
@@ -538,8 +538,8 @@ class DotField(VisionEgg.Core.Stimulus):
         if p.on:
             gl.glMatrixMode(gl.GL_MODELVIEW)
             gl.glPushMatrix()
-            gl.glTranslate(p.center[0],p.center[1],0.0)
-            gl.glRotate(p.orientation,0.0,0.0,1.0)
+            gl.glTranslate(p.center[0], p.center[1], 0.0)
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0)
 
             if len(p.color)==3:
                 gl.glColor3f(*p.color)
@@ -547,7 +547,7 @@ class DotField(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.color)
             gl.glDisable(gl.GL_DEPTH_TEST)
             gl.glDisable(gl.GL_TEXTURE_2D)
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA)
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
             gl.glEnable(gl.GL_BLEND)
             if p.anti_aliasing:
                 gl.glEnable(gl.GL_LINE_SMOOTH)
@@ -614,7 +614,7 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
         'on' : (True, 
                 ve_types.Boolean, 
                 "draw stimulus? (Boolean)"), 
-        'color' : ((1.0,1.0,1.0), 
+        'color' : ((1.0, 1.0, 1.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
         'anti_aliasing' : (True, 
@@ -635,13 +635,13 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
         'innerSize' : (0.0,
                  ve_types.Real, 
                  "units: eye coordinates"), 
-        'innerColor' : ((0.0,0.0,0.0), 
+        'innerColor' : ((0.0, 0.0, 0.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
         'watermark_size' : (0.0,
                             ve_types.Real,
                             "units: eye coordinates"),
-        'watermark_color' : ((0.0,0.0,0.0,0.0),
+        'watermark_color' : ((0.0, 0.0, 0.0, 0.0),
                              ve_types.Sequence4(ve_types.Real)),
         'center' : (None, 
                     ve_types.Sequence2(ve_types.Real), 
@@ -653,13 +653,13 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
         ) 
    
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
     
     def draw(self):
         p = self.parameters # shorthand 
         if p.center is not None: 
-            if not hasattr(VisionEgg.config,"_GAVE_CENTER_DEPRECATION"): 
+            if not hasattr(VisionEgg.config, "_GAVE_CENTER_DEPRECATION"): 
                 logger = logging.getLogger('VisionEgg.MoreStimuli') 
                 logger.warning("Specifying FilledTriangle by deprecated " 
                                "'center' parameter deprecated.  Use " 
@@ -671,11 +671,11 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
             p.position = p.center[0], p.center[1] # copy values (don't copy ref to tuple) 
         if p.on: 
             # calculate center 
-            center = self._my_get_center(p.position,p.anchor,p.size) 
+            center = self._my_get_center(p.position, p.anchor, p.size) 
             gl.glMatrixMode(gl.GL_MODELVIEW) 
             gl.glPushMatrix() 
-            gl.glTranslate(center[0],center[1],0.0) 
-            gl.glRotate(p.orientation,0.0,0.0,1.0) 
+            gl.glTranslate(center[0], center[1], 0.0) 
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0) 
         
             if len(p.color)==3: 
                 gl.glColor3f(*p.color) 
@@ -683,7 +683,7 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.color) 
             gl.glDisable(gl.GL_DEPTH_TEST) 
             gl.glDisable(gl.GL_TEXTURE_2D) 
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
             
             a = p.size//2.0
@@ -704,7 +704,7 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                     gl.glColor4f(*p.innerColor) 
                 gl.glDisable(gl.GL_DEPTH_TEST) 
                 gl.glDisable(gl.GL_TEXTURE_2D) 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND) 
                 
                 a2 = p.innerSize//2.0
@@ -723,7 +723,7 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                 
                 gl.glDisable(gl.GL_DEPTH_TEST) 
                 gl.glDisable(gl.GL_TEXTURE_2D) 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA)
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
                 gl.glEnable(gl.GL_BLEND)
                 
                 a3 = p.watermark_size//2.0
@@ -761,11 +761,11 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                 # and store as alpha 
                 gl.glEnable(gl.GL_LINE_SMOOTH) 
                 # Now specify how to use the alpha value 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND) 
         
                 # Draw a second polygon in line mode, so the edges are anti-aliased 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_LINE)
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)
                 gl.glBegin(gl.GL_TRIANGLES)
                 gl.glVertex3f( a, -b, 0.0)
                 gl.glVertex3f(-a, -b, 0.0)
@@ -773,7 +773,7 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
                 gl.glEnd() # GL_TRIANGLE_FAN
         
                 # Set the polygon mode back to fill mode 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_FILL) 
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL) 
                 gl.glDisable(gl.GL_LINE_SMOOTH) 
             gl.glPopMatrix()
 
@@ -799,9 +799,9 @@ class FilledTriangle(VisionEgg.Core.Stimulus):
             elif anchor == 'right':
                 center = (position[0] - a, position[1])
             elif anchor == 'bottom':
-                center = (position[0],position[1] + b)
+                center = (position[0], position[1] + b)
             elif anchor == 'top':
-                center = (position[0],position[1] - r)
+                center = (position[0], position[1] - r)
             else:
                 raise ValueError("No anchor position %s"%anchor)
         return center
@@ -833,33 +833,33 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
     """ 
     
     parameters_and_defaults = { 
-        'on' : (True, 
+        'on': (True, 
                 ve_types.Boolean, 
                 "draw stimulus? (Boolean)"), 
-        'color' : ((1.0,1.0,1.0), 
+        'color': ((1.0, 1.0, 1.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-        'anti_aliasing' : (False, 
+        'anti_aliasing': (False, 
                           ve_types.Boolean), 
-        'orientation' : (0.0, 
+        'orientation': (0.0, 
                          ve_types.Real), 
-        'position' : ((320.0, 240.0), 
+        'position': ((320.0, 240.0), 
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real), 
                                       ve_types.Sequence3(ve_types.Real), 
                                       ve_types.Sequence4(ve_types.Real)), 
                        "units: eye coordinates"), 
-        'anchor' : ('center', 
+        'anchor': ('center', 
                     ve_types.String, 
                     "specifies how position parameter is interpreted"), 
-        'size' : (30.0,
+        'size': (30.0,
                  ve_types.Real, 
                  "units: eye coordinates"), 
-        'watermark_size' : (0.0,
+        'watermark_size': (0.0,
                             ve_types.Real,
                             "units: eye coordinates"),
-        'watermark_color' : ((0.0,0.0,0.0,0.0),
+        'watermark_color': ((0.0, 0.0, 0.0, 0.0),
                              ve_types.Sequence4(ve_types.Real)),
-        'center' : (None, 
+        'center': (None, 
                     ve_types.Sequence2(ve_types.Real), 
                     "DEPRECATED: don't use"), 
         } 
@@ -869,13 +869,13 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
         ) 
    
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
     
     def draw(self):
         p = self.parameters # shorthand 
         if p.center is not None: 
-            if not hasattr(VisionEgg.config,"_GAVE_CENTER_DEPRECATION"): 
+            if not hasattr(VisionEgg.config, "_GAVE_CENTER_DEPRECATION"): 
                 logger = logging.getLogger('VisionEgg.MoreStimuli') 
                 logger.warning("Specifying FilledTriangle by deprecated " 
                                "'center' parameter deprecated.  Use " 
@@ -887,11 +887,11 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
             p.position = p.center[0], p.center[1] # copy values (don't copy ref to tuple) 
         if p.on: 
             # calculate center 
-            center = self._my_get_center(p.position,p.anchor,p.size) 
+            center = self._my_get_center(p.position, p.anchor, p.size) 
             gl.glMatrixMode(gl.GL_MODELVIEW) 
             gl.glPushMatrix() 
-            gl.glTranslate(center[0],center[1],0.0) 
-            gl.glRotate(p.orientation,0.0,0.0,1.0) 
+            gl.glTranslate(center[0], center[1], 0.0) 
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0) 
 
             # Upper triangle
             if len(p.color)==3: 
@@ -900,7 +900,7 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
                 gl.glColor4f(*p.color) 
             gl.glDisable(gl.GL_DEPTH_TEST) 
             gl.glDisable(gl.GL_TEXTURE_2D) 
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND) 
             
             a = p.size//2.0
@@ -943,14 +943,14 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
 
                 gl.glDisable(gl.GL_DEPTH_TEST) 
                 gl.glDisable(gl.GL_TEXTURE_2D) 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND)
 
                 w = p.watermark_size//2
         
                 gl.glBegin(gl.GL_QUADS)
-                gl.glVertex3f(-w,-w, 0.0)
-                gl.glVertex3f( w,-w, 0.0)
+                gl.glVertex3f(-w, -w, 0.0)
+                gl.glVertex3f( w, -w, 0.0)
                 gl.glVertex3f( w, w, 0.0)
                 gl.glVertex3f(-w, w, 0.0)
                 gl.glEnd() # GL_QUADS            
@@ -980,11 +980,11 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
                 # and store as alpha 
                 gl.glEnable(gl.GL_LINE_SMOOTH) 
                 # Now specify how to use the alpha value 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND) 
         
                 # Draw a second polygon in line mode, so the edges are anti-aliased 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_LINE)
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)
                 gl.glBegin(gl.GL_TRIANGLES)
                 gl.glVertex3f( a, -b, 0.0)
                 gl.glVertex3f(-a, -b, 0.0)
@@ -992,7 +992,7 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
                 gl.glEnd() # GL_TRIANGLE_FAN
       
                 # Set the polygon mode back to fill mode 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_FILL) 
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL) 
                 gl.glDisable(gl.GL_LINE_SMOOTH) 
             gl.glPopMatrix()
 
@@ -1018,9 +1018,9 @@ class FilledHourglass(VisionEgg.Core.Stimulus):
             elif anchor == 'right':
                 center = (position[0] - a, position[1])
             elif anchor == 'bottom':
-                center = (position[0],position[1] + b)
+                center = (position[0], position[1] + b)
             elif anchor == 'top':
-                center = (position[0],position[1] - r)
+                center = (position[0], position[1] - r)
             else:
                 raise ValueError("No anchor position %s"%anchor)
         return center
@@ -1054,36 +1054,36 @@ class FilledCross(VisionEgg.Core.Stimulus):
     """ 
 
     parameters_and_defaults = { 
-        'on' : (True, 
+        'on': (True, 
                 ve_types.Boolean, 
                 "draw stimulus? (Boolean)"), 
-        'color' : ((1.0,1.0,1.0), 
+        'color': ((1.0, 1.0, 1.0), 
                    ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
                                   ve_types.Sequence4(ve_types.Real))), 
-		'innerColor' : ((0.0,0.0,0.0),
+		'innerColor': ((0.0, 0.0, 0.0),
 		                ve_types.AnyOf(ve_types.Sequence3(ve_types.Real), 
 	                                  ve_types.Sequence4(ve_types.Real))),
-        'anti_aliasing' : (False, 
+        'anti_aliasing': (False, 
                           ve_types.Boolean), 
-        'orientation' : (0.0, 
+        'orientation': (0.0, 
                          ve_types.Real), 
-        'position' : ((320.0, 240.0), 
+        'position': ((320.0, 240.0), 
                        ve_types.AnyOf(ve_types.Sequence2(ve_types.Real), 
                                       ve_types.Sequence3(ve_types.Real), 
                                       ve_types.Sequence4(ve_types.Real)), 
                        "units: eye coordinates"), 
-        'anchor' : ('center', 
+        'anchor': ('center', 
                     ve_types.String, 
                     "specifies how position parameter is interpreted"), 
-        'size' : ((30.0, 70.0),
+        'size': ((30.0, 70.0),
                   ve_types.Sequence2(ve_types.Real),
                   "units: eye coordinates"),
-        'watermark_size' : (0.0,
+        'watermark_size': (0.0,
                             ve_types.Real,
                             "units: eye coordinates"),
-        'watermark_color' : ((0.0,0.0,0.0,0.0),
+        'watermark_color': ((0.0, 0.0, 0.0, 0.0),
                              ve_types.Sequence4(ve_types.Real)),
-        'center' : (None, 
+        'center': (None, 
                     ve_types.Sequence2(ve_types.Real), 
                     "DEPRECATED: don't use"), 
         } 
@@ -1093,13 +1093,13 @@ class FilledCross(VisionEgg.Core.Stimulus):
         ) 
 
     def __init__(self,**kw):
-        VisionEgg.Core.Stimulus.__init__(self,**kw)
+        VisionEgg.Core.Stimulus.__init__(self, **kw)
         self._gave_alpha_warning = 0
 
     def draw(self):
         p = self.parameters # shorthand 
         if p.center is not None: 
-            if not hasattr(VisionEgg.config,"_GAVE_CENTER_DEPRECATION"): 
+            if not hasattr(VisionEgg.config, "_GAVE_CENTER_DEPRECATION"): 
                 logger = logging.getLogger('VisionEgg.MoreStimuli') 
                 logger.warning("Specifying FilledTriangle by deprecated " 
                                "'center' parameter deprecated.  Use " 
@@ -1114,8 +1114,8 @@ class FilledCross(VisionEgg.Core.Stimulus):
             center = p.position #self._my_get_center(p.position,p.anchor,p.size) 
             gl.glMatrixMode(gl.GL_MODELVIEW) 
             gl.glPushMatrix() 
-            gl.glTranslate(center[0],center[1],0.0) 
-            gl.glRotate(p.orientation,0.0,0.0,1.0) 
+            gl.glTranslate(center[0], center[1], 0.0) 
+            gl.glRotate(p.orientation, 0.0, 0.0, 1.0) 
 
             w = p.size[0]//2.0
             h = (p.size[1] - w)//2.0
@@ -1128,12 +1128,12 @@ class FilledCross(VisionEgg.Core.Stimulus):
 
             gl.glDisable(gl.GL_DEPTH_TEST) 
             gl.glDisable(gl.GL_TEXTURE_2D) 
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND)
 
             gl.glBegin(gl.GL_QUADS)
-            gl.glVertex3f(-w,-w, 0.0)
-            gl.glVertex3f( w,-w, 0.0)
+            gl.glVertex3f(-w, -w, 0.0)
+            gl.glVertex3f( w, -w, 0.0)
             gl.glVertex3f( w, w, 0.0)
             gl.glVertex3f(-w, w, 0.0)
             gl.glEnd() # GL_QUADS
@@ -1146,7 +1146,7 @@ class FilledCross(VisionEgg.Core.Stimulus):
 
             gl.glDisable(gl.GL_DEPTH_TEST) 
             gl.glDisable(gl.GL_TEXTURE_2D) 
-            gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+            gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
             gl.glEnable(gl.GL_BLEND)
 
             gl.glBegin(gl.GL_QUADS)
@@ -1183,7 +1183,7 @@ class FilledCross(VisionEgg.Core.Stimulus):
 
                 gl.glDisable(gl.GL_DEPTH_TEST) 
                 gl.glDisable(gl.GL_TEXTURE_2D) 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND)
 
                 w2 = p.watermark_size//2
@@ -1220,11 +1220,11 @@ class FilledCross(VisionEgg.Core.Stimulus):
                 # and store as alpha 
                 gl.glEnable(gl.GL_LINE_SMOOTH) 
                 # Now specify how to use the alpha value 
-                gl.glBlendFunc(gl.GL_SRC_ALPHA,gl.GL_ONE_MINUS_SRC_ALPHA) 
+                gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA) 
                 gl.glEnable(gl.GL_BLEND) 
 
                 # Draw a second polygon in line mode, so the edges are anti-aliased 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_LINE)
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_LINE)
 
                 gl.glBegin(gl.GL_QUADS)
                 gl.glVertex3f(w, w, 0.0)
@@ -1255,6 +1255,6 @@ class FilledCross(VisionEgg.Core.Stimulus):
                 gl.glEnd() # GL_QUADS
 
                 # Set the polygon mode back to fill mode 
-                gl.glPolygonMode(gl.GL_FRONT_AND_BACK,gl.GL_FILL) 
+                gl.glPolygonMode(gl.GL_FRONT_AND_BACK, gl.GL_FILL) 
                 gl.glDisable(gl.GL_LINE_SMOOTH) 
             gl.glPopMatrix()

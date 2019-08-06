@@ -18,5 +18,5 @@ Place, Suite 330, Boston, MA  02111-1307  USA
 
 from os import path, pardir
 
-basedir = path.join(path.dirname(__file__) , pardir)
+basedir = path.join(path.dirname(__file__), pardir)
 datadir = path.join(basedir, 'data')

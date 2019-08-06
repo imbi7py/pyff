@@ -261,11 +261,11 @@ class CakeSpellerVE(VisualSpellerVE):
                                                  text=self.letter_set[self._classified_element][i],
                                                  anchor="center"))
                 self._viewport.parameters.stimuli.extend(feedback_letters)
-            self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+            self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
             
             # send to screen:
             self._presentation.go()
-            self._presentation.remove_controller(None,None,None)
+            self._presentation.remove_controller(None, None, None)
             self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-(self._nr_elements-1)]
                 
             ## turn on level 2 letters:
@@ -319,11 +319,11 @@ class CakeSpellerVE(VisualSpellerVE):
                                                                   font_size=font_size,
                                                                   text=text,
                                                                   anchor='center'))
-                self._presentation.add_controller(None,None,FunctionController(during_go_func=update))
+                self._presentation.add_controller(None, None, FunctionController(during_go_func=update))
                 
                 # send to screen:
                 self._presentation.go()
-                self._presentation.remove_controller(None,None,None)
+                self._presentation.remove_controller(None, None, None)
                 self._viewport.parameters.stimuli = self._viewport.parameters.stimuli[:-1]
             else:
                 self._presentation.set(go_duration=(self.animation_time, 'seconds'))

@@ -57,10 +57,10 @@ class VisualSpellerVE(MainloopFeedback):
     '''
 
     # Triggers: look in Marker
-    END_LEVEL1, END_LEVEL2 = 244,245               # end of hex levels
+    END_LEVEL1, END_LEVEL2 = 244, 245               # end of hex levels
     COPYSPELLING_FINISHED = 246
-    STIMULUS = [ [11, 12, 13, 14, 15, 16] , [21, 22, 23, 24, 25, 26] ]
-    RESPONSE = [ [51, 52, 53, 54, 55, 56] , [61, 62, 63, 64, 65, 66] ]
+    STIMULUS = [ [11, 12, 13, 14, 15, 16], [21, 22, 23, 24, 25, 26] ]
+    RESPONSE = [ [51, 52, 53, 54, 55, 56], [61, 62, 63, 64, 65, 66] ]
     TARGET_ADD = 20
     ERROR_ADD = 100
     COUNTDOWN_STIMULI = 239
@@ -72,9 +72,9 @@ class VisualSpellerVE(MainloopFeedback):
         '''
         self.log_filename = 'VisualSpellerVE.log'
 
-        self.geometry=[0,0,1280,800]         ## size
+        self.geometry=[0, 0, 1280, 800]         ## size
 
-        self.letterbox_size = (60,60)
+        self.letterbox_size = (60, 60)
         self.osc_size = 40
         self.font_size_phrase = 60       # the spelled phrase at the top
         self.font_size_current_letter = 80       # the spelled phrase at the top
@@ -86,14 +86,14 @@ class VisualSpellerVE(MainloopFeedback):
         self.phrase_color = (0.2, 0.0, 1.0)
         self.current_letter_color = (1.0, 0.0, 0.0)
         self.countdown_color = (0.2, 0.0, 1.0)
-        self.osc_color = (1,1,1)
+        self.osc_color = (1, 1, 1)
 
-        self.letter_set = [['A','B','C','D','E'], \
-                           ['F','G','H','I','J'], \
-                           ['K','L','M','N','O'], \
-                           ['P','Q','R','S','T'], \
-                           ['U','V','W','X','Y'], \
-                           ['Z','_','.',',','<']]
+        self.letter_set = [['A', 'B', 'C', 'D', 'E'], \
+                           ['F', 'G', 'H', 'I', 'J'], \
+                           ['K', 'L', 'M', 'N', 'O'], \
+                           ['P', 'Q', 'R', 'S', 'T'], \
+                           ['U', 'V', 'W', 'X', 'Y'], \
+                           ['Z', '_', '.', ',', '<']]
         self.fullscreen = False
         self.use_oscillator = True
         self.offline = True
@@ -127,7 +127,7 @@ class VisualSpellerVE(MainloopFeedback):
         self.countdown_shapes = {'circle':FilledCircle,
 	                              'hexagon':FilledHexagon}
         self.countdown_shape_select = 'hexagon'
-        self.countdown_shape_color=(0.7,0.7,0.7)
+        self.countdown_shape_color=(0.7, 0.7, 0.7)
         self.countdown_shape_on=True
         self.countdown_blinking_nr=5   #number of pre-sequence stimuli(1 sec is approx. 5 frames at 60 Hz)
 
@@ -339,7 +339,7 @@ class VisualSpellerVE(MainloopFeedback):
                                        on=False)
 
         ## create oscillator circle:
-        self._ve_oscillator = FilledCircle(position=(self.osc_size//2+10,self.osc_size//2+10),
+        self._ve_oscillator = FilledCircle(position=(self.osc_size//2+10, self.osc_size//2+10),
                                        radius=self.osc_size//2,
                                        color=self.osc_color,
                                        on=False)
@@ -423,7 +423,7 @@ class VisualSpellerVE(MainloopFeedback):
             i=0
             while(i<self.countdown_blinking_nr):
                 self._ve_countdown_shape.set(on=True)
-                self._ve_countdown.set(text="%d" % self._current_countdown,on=True)
+                self._ve_countdown.set(text="%d" % self._current_countdown, on=True)
                 self.send_parallel(self.COUNTDOWN_STIMULI )
                 self.logger.info("[TRIGGER] %d" % self.COUNTDOWN_STIMULI )
                 self._presentation.set(go_duration=(self.stimulus_duration, 'seconds'))
@@ -591,7 +591,7 @@ class VisualSpellerVE(MainloopFeedback):
                 self._state_trial = False
                 self._state_classify = True
 
-    def check_classification(self,nr):
+    def check_classification(self, nr):
         #print self._classifier_output
         means = [None]*self._nr_elements
         minimum = maxint
@@ -602,7 +602,7 @@ class VisualSpellerVE(MainloopFeedback):
                minimum = means[ii]
                classified = ii+1
 
-        print("\n**** Class: %d (mean=%f)\n" % (classified,means[classified-1]))
+        print("\n**** Class: %d (mean=%f)\n" % (classified, means[classified-1]))
         return classified
 
 
@@ -638,7 +638,7 @@ class VisualSpellerVE(MainloopFeedback):
                     if means[ii]<minimum:
                         minimum = means[ii]
                         classified = ii
-                print("\n**** Class: %d (mean=%f)\n" % (classified+1,means[classified]))
+                print("\n**** Class: %d (mean=%f)\n" % (classified+1, means[classified]))
             else:
                 means = [None]*self._nr_elements
                 minimum = maxint
@@ -648,7 +648,7 @@ class VisualSpellerVE(MainloopFeedback):
                     if means[ii]<minimum:
                         minimum = means[ii]
                         classified = ii
-                print("\n**** Class: %d (mean=%f)\n" % (classified+1,means[classified]))
+                print("\n**** Class: %d (mean=%f)\n" % (classified+1, means[classified]))
 
             ## Reset classifier output to empty lists
             self._init_classifier_output()
@@ -788,23 +788,23 @@ class VisualSpellerVE(MainloopFeedback):
 
         # play warning sound
 
-        def sine_array_onecycle(hz, peak,sample_rate):
+        def sine_array_onecycle(hz, peak, sample_rate):
             length = sample_rate // float(hz)
             omega = NP.pi * 2 // length
             xvalues = NP.arange(int(length)) * omega
             return (peak * NP.sin(xvalues))
 
         def sine_array(hz, peak, samples_rate ):
-            return NP.resize(sine_array_onecycle(hz, peak,sample_rate), (sample_rate,))
+            return NP.resize(sine_array_onecycle(hz, peak, sample_rate), (sample_rate,))
 
 
         sample_rate=44100
         pygame.mixer.init(sample_rate, -16, 2) # 44.1kHz, 16-bit signed, stereo
-        f = sine_array(8000, 1,sample_rate)
-        f = NP.array(zip (f , f))
+        f = sine_array(8000, 1, sample_rate)
+        f = NP.array(zip (f, f))
         sound = pygame.sndarray.make_sound(f)
         channel = sound.play(-1)
-        channel.set_volume(0.2,0.2)
+        channel.set_volume(0.2, 0.2)
         pygame.time.delay(1000)
         sound.stop()
 
@@ -859,9 +859,9 @@ class VisualSpellerVE(MainloopFeedback):
             elif event.key == pygame.K_SPACE:
                 self.on_control_event({'new_letter':chr(pygame.K_UNDERSCORE)})
             elif event.key == pygame.K_UP and self.use_ErrP_detection:
-                self.on_control_event({'cl_output':(1,7)})
+                self.on_control_event({'cl_output':(1, 7)})
             elif event.key == pygame.K_DOWN and self.use_ErrP_detection:
-                self.on_control_event({'cl_output':(0,7)})
+                self.on_control_event({'cl_output':(0, 7)})
             if not self.offline:
                 if (event.key >= pygame.K_0 and event.key <= pygame.K_5):
                     self._debug_classified = int(chr(event.key))
@@ -876,7 +876,7 @@ class VisualSpellerVE(MainloopFeedback):
             score_data = data[u'cl_output']
             cl_out = score_data[0]
             iSubstim = int(score_data[1]) # evt auch "Subtrial"
-            if iSubstim in range(1,7):
+            if iSubstim in range(1, 7):
                 self._classifier_output[iSubstim-1].append(cl_out)
             elif self.use_ErrP_detection:
                 self._ErrP_classifier = cl_out

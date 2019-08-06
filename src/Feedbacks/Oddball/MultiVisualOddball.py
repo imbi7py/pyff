@@ -25,7 +25,7 @@
 
 from __future__ import absolute_import
 import pygame
-import os,random,time
+import os, random, time
 import glob
 
 from Feedbacks.Oddball.Oddball import Oddball
@@ -33,11 +33,11 @@ from Feedbacks.Oddball.Oddball import Oddball
 class MultiVisualOddball(Oddball):
     
     def init(self):
-        super(MultiVisualOddball,self).init()
+        super(MultiVisualOddball, self).init()
         self.dev_perc = 0.2
         #self.within_std_perc = [0.5, 0.5]  # sum must be 1
         self.within_std_perc = [1]
-        self.within_dev_perc = [.4,.6]
+        self.within_dev_perc = [.4, .6]
         #self.within_dev_perc = [.25,.25,.125,.125,.125,.125]
         self.stimuli = 'load'
         self.nStim = 450
@@ -54,9 +54,9 @@ class MultiVisualOddball(Oddball):
         self.rsp_key_dev = ' '      # ' ' = space bar
         
         # Graphics
-        self.screen_pos = (100,100,800,700)
-        self.fixColor = (0,0,255)       # Fix dot color
-        self.fixPos = (300,300)         # Fix dot pos in image
+        self.screen_pos = (100, 100, 800, 700)
+        self.fixColor = (0, 0, 255)       # Fix dot color
+        self.fixPos = (300, 300)         # Fix dot pos in image
         self.fixLen = 4                # Fix dot length or radius
 
         # An example
@@ -72,9 +72,9 @@ class MultiVisualOddball(Oddball):
         #self.DIR_DEV.append(os.path.join(basedir,'t7_yellow*.jpg'))
 
         basedir = '/data/sonstiges/matlab/stimuli/symblobs4'   # just for convenience
-        self.DIR_STD = [os.path.join(basedir,'standard*.jpg')]
-        self.DIR_DEV = [os.path.join(basedir,'sym*.jpg')]
-        self.DIR_DEV.append(os.path.join(basedir,'target*.jpg'))
+        self.DIR_STD = [os.path.join(basedir, 'standard*.jpg')]
+        self.DIR_DEV = [os.path.join(basedir, 'sym*.jpg')]
+        self.DIR_DEV.append(os.path.join(basedir, 'target*.jpg'))
 
         
         # Initialize random number generator with system time
@@ -86,25 +86,25 @@ class MultiVisualOddball(Oddball):
         files themselves) for self.DIR_DEV and self.DIR_STD
         """
         stds, devs = [], []
-        for stimdir in (self.DIR_STD,self.DIR_DEV):
-            if not isinstance(stimdir,list):
+        for stimdir in (self.DIR_STD, self.DIR_DEV):
+            if not isinstance(stimdir, list):
                 stimdir = [stimdir]         # make a dummy list out of it
             for dir in stimdir:
                 if os.path.isdir(dir):
-                    dir = os.path.join(dir,'*')     # Append wildcard
+                    dir = os.path.join(dir, '*')     # Append wildcard
                 if stimdir is self.DIR_STD:
                     stds.append(glob.glob(dir))
                 else:
                     devs.append(glob.glob(dir))
         return stds, devs
         
-    def load_stimulus(self,filename):
+    def load_stimulus(self, filename):
         """
         Loads a stimulus from a file and returns it as a pygame surface.
         """
         surf = pygame.image.load(filename)
         surf = surf.convert()
-        pygame.draw.circle(surf, self.fixColor,self.fixPos,self.fixLen+2)
+        pygame.draw.circle(surf, self.fixColor, self.fixPos, self.fixLen+2)
         #pygame.draw.circle(surf, (0,0,0),self.fixPos,self.fixLen) # black boundary
   #      pygame.draw.rect(surf, self.fixColor, (298,280,5,41))
   #      pygame.draw.rect(surf, self.fixColor, (280,298,41,5))
@@ -129,17 +129,17 @@ class MultiVisualOddball(Oddball):
            
     def get_deviant(self):        
         idx = self.devlist.pop()
-        randImage = random.randint(0,len(self.devs[idx])-1)
+        randImage = random.randint(0, len(self.devs[idx])-1)
         filename = self.devs[idx][randImage]
         return self.load_stimulus(filename), idx
         
     def get_standard(self):
         idx = self.stdlist.pop()
         if len(self.stds)>1:
-            idx = random.randint(0,len(self.stds)-1)
+            idx = random.randint(0, len(self.stds)-1)
         else:
             idx = 0
-        randImage = random.randint(0,len(self.stds[idx])-1)
+        randImage = random.randint(0, len(self.stds[idx])-1)
         filename = self.stds[idx][randImage]
         return self.load_stimulus(filename), idx
     

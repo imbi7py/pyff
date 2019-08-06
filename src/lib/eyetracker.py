@@ -60,7 +60,7 @@ class AleaData(ctypes.Structure):
 # event types
 eventArray = 'Fixation detected', 'Saccade detected', 'Blink detected', 'No Event detected'
 # calibration statuses
-calibrationStatus = 'Excellent' , 'Good' , 'Average' , 'Poor' , 'Failed'
+calibrationStatus = 'Excellent', 'Good', 'Average', 'Poor', 'Failed'
 
 
 class EyeTracker(object):
@@ -206,7 +206,7 @@ class EyeTracker(object):
 
         print("Perform calibration. Press Enter to start calibration")
         sys.stdin.readline()
-        result = api.PerformCalibration(5, 0, False, False, True, 0, True, True, True, hex2dec('C0C0C0'), hex2dec('0000FF') , "")
+        result = api.PerformCalibration(5, 0, False, False, True, 0, True, True, True, hex2dec('C0C0C0'), hex2dec('0000FF'), "")
         if(result == 0):
             self.logger.debug("PerformCalibration call succeed")
             status = c_int()

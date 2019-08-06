@@ -94,12 +94,12 @@ class GoalKeeper(PygameFeedback):
 
         ### mu-rhythm settings (used only if mu_fb = 1) ###
         self.mu_fb = 1
-        self.mu_left, self.mu_right = 1,1
-        self.mu_bound_left = [0,1]
-        self.mu_bound_right = [0,1]
+        self.mu_left, self.mu_right = 1, 1
+        self.mu_bound_left = [0, 1]
+        self.mu_bound_right = [0, 1]
         self.colorbar = list()
         for n in range(101):
-            self.colorbar.append((int(round(255*(n//100.0))), int(round(255*(1-n//100.0))),0))
+            self.colorbar.append((int(round(255*(n//100.0))), int(round(255*(1-n//100.0))), 0))
         ### end ###
 
         self.trials = 2
@@ -156,7 +156,7 @@ class GoalKeeper(PygameFeedback):
         self.backgroundColor = (50, 50, 50)
         self.fontColor = (0, 150, 150)
         self.countdownColor = (200, 80, 118)
-        self.fixcrossColor = (130,130,130)
+        self.fixcrossColor = (130, 130, 130)
 
         # Keeper specifications
         self.contKeeperMotion = 750   # if 0:  jump between the three positions
@@ -707,16 +707,16 @@ class GoalKeeper(PygameFeedback):
         self.fixl = pygame.Surface((fc, fc)) # left part
         self.fixr = pygame.Surface((fc, fc)) # right part
         self.fixb = pygame.Surface((fc, fc)) # border of fixtation cross
-        self.fixlRect = self.fixl.get_rect(center=(self.screen.get_width()//2,self.screen.get_height()//3))
-        self.fixrRect = self.fixr.get_rect(center=(self.screen.get_width()//2,self.screen.get_height()//3))
-        self.fixbRect = self.fixb.get_rect(center=(self.screen.get_width()//2,self.screen.get_height()//3))
-        self.fixl.set_colorkey((0,0,0))
-        self.fixr.set_colorkey((0,0,0))
-        self.fixb.set_colorkey((0,0,0))
+        self.fixlRect = self.fixl.get_rect(center=(self.screen.get_width()//2, self.screen.get_height()//3))
+        self.fixrRect = self.fixr.get_rect(center=(self.screen.get_width()//2, self.screen.get_height()//3))
+        self.fixbRect = self.fixb.get_rect(center=(self.screen.get_width()//2, self.screen.get_height()//3))
+        self.fixl.set_colorkey((0, 0, 0))
+        self.fixr.set_colorkey((0, 0, 0))
+        self.fixb.set_colorkey((0, 0, 0))
         fc2 = fc//2
-        self.pointlistl = [(fc2-d,0),(fc2-d,fc2-d),(0,fc2-d),(0,fc2+d),(fc2-d,fc2+d),(fc2-d,fc),(fc2,fc),(fc2,0)]
-        self.pointlistr = [(fc2+d,0),(fc2+d,fc2-d),(fc,fc2-d),(fc,fc2+d),(fc2+d,fc2+d),(fc2+d,fc),(fc2,fc),(fc2,0)]
-        pointlistb = [(fc2-d,0),(fc2-d,fc2-d),(0,fc2-d),(0,fc2+d),(fc2-d,fc2+d),(fc2-d,fc),(fc2+d,fc),(fc2+d,fc2+d),(fc,fc2+d),(fc,fc2-d),(fc2+d,fc2-d),(fc2+d,0)]
+        self.pointlistl = [(fc2-d, 0), (fc2-d, fc2-d), (0, fc2-d), (0, fc2+d), (fc2-d, fc2+d), (fc2-d, fc), (fc2, fc), (fc2, 0)]
+        self.pointlistr = [(fc2+d, 0), (fc2+d, fc2-d), (fc, fc2-d), (fc, fc2+d), (fc2+d, fc2+d), (fc2+d, fc), (fc2, fc), (fc2, 0)]
+        pointlistb = [(fc2-d, 0), (fc2-d, fc2-d), (0, fc2-d), (0, fc2+d), (fc2-d, fc2+d), (fc2-d, fc), (fc2+d, fc), (fc2+d, fc2+d), (fc, fc2+d), (fc, fc2-d), (fc2+d, fc2-d), (fc2+d, 0)]
         pygame.draw.polygon(self.fixl, self.fixcrossColor, self.pointlistl)
         pygame.draw.polygon(self.fixr, self.fixcrossColor, self.pointlistr)
         pygame.draw.polygon(self.fixb, self.fixcrossColor, pointlistb, 3)
@@ -756,7 +756,7 @@ class GoalKeeper(PygameFeedback):
         self.ballRect = self.ball.get_rect(midtop=(self.screenSize[0] // 2, ballOffsetY))
         self.ballX, self.ballY = self.ballRect.centerx, self.ballRect.bottom
         self.distBallKeeper = self.keeperRect.top - self.ballRect.bottom
-        self.ball.set_colorkey((0,0,0))
+        self.ball.set_colorkey((0, 0, 0))
 
         # init hbs
         if self.showTrialStartAnimation:
