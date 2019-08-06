@@ -70,4 +70,5 @@ if __name__ == "__main__":
             apply_fixer(fixer_name)
             last_completed_fixer = fixer_name
     finally:
-
+        print("Last attempted fixer: ", last_attempted_fixer)
+        print("Last completed fixer: ", last_completed_fixer)
